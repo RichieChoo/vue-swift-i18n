@@ -1,0 +1,67 @@
+{
+  "name": "vue-swift-i18n",
+  "displayName": "vue-swift-i18n",
+  "description": "swift i18n plugin for vue developer",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.36.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.vueSwiftI18n.flatJson"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.vueSwiftI18n.flatJson",
+        "title": "Flat Json By Vue Swift I18n "
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorFocus",
+          "command": "extension.vueSwiftI18n.flatJson",
+          "group": "navigation@6"
+        }
+      ],
+      "editor/title": [
+        {
+          "when": "editorFocus && resourceLangId == javascript",
+          "command": "extension.vueSwiftI18n.flatJson",
+          "group": "navigation"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "when": "resourceLangId == javascript",
+          "command": "extension.vueSwiftI18n.flatJson",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "extension.vueSwiftI18n.flatJson",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^10.12.21",
+    "@types/vscode": "^1.36.0",
+    "eslint": "^5.13.0",
+    "glob": "^7.1.4",
+    "mocha": "^6.1.4",
+    "typescript": "^3.3.1",
+    "vscode-test": "^1.0.0-next.0"
+  }
+}
