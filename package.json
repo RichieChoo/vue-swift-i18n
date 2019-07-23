@@ -2,6 +2,13 @@
   "name": "vue-swift-i18n",
   "displayName": "vue-swift-i18n",
   "description": "swift i18n plugin for vue developer",
+  "keywords": [
+    "vue",
+    "i18n",
+    "quick",
+    "fast",
+    "swift"
+  ],
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.36.0"
@@ -9,6 +16,7 @@
   "categories": [
     "Other"
   ],
+  "icon": "./images/icon.png",
   "activationEvents": [
     "onCommand:extension.vueSwiftI18n.flatJson"
   ],
@@ -48,7 +56,17 @@
           "group": "navigation"
         }
       ]
-    }
+    },
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./snippets/javascript.json"
+      },
+      {
+        "language": "vue",
+        "path": "./snippets/vue.json"
+      }
+    ]
   },
   "scripts": {
     "test": "node ./test/runTest.js"
@@ -66,5 +84,13 @@
   },
   "dependencies": {
     "flat": "^4.1.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/RichieChoo/vue-swift-i18n/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RichieChoo/vue-swift-i18n"
+  },
+  "homepage": "https://github.com/RichieChoo/vue-swift-i18n/blob/master/README.md"
 }

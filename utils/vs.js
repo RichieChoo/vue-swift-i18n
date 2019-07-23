@@ -5,5 +5,7 @@ module.exports = {
     warn: vscode.window.showWarningMessage,
     error: vscode.window.showErrorMessage
   },
-  registerCommand: vscode.commands.registerCommand
+  registerCommand: vscode.commands.registerCommand,
+  edit:vscode.window.activeTextEditor.edit,
+
 };

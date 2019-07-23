@@ -1,0 +1,17 @@
+{
+    "$t": {
+        "prefix": "t",
+        "body": ["\\$t('${CLIPBOARD}')"],
+        "description": "output $t(CLIPBOARD)"
+    },
+    "{{$t}}": {
+        "prefix": "tt",
+        "body": ["{{\\$t('${CLIPBOARD}')}}"],
+        "description": "output {{$t(CLIPBOARD)}}"
+    },
+    "this.$t": {
+        "prefix": "ttt",
+        "body": ["this.\\$t('${CLIPBOARD}')"],
+        "description": "output this.$t(CLIPBOARD)"
+    }
+}
