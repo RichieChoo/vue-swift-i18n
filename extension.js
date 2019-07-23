@@ -1,14 +1,14 @@
 const { registerCommand, msg } = require("./utils/vs");
 const { plugin } = require("./lib/constant");
-const fs = require("fs");
+const flat = require("./lib/flat");
 function activate(context) {
   //   msg(plugin.congratulations);
   let disposable = registerCommand("extension.vueSwiftI18n.flatJson", uri => {
     if (uri && uri.path) {
-		console.warn('current flat file :',uri.path);
-	}else{
-		msg(plugin.noUri)
-	}
+      flat(uri)
+    } else {
+      msg.warn(plugin.noUri);
+    }
   });
 
   context.subscriptions.push(disposable);
@@ -17,7 +17,7 @@ function activate(context) {
 
 // this method is called when your extension is deactivated
 function deactivate() {
-  msg(`${plugin.name} deactivated`);
+  msg.info(`${plugin.name} deactivated`);
 }
 
 module.exports = {

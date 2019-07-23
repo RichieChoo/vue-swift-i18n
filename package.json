@@ -63,5 +63,8 @@
     "mocha": "^6.1.4",
     "typescript": "^3.3.1",
     "vscode-test": "^1.0.0-next.0"
+  },
+  "dependencies": {
+    "flat": "^4.1.0"
   }
 }
