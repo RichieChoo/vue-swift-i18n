@@ -13,13 +13,13 @@
 A Visual Studio Code extension with rich support for the i18n in Vue,including features such as flating json file or flat json files in a folder,i18n snippets and more !
 
 
-##Quick Start
+## Quick Start
 1. Install the vue-swift-i18n extension for Visual Studio Code.
 2. Open or create a vue project.
 3. Flat 'locales' by click it with right mouse button.
 4. In 'xx.vue',you can use snippet such as t,tt,ttt and start i18n swiftly!
 
-##RFC
+## RFC
 Warmly welcome to comment feelings when you use and propose the desired features you want.
 
 ## License MIT

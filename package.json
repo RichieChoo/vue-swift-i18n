@@ -10,7 +10,7 @@
     "fast",
     "swift"
   ],
-  "version": "1.0.0",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.36.0"
   },
