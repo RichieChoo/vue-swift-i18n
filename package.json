@@ -19,42 +19,88 @@
   ],
   "icon": "images/icon.png",
   "activationEvents": [
-    "onCommand:extension.vueSwiftI18n.flatJson"
+    "onCommand:extension.vueSwiftI18n.flatJson",
+    "onCommand:extension.vueSwiftI18n.swiftI18n"
   ],
-  "main": "./extension.js",
+  "main": "./src/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "extension.vueSwiftI18n.flatJson",
-        "title": "Flat Json By Vue Swift I18n "
+        "title": "Flat Json"
+      },
+      {
+        "command": "extension.vueSwiftI18n.swiftI18n",
+        "title": "Swift I18n ",
+        "icon":  {
+          "light": "./images/icon-light.svg",
+          "dark": "./images/icon-dark.svg"
+        }
       }
     ],
+    "keybindings": [
+			{
+				"command": "extension.vueSwiftI18n.swiftI18n",
+				"key": "ctrl+f1",
+				"mac": "cmd+f1",
+				"when": "editorTextFocus"
+			}
+		],
     "menus": {
       "editor/context": [
         {
-          "when": "editorFocus",
-          "command": "extension.vueSwiftI18n.flatJson",
-          "group": "navigation@6"
-        }
-      ],
-      "editor/title": [
-        {
-          "when": "editorFocus && resourceLangId == javascript",
+          "when": "editorFocus && resourceLangId == json",
           "command": "extension.vueSwiftI18n.flatJson",
           "group": "navigation"
+        },
+        {
+          "when": "editorFocus && resourceLangId == vue",
+          "command": "extension.vueSwiftI18n.swiftI18n",
+          "group": "1_modification"
+        },
+        {
+          "when": "editorFocus && resourceLangId == javascript",
+          "command": "extension.vueSwiftI18n.swiftI18n",
+          "group": "1_modification"
         }
       ],
       "editor/title/context": [
         {
-          "when": "resourceLangId == javascript",
+          "when": "resourceLangId == json",
           "command": "extension.vueSwiftI18n.flatJson",
           "group": "navigation"
+        },
+        {
+          "when": "resourceLangId == vue",
+          "command": "extension.vueSwiftI18n.swiftI18n",
+          "group": "1_modification"
         }
       ],
       "explorer/context": [
         {
           "command": "extension.vueSwiftI18n.flatJson",
+          "when": "explorerResourceIsFolder",
           "group": "navigation"
+        },
+        {
+          "command": "extension.vueSwiftI18n.swiftI18n",
+          "when": "explorerResourceIsFolder",
+          "group": "1_modification"
+        },
+        {
+          "command": "extension.vueSwiftI18n.flatJson",
+          "when": "resourceLangId == json",
+          "group": "navigation"
+        },
+        {
+          "command": "extension.vueSwiftI18n.swiftI18n",
+          "when": "resourceLangId == vue",
+          "group": "1_modification"
+        },
+        {
+          "command": "extension.vueSwiftI18n.swiftI18n",
+          "when": "resourceLangId == javascript",
+          "group": "1_modification"
         }
       ]
     },
@@ -73,10 +119,10 @@
     "test": "node ./test/runTest.js"
   },
   "devDependencies": {
-    "@types/glob": "^7.1.1",
-    "@types/mocha": "^5.2.6",
-    "@types/node": "^10.12.21",
-    "@types/vscode": "^1.36.0",
+    "ypes/glob": "^7.1.1",
+    "ypes/mocha": "^5.2.6",
+    "ypes/node": "^10.12.21",
+    "ypes/vscode": "^1.36.0",
     "eslint": "^5.13.0",
     "glob": "^7.1.4",
     "mocha": "^6.1.4",

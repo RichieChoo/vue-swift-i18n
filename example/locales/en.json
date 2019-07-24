@@ -1,7 +1,13 @@
 {
     "hello": "hello, vue swift i18n",
-    "test.a.1": "a1",
-    "test.a.2": "a2",
-    "test.b.1": "b1",
-    "test.b.2": "b2"
+    "test": {
+        "a": {
+            "1": "a1",
+            "2": "a2"
+        },
+        "b": {
+            "1": "b1",
+            "2": "b2"
+        }
+    }
 }
