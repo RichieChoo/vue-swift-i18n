@@ -2,6 +2,7 @@
   "name": "vue-swift-i18n",
   "displayName": "vue-swift-i18n",
   "description": "swift i18n plugin for vue developer",
+  "publisher": "RichieChoo",
   "keywords": [
     "vue",
     "i18n",
@@ -9,14 +10,14 @@
     "fast",
     "swift"
   ],
-  "version": "0.2.0",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.36.0"
   },
   "categories": [
     "Other"
   ],
-  "icon": "./images/icon.png",
+  "icon": "images/icon.png",
   "activationEvents": [
     "onCommand:extension.vueSwiftI18n.flatJson"
   ],
