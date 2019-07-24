@@ -18,7 +18,7 @@ module.exports = context => {
                 open(file(uri.path), option).then(editor=>{
                     if(editor.document.languageId==="vue"){
                         console.warn('typeof',typeof editor.document.getWordRangeAtPosition());
-                        console.warn('editor.document', editor.document.getWordRangeAtPosition());
+                        console.warn('editor.document', editor.document.getWordRangeAtPosition(new Position(5,999),/"[\u4e00-\u9fa5]+"|\>[\u4e00-\u9fa5]+\</));
                     }
                 });
             } else {
