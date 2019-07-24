@@ -6,6 +6,4 @@ module.exports = {
     error: vscode.window.showErrorMessage
   },
   registerCommand: vscode.commands.registerCommand,
-  edit:vscode.window.activeTextEditor.edit,
-
 };
