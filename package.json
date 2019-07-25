@@ -1,97 +1,148 @@
 {
-  "name": "vue-swift-i18n",
-  "displayName": "vue-swift-i18n",
-  "description": "swift i18n plugin for vue developer",
-  "publisher": "RichieChoo",
-  "keywords": [
-    "vue",
-    "i18n",
-    "quick",
-    "fast",
-    "swift"
-  ],
-  "version": "0.0.3",
-  "engines": {
-    "vscode": "^1.36.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "icon": "images/icon.png",
-  "activationEvents": [
-    "onCommand:extension.vueSwiftI18n.flatJson"
-  ],
-  "main": "./extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "extension.vueSwiftI18n.flatJson",
-        "title": "Flat Json By Vue Swift I18n "
-      }
+    "name": "vue-swift-i18n",
+    "displayName": "vue-swift-i18n",
+    "description": "swift i18n plugin for vue developer",
+    "publisher": "RichieChoo",
+    "keywords": [
+        "vue",
+        "i18n",
+        "quick",
+        "fast",
+        "swift"
     ],
-    "menus": {
-      "editor/context": [
-        {
-          "when": "editorFocus",
-          "command": "extension.vueSwiftI18n.flatJson",
-          "group": "navigation@6"
-        }
-      ],
-      "editor/title": [
-        {
-          "when": "editorFocus && resourceLangId == javascript",
-          "command": "extension.vueSwiftI18n.flatJson",
-          "group": "navigation"
-        }
-      ],
-      "editor/title/context": [
-        {
-          "when": "resourceLangId == javascript",
-          "command": "extension.vueSwiftI18n.flatJson",
-          "group": "navigation"
-        }
-      ],
-      "explorer/context": [
-        {
-          "command": "extension.vueSwiftI18n.flatJson",
-          "group": "navigation"
-        }
-      ]
+    "version": "0.0.3",
+    "engines": {
+        "vscode": "^1.36.0"
     },
-    "snippets": [
-      {
-        "language": "javascript",
-        "path": "./snippets/javascript.json"
-      },
-      {
-        "language": "vue",
-        "path": "./snippets/vue.json"
-      }
-    ]
-  },
-  "scripts": {
-    "test": "node ./test/runTest.js"
-  },
-  "devDependencies": {
-    "@types/glob": "^7.1.1",
-    "@types/mocha": "^5.2.6",
-    "@types/node": "^10.12.21",
-    "@types/vscode": "^1.36.0",
-    "eslint": "^5.13.0",
-    "glob": "^7.1.4",
-    "mocha": "^6.1.4",
-    "typescript": "^3.3.1",
-    "vscode-test": "^1.0.0-next.0"
-  },
-  "dependencies": {
-    "flat": "^4.1.0"
-  },
-  "bugs": {
-    "url": "https://github.com/RichieChoo/vue-swift-i18n/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/RichieChoo/vue-swift-i18n"
-  },
-  "homepage": "https://github.com/RichieChoo/vue-swift-i18n/blob/master/README.md"
+    "categories": [
+        "Other"
+    ],
+    "icon": "images/icon.png",
+    "activationEvents": [
+        "onCommand:extension.vueSwiftI18n.flatJson"
+    ],
+    "main": "./extension.js",
+    "contributes": {
+        "languages": [
+            {
+                "id": "vue",
+                "aliases": [
+                    "Vue",
+                    "vue"
+                ],
+                "extensions": [
+                    ".vue"
+                ],
+                "configuration": "./syntaxes/vue.configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "vue",
+                "scopeName": "text.html.vue",
+                "path": "./syntaxes/vue.tmLanguage"
+            }
+        ],
+        "commands": [
+            {
+                "command": "extension.vueSwiftI18n.flatJson",
+                "title": "Flat Json"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "when": "editorFocus && resourceLangId == json",
+                    "command": "extension.vueSwiftI18n.flatJson",
+                    "group": "navigation"
+                }
+            ],
+            "editor/title/context": [
+                {
+                    "when": "resourceLangId == json",
+                    "command": "extension.vueSwiftI18n.flatJson",
+                    "group": "navigation"
+                }
+            ],
+            "explorer/context": [
+                {
+                    "command": "extension.vueSwiftI18n.flatJson",
+                    "when": "explorerResourceIsFolder",
+                    "group": "navigation"
+                },
+                {
+                    "command": "extension.vueSwiftI18n.flatJson",
+                    "when": "resourceLangId == json",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "snippets": [
+          {
+            "language": "javascript",
+            "path": "./snippets/tt.json"
+        },
+        {
+            "language": "typescript",
+            "path": "./snippets/tt.json"
+        },
+        {
+            "language": "html",
+            "path": "./snippets/tt.json"
+        },
+        {
+            "language": "html",
+            "path": "./snippets/tt.json"
+        },
+        {
+            "language": "vue-html",
+            "path": "./snippets/tt.json"
+        },
+        {
+            "language": "html",
+            "path": "./snippets/tt.json"
+        },
+        {
+            "language": "vue",
+            "path": "./snippets/tt.json"
+        },
+        {
+            "language": "vue",
+            "path": "./snippets/tt.json"
+        },
+        {
+            "language": "vue",
+            "path": "./snippets/tt.json"
+        },
+        {
+            "language": "jade",
+            "path": "./snippets/tt.json"
+        }
+        ]
+    },
+    "scripts": {
+        "test": "node ./test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.1.1",
+        "@types/mocha": "^5.2.6",
+        "@types/node": "^10.12.21",
+        "@types/vscode": "^1.36.0",
+        "eslint": "^5.13.0",
+        "glob": "^7.1.4",
+        "mocha": "^6.1.4",
+        "typescript": "^3.3.1",
+        "vscode-test": "^1.0.0-next.0"
+    },
+    "dependencies": {
+        "flat": "^4.1.0"
+    },
+    "bugs": {
+        "url": "https://github.com/RichieChoo/vue-swift-i18n/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/RichieChoo/vue-swift-i18n"
+    },
+    "homepage": "https://github.com/RichieChoo/vue-swift-i18n/blob/master/README.md"
 }
