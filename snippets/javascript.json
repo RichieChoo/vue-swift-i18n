@@ -1,17 +1,17 @@
 {
-    "剪切板获取,快捷vue国际化 $t": {
+    "$t": {
         "prefix": "t",
         "body": ["\\$t('${CLIPBOARD}')"],
-        "description": "vue-swift-i18n,snippets"
+        "description": "output $t(CLIPBOARD)"
     },
-    "剪切板获取,快捷vue国际化 {{$t}}": {
+    "{{$t}}": {
         "prefix": "tt",
         "body": ["{{\\$t('${CLIPBOARD}')}}"],
-        "description": "vue-swift-i18n,snippets"
+        "description": "output {{$t(CLIPBOARD)}}"
     },
-    "剪切板获取,快捷vue国际化 this.$t": {
+    "this.$t": {
         "prefix": "ttt",
         "body": ["this.\\$t('${CLIPBOARD}')"],
-        "description": "vue-swift-i18n,snippets"
+        "description": "output this.$t(CLIPBOARD)"
     }
 }
