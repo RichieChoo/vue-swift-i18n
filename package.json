@@ -6,16 +6,16 @@
     "keywords": [
         "vue",
         "i18n",
-        "quick",
-        "fast",
+        "snippet",
         "swift"
     ],
-    "version": "0.0.3",
+    "version": "0.0.4",
     "engines": {
         "vscode": "^1.36.0"
     },
     "categories": [
-        "Other"
+        "Programming Languages",
+        "Snippets"
     ],
     "icon": "images/icon.png",
     "activationEvents": [
