@@ -21,7 +21,6 @@ A Visual Studio Code extension with rich support for the i18n in Vue,including f
 3. Flat 'locales' by click it with right mouse button.
 4. In 'xx.vue',you can use snippet such as t,tt,ttt and start i18n swiftly!
 
-![Flat Gif](./images/flat.gif "Flat JSON")
 ## RFC
 Warmly welcome to comment feelings when you use and propose the desired features you want.
 
