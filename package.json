@@ -9,7 +9,7 @@
         "snippet",
         "swift"
     ],
-    "version": "0.0.4",
+    "version": "0.0.5",
     "engines": {
         "vscode": "^1.36.0"
     },
@@ -21,7 +21,7 @@
     "activationEvents": [
         "onCommand:extension.vueSwiftI18n.flatJson"
     ],
-    "main": "./extension.js",
+    "main": "./src/extension.js",
     "contributes": {
         "languages": [
             {

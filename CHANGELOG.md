@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.0.5
+- Fix Vue Snippet
+
 ## 0.0.3
 - Fix Flat Bug In Window Operating System
 
