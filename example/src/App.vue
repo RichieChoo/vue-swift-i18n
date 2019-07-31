@@ -1,9 +1,9 @@
-<template>
-  <div id="app">
+<template>测试<div id="app">测试
+  <div id="app">测试
     <div id="nav">
-      <router-link to="/">{{test}}</router-link>|
-      <router-link to="/about" :title="测试">测试</router-link>
-    </div>t
+      <router-link to="/">{{test}}</router-link>
+      <router-link to="/about" :title="测试">测试</router-link>测试
+    </div>
     <router-view />
   </div>
 </template>

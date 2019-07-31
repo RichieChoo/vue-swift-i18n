@@ -19,7 +19,8 @@
     ],
     "icon": "images/icon.png",
     "activationEvents": [
-        "onCommand:extension.vueSwiftI18n.flatJson"
+        "onCommand:extension.vueSwiftI18n.flatJson",
+        "onCommand:extension.vueSwiftI18n.swiftI18n"
     ],
     "main": "./src/extension.js",
     "contributes": {
@@ -47,6 +48,14 @@
             {
                 "command": "extension.vueSwiftI18n.flatJson",
                 "title": "Flat Json"
+            },
+            {
+                "command": "extension.vueSwiftI18n.swiftI18n",
+                "title": "Swift I18n ",
+                "icon": {
+                    "light": "./images/icon-light.svg",
+                    "dark": "./images/icon-dark.svg"
+                }
             }
         ],
         "menus": {
@@ -55,12 +64,15 @@
                     "when": "editorFocus && resourceLangId == json",
                     "command": "extension.vueSwiftI18n.flatJson",
                     "group": "navigation"
-                }
-            ],
-            "editor/title/context": [
+                },
                 {
-                    "when": "resourceLangId == json",
-                    "command": "extension.vueSwiftI18n.flatJson",
+                    "when": "editorFocus &&  resourceLangId == javascript",
+                    "command": "extension.vueSwiftI18n.swiftI18n",
+                    "group": "navigation"
+                },
+                {
+                    "when": "editorFocus &&  resourceLangId == vue",
+                    "command": "extension.vueSwiftI18n.swiftI18n",
                     "group": "navigation"
                 }
             ],
@@ -74,50 +86,57 @@
                     "command": "extension.vueSwiftI18n.flatJson",
                     "when": "resourceLangId == json",
                     "group": "navigation"
+                },
+                {
+                    "command": "extension.vueSwiftI18n.swiftI18n",
+                    "when": "resourceLangId == vue",
+                    "group": "1_modification"
+                },
+                {
+                    "command": "extension.vueSwiftI18n.swiftI18n",
+                    "when": "resourceLangId == javascript",
+                    "group": "1_modification"
+                },
+                {
+                    "command": "extension.vueSwiftI18n.swiftI18n",
+                    "when": "explorerResourceIsFolder",
+                    "group": "1_modification"
                 }
             ]
         },
         "snippets": [
-          {
-            "language": "javascript",
-            "path": "./snippets/tt.json"
-        },
-        {
-            "language": "typescript",
-            "path": "./snippets/tt.json"
-        },
-        {
-            "language": "html",
-            "path": "./snippets/tt.json"
-        },
-        {
-            "language": "html",
-            "path": "./snippets/tt.json"
-        },
-        {
-            "language": "vue-html",
-            "path": "./snippets/tt.json"
-        },
-        {
-            "language": "html",
-            "path": "./snippets/tt.json"
-        },
-        {
-            "language": "vue",
-            "path": "./snippets/tt.json"
-        },
-        {
-            "language": "vue",
-            "path": "./snippets/tt.json"
-        },
-        {
-            "language": "vue",
-            "path": "./snippets/tt.json"
-        },
-        {
-            "language": "jade",
-            "path": "./snippets/tt.json"
-        }
+            {
+                "language": "javascript",
+                "path": "./snippets/tt.json"
+            },
+            {
+                "language": "typescript",
+                "path": "./snippets/tt.json"
+            },
+            {
+                "language": "html",
+                "path": "./snippets/tt.json"
+            },
+            {
+                "language": "html",
+                "path": "./snippets/tt.json"
+            },
+            {
+                "language": "vue-html",
+                "path": "./snippets/tt.json"
+            },
+            {
+                "language": "html",
+                "path": "./snippets/tt.json"
+            },
+            {
+                "language": "vue",
+                "path": "./snippets/tt.json"
+            },
+            {
+                "language": "jade",
+                "path": "./snippets/tt.json"
+            }
         ]
     },
     "scripts": {
