@@ -4,6 +4,7 @@ const swiftI18n = require('./swiftI18n');
 const flatJson = require('./flatJson');
 
 function activate(context) {
+    console.log('vue swift i18n actived');
     flatJson(context);
     swiftI18n(context);
 }

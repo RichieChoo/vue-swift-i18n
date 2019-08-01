@@ -1,36 +1,176 @@
-const { msg, Position, Range } = require('../utils/vs');
-
+const { msg, Position, Selection, Range } = require('../utils/vs');
+var fs = require('fs');
+var path = require('path');
+const flatten = require('flat');
 //匹配属性或者js中的汉字
-const scriptRegexp = /["|'][\u4e00-\u9fa5]+["|']/g;
 // 后行否定断言  和  正向否定查找 匹配 template下的汉字
-const templateRegexp = /(?<!["|'])[\u4e00-\u9fa5]+(?!["|'])/g;
+const templateBeginRegexp = /\<template\>/g;
+const templateEndRegexp = /\<\/template\>/g;
+const scriptBeginRegexp = /\<script\>/g;
+const scripteEndRegexp = /\<\/script\>/g;
+const scriptRegexp = /(?<!=)["|'][\u4e00-\u9fa5]+["|']/g;
+const propertyRegexp = /\s\w+=["|'][\u4e00-\u9fa5]+["|']/g;
+const templateTextRegexp = /(?<!["|'])[\u4e00-\u9fa5]+(?!["|'])/g;
 
-module.exports = editor => {
+const getCellRange = ({ editor, regex, line, lineEnd }) =>
+    editor.document.getWordRangeAtPosition(new Position(line, lineEnd), regex);
+
+const getRange = editor => {
+    const range = {
+        template: {},
+        script: {},
+    };
     const lineCount = editor.document.lineCount;
-    console.warn('editor.document.lineAt(0)',editor.document.lineAt(0));
     for (let i = 0; i < lineCount; i++) {
         const line = editor.document.lineAt(i);
-        const temp = editor.document.getWordRangeAtPosition(
-            new Position(i, line.range.end.character),
-            templateRegexp
-        );
-        temp && console.warn(temp)
-        // if (temp) {
-        //     console.warn('i',i);
-        //     editor.edit(editBuilder=> {
-        //         editBuilder.replace(new Range(new Position(i, temp.start.character),new Position(i, temp.end.character)), 'tt');
-        //     });
-        // }
+        const tBegin = getCellRange({
+            editor,
+            regex: templateBeginRegexp,
+            line: i,
+            lineEnd: line.range.end.character,
+        });
+        const tEnd = getCellRange({
+            editor,
+            regex: templateEndRegexp,
+            line: i,
+            lineEnd: line.range.end.character,
+        });
+        const sBegin = getCellRange({
+            editor,
+            regex: scriptBeginRegexp,
+            line: i,
+            lineEnd: line.range.end.character,
+        });
+        const sEnd = getCellRange({
+            editor,
+            regex: scripteEndRegexp,
+            line: i,
+            lineEnd: line.range.end.character,
+        });
+        if (tBegin) {
+            range.template.begin = tBegin.start.line;
+        } else if (tEnd) {
+            range.template.end = tEnd.start.line;
+        }
+        if (sBegin) {
+            range.script.begin = sBegin.start.line;
+        } else if (sEnd) {
+            range.script.end = sEnd.start.line;
+        }
     }
-    // const firstLine = editor.document.lineAt(0);
-    // const lastLine = editor.document.lineAt(editor.document.lineCount - 1);
-    // const textRange = new Range(
-    //     0,
-    //     firstLine.range.start.character,
-    //     editor.document.lineCount - 1,
-    //     lastLine.range.end.character
-    // );
-    // editor.edit(function(editBuilder) {
-    //     editBuilder.replace(textRange, 'tt');
-    // });
+    return range;
 };
+
+const getLocales = fsPath => {
+    const dirName = path.dirname(fsPath);
+    if (fs.existsSync(path.join(dirName, 'package.json'))) {
+        const jsonPath = path.join(dirName, 'src/locales/zh-cn.json');
+        if (!fs.existsSync(jsonPath)) {
+            msg.error('自动获取国际化文件失败');
+            return false;
+        } else {
+            msg.info(`自动获取国际化文件路径:${jsonPath}`);
+            return jsonPath;
+        }
+    } else {
+        return getLocales(dirName);
+    }
+};
+const changeObjeValueKey = obj => {
+    const result = {};
+    Object.keys(obj).forEach(v => {
+        if (!result[obj[v]]) {
+            result[obj[v]] = v;
+        }
+    });
+    return result;
+};
+module.exports = editor => {
+    const lineCount = editor.document.lineCount;
+
+    const range = getRange(editor);
+    const localesPath = getLocales(editor.document.uri.fsPath);
+    if (!localesPath) return;
+    const localeObj = changeObjeValueKey(flatten(require(localesPath)));
+    const lines = [];
+    for (let i = 0; i < lineCount; i++) {
+        //使用text替换,getWordRangeAtPosition无法替换全部
+        const line = editor.document.lineAt(i);
+        let lineText = line.text || '';
+        console.warn('lineText', typeof lineText);
+        if (
+            (!range.template.begin &&
+                range.template.begin !== 0 &&
+                range.template.end) ||
+            (range.template.begin &&
+                !range.template.end &&
+                range.template.end !== 0)
+        ) {
+            msg.error('当前vue文件template标签不完整');
+            return;
+        }
+        if (
+            (!range.script.begin &&
+                range.script.begin !== 0 &&
+                range.script.end) ||
+            (range.script.begin && !range.script.end && range.script.end !== 0)
+        ) {
+            msg.error('当前vue文件script标签不完整');
+            return;
+        }
+
+        //{{$t("xx")}}   template下 html替换
+        if (templateTextRegexp.test(lineText)) {
+            lineText = lineText.replace(templateTextRegexp, str => {
+                const result = localeObj[str];
+                if (result) {
+                    return "{{$t('" + result + "')}}";
+                }
+                return str;
+            });
+            console.warn('lineText', lineText);
+        }
+
+        //$t("xx")   template下 属性替换
+        if (propertyRegexp.test(lineText)) {
+            lineText = lineText.replace(propertyRegexp, str => {
+                console.warn('str', str);
+                const prefix = str.split('=')[0].replace(/\s/g, ' :');
+
+                const mainStr = str.split('=')[1].replace(/[\"|\']/g, '');
+                const result = localeObj[mainStr];
+                if (result) {
+                    return `${prefix}="$t('${result}')"`;
+                }
+                return str;
+            });
+        }
+        //this.$t("xx")   script下 替换
+        if (scriptRegexp.test(lineText)) {
+            if (!range.template.end || i > range.template.end) {
+                lineText = lineText.replace(scriptRegexp, str => {
+                    const resultStr = str.replace(/[\"|\']/g, '');
+                    const result = localeObj[resultStr];
+                    if (result) {
+                        return "this.$t('" + result + "')";
+                    }
+                    return str;
+                });
+            }
+            console.warn('lineText', lineText);
+        }
+        lines.push(lineText);
+    }
+    const editText = lines.join('\n');
+    editor.edit(editBuilder => {
+        const end = new Position(lineCount + 1, 0);
+        editBuilder.replace(new Range(new Position(0, 0), end), editText);
+    });
+};
+
+
+//TODO:
+//1.带标点符号的汉字正则!
+//2.template下的script 替换
+//3.被替换的悬浮提示原来的文字
+//4.手动配置locales地址

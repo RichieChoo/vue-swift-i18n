@@ -10,6 +10,6 @@ module.exports = {
     open: vscode.window.showTextDocument, //在Editor打开对应路径的文件,
     Range:vscode.Range,
     Position:vscode.Position,
-    Position:vscode.Position,
+    Selection:vscode.Selection,
     ViewColumn:vscode.ViewColumn,
 };
