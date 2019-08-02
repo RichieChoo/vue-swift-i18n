@@ -60,12 +60,12 @@
         ],
         "configuration": {
             "type": "object",
-            "title": "TODO Highlight",
+            "title": "Vue-Swift-I18n",
             "properties": {
                 "vueSwiftI18n.defaultLocalesPath": {
                     "type": "string",
                     "default": "",
-                    "description": "Specify the 'locales' folder path for vue-swift-i18n using"
+                    "description": "Specify the 'locales' folder path for vue-swift-i18n. \n (expect 'string', such as 'src/locales')"
                 }
             }
         },
