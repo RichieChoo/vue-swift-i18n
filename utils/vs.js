@@ -8,8 +8,9 @@ module.exports = {
     registerCommand: vscode.commands.registerCommand, //注册命令
     file: vscode.Uri.file, //获取文件
     open: vscode.window.showTextDocument, //在Editor打开对应路径的文件,
-    Range:vscode.Range,
-    Position:vscode.Position,
-    Selection:vscode.Selection,
-    ViewColumn:vscode.ViewColumn,
+    Range: vscode.Range,
+    Position: vscode.Position,
+    Selection: vscode.Selection,
+    ViewColumn: vscode.ViewColumn,
+    workspace: vscode.workspace,
 };
