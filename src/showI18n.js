@@ -1,21 +1,21 @@
 const { registerCommand, msg } = require('../utils/vs');
 const { openFileByPath } = require('../utils');
-const resolveEditor = require('../lib/resolveEditor');
-
+const updateEditor = require('../lib/updateEditor');
+const { plugin } = require('../lib/constant');
 module.exports = context => {
     context.subscriptions.push(
-        registerCommand('extension.vueSwiftI18n.swiftI18n', uri => {
+        registerCommand('extension.vueSwiftI18n.showI18n', uri => {
             if (uri && uri.path) {
-                openFileByPath(uri.path).then(editor => {
+                openFileByPath(uri.path).then(editor=>{
                     if (
                         editor.document.languageId === 'vue' ||
                         editor.document.languageId === 'javascript'
                     ) {
-                        resolveEditor(editor);
+                        updateEditor(editor);
                     }
-                });
+                })
             } else {
-                msg.info(uri);
+                updateEditor();
             }
         })
     );

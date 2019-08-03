@@ -20,7 +20,8 @@
     "icon": "images/icon.png",
     "activationEvents": [
         "onCommand:extension.vueSwiftI18n.flatJson",
-        "onCommand:extension.vueSwiftI18n.swiftI18n"
+        "onCommand:extension.vueSwiftI18n.swiftI18n",
+        "onCommand:extension.vueSwiftI18n.showI18n"
     ],
     "main": "./src/extension.js",
     "contributes": {
@@ -50,6 +51,10 @@
                 "title": "Flat Json"
             },
             {
+                "command": "extension.vueSwiftI18n.showI18n",
+                "title": "Show I18n"
+            },
+            {
                 "command": "extension.vueSwiftI18n.swiftI18n",
                 "title": "Swift I18n ",
                 "icon": {
@@ -69,6 +74,14 @@
                 }
             }
         },
+        "keybindings": [
+            {
+                "command": "extension.vueSwiftI18n.showI18n",
+                "key": "ctrl+alt+i",
+                "mac": "cmd+alt+i",
+                "when": "editorTextFocus"
+            }
+        ],
         "menus": {
             "editor/context": [
                 {
@@ -77,14 +90,19 @@
                     "group": "navigation"
                 },
                 {
+                    "when": "editorFocus && resourceLangId == vue",
+                    "command": "extension.vueSwiftI18n.showI18n",
+                    "group": "navigation"
+                },
+                {
                     "when": "editorFocus &&  resourceLangId == javascript",
                     "command": "extension.vueSwiftI18n.swiftI18n",
-                    "group": "navigation"
+                    "group": "1_modification"
                 },
                 {
                     "when": "editorFocus &&  resourceLangId == vue",
                     "command": "extension.vueSwiftI18n.swiftI18n",
-                    "group": "navigation"
+                    "group": "1_modification"
                 }
             ],
             "explorer/context": [
@@ -96,6 +114,11 @@
                 {
                     "command": "extension.vueSwiftI18n.flatJson",
                     "when": "resourceLangId == json",
+                    "group": "navigation"
+                },
+                {
+                    "command": "extension.vueSwiftI18n.showI18n",
+                    "when": "resourceLangId == vue",
                     "group": "navigation"
                 },
                 {

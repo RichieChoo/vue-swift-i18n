@@ -13,4 +13,6 @@ module.exports = {
     Selection: vscode.Selection,
     ViewColumn: vscode.ViewColumn,
     workspace: vscode.workspace,
+    window: vscode.window,
+    OverviewRulerLane: vscode.OverviewRulerLane,
 };
