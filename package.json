@@ -179,16 +179,18 @@
     "devDependencies": {
         "@types/glob": "^7.1.1",
         "@types/mocha": "^5.2.6",
-        "@types/node": "^10.12.21",
+        "@types/node": "^10.14.14",
         "@types/vscode": "^1.36.0",
         "eslint": "^5.13.0",
         "glob": "^7.1.4",
-        "mocha": "^6.1.4",
+        "mocha": "^6.2.0",
         "typescript": "^3.3.1",
-        "vscode-test": "^1.0.0-next.0"
+        "vscode-test": "^1.1.0"
     },
     "dependencies": {
-        "flat": "^4.1.0"
+        "flat": "^4.1.0",
+        "nanobus": "^4.4.0",
+        "postal": "^2.0.5"
     },
     "bugs": {
         "url": "https://github.com/RichieChoo/vue-swift-i18n/issues"

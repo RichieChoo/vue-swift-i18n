@@ -6,16 +6,16 @@ module.exports = context => {
     context.subscriptions.push(
         registerCommand('extension.vueSwiftI18n.showI18n', uri => {
             if (uri && uri.path) {
-                openFileByPath(uri.path).then(editor=>{
+                openFileByPath(uri.path).then(editor => {
                     if (
                         editor.document.languageId === 'vue' ||
                         editor.document.languageId === 'javascript'
                     ) {
-                        updateEditor(editor);
+                        updateEditor(context);
                     }
-                })
+                });
             } else {
-                updateEditor();
+                updateEditor(context);
             }
         })
     );
