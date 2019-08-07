@@ -8,6 +8,7 @@ const {
     Range,
     Position,
     ViewColumn,
+    window,
 } = require('./vs');
 const {
     templateBeginRegexp,
@@ -15,6 +16,7 @@ const {
     scriptBeginRegexp,
     scripteEndRegexp,
 } = require('./regex');
+const { langArr } = require('./constant');
 const defaultOption = {
     selection: new Range(new Position(0, 0), new Position(0, 0)),
     preview: false,
@@ -71,30 +73,70 @@ const getRange = editor => {
     }
     return range;
 };
-
-const varifyFile = filePath => {
-    if (!fs.existsSync(filePath)) {
-        //TODO: 跳转到国际化设置路径!
-        msg.error(`Not Found File:${filePath}`);
+const getEditor = editor => {
+    let currentEditor = editor || window.activeTextEditor;
+    if (
+        !currentEditor &&
+        !langArr.includes(currentEditor.document.languageId)
+    ) {
         return false;
-    } else {
-        //TODO: 跳转查看该文件!
-        msg.info(`Get Locales Path:${filePath}`);
-        return filePath;
     }
+
+    return currentEditor;
+};
+const showMessageAndOpen = ({ type = 'info', message, file, editor }) => {
+    const showMessage = type === 'error' ? msg.error : msg.info;
+    const viewColumn = editor
+        ? editor.viewColumn + 1
+        : getEditor(editor)
+        ? getEditor(editor).viewColumn+1
+        : 1;
+    showMessage(message, 'Got it', 'Open it').then(val => {
+        if (val === 'Open it') {
+            openFileByPath(file, {
+                selection: new Range(new Position(0, 0), new Position(0, 0)),
+                preview: false,
+                viewColumn,
+            });
+        }
+    });
+};
+const varifyFile = ({ fsPath, showError, showInfo }) => {
+    let exist = false;
+    if (!fs.existsSync(fsPath)) {
+        //TODO: 跳转到国际化设置路径!
+        showError && msg.error(`Not Found File:${fsPath}`);
+    } else {
+        showInfo &&
+            showMessageAndOpen({
+                message: `Get Locales Path:${fsPath}`,
+                file: fsPath,
+            });
+        exist = true;
+    }
+    return { localesPath: fsPath, exist };
 };
 
-const getLocales = (fsPath, defaultLocalesPath) => {
+const getLocales = ({
+    fsPath,
+    defaultLocalesPath,
+    showInfo = false,
+    showError = true,
+}) => {
     const dirName = path.dirname(fsPath);
     if (fs.existsSync(path.join(dirName, 'package.json'))) {
         let jsonPath = path.join(dirName, 'src', 'locales', 'zh-cn.json');
         if (!!defaultLocalesPath) {
-            //TODO: 兼容绝对路径!
             jsonPath = path.join(dirName, defaultLocalesPath, 'zh-cn.json');
         }
-        return varifyFile(jsonPath);
+        return varifyFile({ fsPath: jsonPath, showInfo, showError });
     } else {
-        return getLocales(dirName, defaultLocalesPath);
+        return getLocales({
+            fsPath: dirName,
+            defaultLocalesPath,
+            showInfo,
+            showError,
+        });
     }
 };
 const changeObjeValueKey = obj => {
@@ -106,10 +148,13 @@ const changeObjeValueKey = obj => {
     });
     return result;
 };
+
 module.exports = {
     openFileByPath,
     getCellRange,
     getRange,
     getLocales,
     changeObjeValueKey,
+    getEditor,
+    showMessageAndOpen,
 };

@@ -21,7 +21,8 @@
     "activationEvents": [
         "onCommand:extension.vueSwiftI18n.flatJson",
         "onCommand:extension.vueSwiftI18n.swiftI18n",
-        "onCommand:extension.vueSwiftI18n.showI18n"
+        "onCommand:extension.vueSwiftI18n.showI18n",
+        "onCommand:extension.vueSwiftI18n.generateI18n"
     ],
     "main": "./src/extension.js",
     "contributes": {
@@ -52,11 +53,15 @@
             },
             {
                 "command": "extension.vueSwiftI18n.showI18n",
-                "title": "Show I18n"
+                "title": "Show I18n Translate Detail"
+            },
+            {
+                "command": "extension.vueSwiftI18n.generateI18n",
+                "title": "Update I18n Locales Json"
             },
             {
                 "command": "extension.vueSwiftI18n.swiftI18n",
-                "title": "Swift I18n ",
+                "title": "Swift I18n",
                 "icon": {
                     "light": "./images/icon-light.svg",
                     "dark": "./images/icon-dark.svg"
@@ -69,16 +74,33 @@
             "properties": {
                 "vueSwiftI18n.defaultLocalesPath": {
                     "type": "string",
+                    "default": "src/locales",
+                    "description": "Specify the 'locales' folder path for vue-swift-i18n. \n (expect 'string', default 'src/locales')"
+                },
+                "vueSwiftI18n.modulePrefixForGenerateJson": {
+                    "type": "string",
                     "default": "",
-                    "description": "Specify the 'locales' folder path for vue-swift-i18n. \n (expect 'string', such as 'src/locales')"
+                    "description": "Generate i18n json with it. \n (expect 'string', such as '' or 'hello-world' )"
                 }
             }
         },
         "keybindings": [
             {
-                "command": "extension.vueSwiftI18n.showI18n",
+                "command": "extension.vueSwiftI18n.generateI18n",
+                "key": "ctrl+alt+u",
+                "mac": "cmd+alt+u",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "extension.vueSwiftI18n.swiftI18n",
                 "key": "ctrl+alt+i",
                 "mac": "cmd+alt+i",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "extension.vueSwiftI18n.showI18n",
+                "key": "ctrl+alt+o",
+                "mac": "cmd+alt+o",
                 "when": "editorTextFocus"
             }
         ],
@@ -95,6 +117,11 @@
                     "group": "navigation"
                 },
                 {
+                    "when": "editorFocus && resourceLangId == javascript",
+                    "command": "extension.vueSwiftI18n.showI18n",
+                    "group": "navigation"
+                },
+                {
                     "when": "editorFocus &&  resourceLangId == javascript",
                     "command": "extension.vueSwiftI18n.swiftI18n",
                     "group": "1_modification"
@@ -102,6 +129,16 @@
                 {
                     "when": "editorFocus &&  resourceLangId == vue",
                     "command": "extension.vueSwiftI18n.swiftI18n",
+                    "group": "1_modification"
+                },
+                {
+                    "when": "editorFocus &&  resourceLangId == javascript",
+                    "command": "extension.vueSwiftI18n.generateI18n",
+                    "group": "1_modification"
+                },
+                {
+                    "when": "editorFocus &&  resourceLangId == vue",
+                    "command": "extension.vueSwiftI18n.generateI18n",
                     "group": "1_modification"
                 }
             ],
@@ -122,6 +159,11 @@
                     "group": "navigation"
                 },
                 {
+                    "command": "extension.vueSwiftI18n.showI18n",
+                    "when": "resourceLangId == javascript",
+                    "group": "navigation"
+                },
+                {
                     "command": "extension.vueSwiftI18n.swiftI18n",
                     "when": "resourceLangId == vue",
                     "group": "1_modification"
@@ -132,8 +174,13 @@
                     "group": "1_modification"
                 },
                 {
-                    "command": "extension.vueSwiftI18n.swiftI18n",
-                    "when": "explorerResourceIsFolder",
+                    "command": "extension.vueSwiftI18n.generateI18n",
+                    "when": "resourceLangId == vue",
+                    "group": "1_modification"
+                },
+                {
+                    "command": "extension.vueSwiftI18n.generateI18n",
+                    "when": "resourceLangId == javascript",
                     "group": "1_modification"
                 }
             ]
@@ -188,9 +235,12 @@
         "vscode-test": "^1.1.0"
     },
     "dependencies": {
+        "chinese-to-pinyin": "^1.0.2",
         "flat": "^4.1.0",
+        "mkdirp": "^0.5.1",
         "nanobus": "^4.4.0",
-        "postal": "^2.0.5"
+        "postal": "^2.0.5",
+        "puid": "^1.0.7"
     },
     "bugs": {
         "url": "https://github.com/RichieChoo/vue-swift-i18n/issues"
