@@ -25,8 +25,8 @@ const operation = {
         title: 'Show I18n Translate Detail',
     },
 
-    generateI18n: {
-        cmd: 'extension.vueSwiftI18n.generateI18n',
+    updateI18n: {
+        cmd: 'extension.vueSwiftI18n.updateI18n',
         title: 'Update I18n Locales Json',
     },
     swiftI18n: {

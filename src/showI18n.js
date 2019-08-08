@@ -1,16 +1,16 @@
 const { registerCommand, msg } = require('../utils/vs');
 const { openFileByPath } = require('../utils');
-const updateEditor = require('../lib/updateEditor');
+const showJson = require('../lib/showJson');
 const { operation } = require('../utils/constant');
 module.exports = context => {
     context.subscriptions.push(
         registerCommand(operation.showI18n.cmd, uri => {
             if (uri && uri.path) {
                 openFileByPath(uri.path).then(editor => {
-                    updateEditor({ editor, context });
+                    showJson({ editor, context });
                 });
             } else {
-                updateEditor({ context });
+                showJson({ context });
             }
         })
     );

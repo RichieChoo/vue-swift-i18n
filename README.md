@@ -18,11 +18,20 @@ A Visual Studio Code extension with rich support for the i18n in Vue,including f
 ## Quick Start
 1. Install the vue-swift-i18n extension for Visual Studio Code.
 2. Open or create a vue project.
-3. Flat 'locales' by click it with right mouse button.
-4. In 'xx.vue',you can use snippet such as t,tt,ttt and start i18n swiftly!
+
+## Feature
+1. Flat json or a folder contains json file
+2. Update  or create a zh-cn.json for i18n with unique key
+3. I18n swiftly in a vue or javascript file with zh-cn.json
+4. Show the  corresponding value for i18n key in a vue or javascript file
 
 ## RFC
 Warmly welcome to comment feelings when you use and propose the desired features you want.
 
 ## License MIT
+
+## TODO
+1. SwiftI18n success tip
+2. ShowI18n after SwiftI18n Success
+3. Show corresponding decoration after UpdateJson
 

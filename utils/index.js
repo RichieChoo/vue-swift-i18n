@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const {
     registerCommand,
+    executeCommand,
     msg,
     open,
     file,
@@ -16,7 +17,7 @@ const {
     scriptBeginRegexp,
     scripteEndRegexp,
 } = require('./regex');
-const { langArr } = require('./constant');
+const { langArr, operation } = require('./constant');
 const defaultOption = {
     selection: new Range(new Position(0, 0), new Position(0, 0)),
     preview: false,
@@ -75,29 +76,40 @@ const getRange = editor => {
 };
 const getEditor = editor => {
     let currentEditor = editor || window.activeTextEditor;
-    if (
-        !currentEditor &&
-        !langArr.includes(currentEditor.document.languageId)
-    ) {
-        return false;
-    }
-
+    const stopFlag =
+        !currentEditor || !langArr.includes(currentEditor.document.languageId);
+    if (stopFlag) return false;
     return currentEditor;
 };
-const showMessageAndOpen = ({ type = 'info', message, file, editor }) => {
+const showMessage = ({
+    type = 'info',
+    message,
+    file,
+    editor,
+    callback,
+    needOpen = true,
+}) => {
+    const actions = [
+        'Got it',
+        callback && callback.name,
+        needOpen && 'View it',
+    ].filter(v => !!v);
     const showMessage = type === 'error' ? msg.error : msg.info;
     const viewColumn = editor
         ? editor.viewColumn + 1
         : getEditor(editor)
-        ? getEditor(editor).viewColumn+1
+        ? getEditor(editor).viewColumn + 1
         : 1;
-    showMessage(message, 'Got it', 'Open it').then(val => {
-        if (val === 'Open it') {
+    showMessage(message, ...actions).then(val => {
+        if (val === 'View it') {
             openFileByPath(file, {
                 selection: new Range(new Position(0, 0), new Position(0, 0)),
                 preview: false,
                 viewColumn,
             });
+        }
+        if (callback && val === callback.name) {
+            callback.func();
         }
     });
 };
@@ -105,10 +117,19 @@ const varifyFile = ({ fsPath, showError, showInfo }) => {
     let exist = false;
     if (!fs.existsSync(fsPath)) {
         //TODO: 跳转到国际化设置路径!
-        showError && msg.error(`Not Found File:${fsPath}`);
+        showError &&
+            showMessage({
+                type: 'error',
+                message: `Not Found File:${fsPath}`,
+                needOpen: false,
+                callback: {
+                    name: operation.updateI18n.title,
+                    func: () => executeCommand(operation.updateI18n.cmd),
+                },
+            });
     } else {
         showInfo &&
-            showMessageAndOpen({
+            showMessage({
                 message: `Get Locales Path:${fsPath}`,
                 file: fsPath,
             });
@@ -156,5 +177,5 @@ module.exports = {
     getLocales,
     changeObjeValueKey,
     getEditor,
-    showMessageAndOpen,
+    showMessage,
 };

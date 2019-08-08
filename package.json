@@ -22,7 +22,7 @@
         "onCommand:extension.vueSwiftI18n.flatJson",
         "onCommand:extension.vueSwiftI18n.swiftI18n",
         "onCommand:extension.vueSwiftI18n.showI18n",
-        "onCommand:extension.vueSwiftI18n.generateI18n"
+        "onCommand:extension.vueSwiftI18n.updateI18n"
     ],
     "main": "./src/extension.js",
     "contributes": {
@@ -56,7 +56,7 @@
                 "title": "Show I18n Translate Detail"
             },
             {
-                "command": "extension.vueSwiftI18n.generateI18n",
+                "command": "extension.vueSwiftI18n.updateI18n",
                 "title": "Update I18n Locales Json"
             },
             {
@@ -77,16 +77,21 @@
                     "default": "src/locales",
                     "description": "Specify the 'locales' folder path for vue-swift-i18n. \n (expect 'string', default 'src/locales')"
                 },
-                "vueSwiftI18n.modulePrefixForGenerateJson": {
+                "vueSwiftI18n.modulePrefixFoUpdateJson": {
                     "type": "string",
                     "default": "",
-                    "description": "Generate i18n json with it. \n (expect 'string', such as '' or 'hello-world' )"
+                    "description": "command 'Update I18n Locales Json' with it. \n (expect 'string', such as '' or 'hello-world' )"
+                },
+                "vueSwiftI18n.notAlertBeforeUpdateI18n": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether alert tip before executing command 'Update I18n Locales Json'. \n (expect 'string', default false )"
                 }
             }
         },
         "keybindings": [
             {
-                "command": "extension.vueSwiftI18n.generateI18n",
+                "command": "extension.vueSwiftI18n.updateI18n",
                 "key": "ctrl+alt+u",
                 "mac": "cmd+alt+u",
                 "when": "editorTextFocus"
@@ -133,12 +138,12 @@
                 },
                 {
                     "when": "editorFocus &&  resourceLangId == javascript",
-                    "command": "extension.vueSwiftI18n.generateI18n",
+                    "command": "extension.vueSwiftI18n.updateI18n",
                     "group": "1_modification"
                 },
                 {
                     "when": "editorFocus &&  resourceLangId == vue",
-                    "command": "extension.vueSwiftI18n.generateI18n",
+                    "command": "extension.vueSwiftI18n.updateI18n",
                     "group": "1_modification"
                 }
             ],
@@ -174,12 +179,12 @@
                     "group": "1_modification"
                 },
                 {
-                    "command": "extension.vueSwiftI18n.generateI18n",
+                    "command": "extension.vueSwiftI18n.updateI18n",
                     "when": "resourceLangId == vue",
                     "group": "1_modification"
                 },
                 {
-                    "command": "extension.vueSwiftI18n.generateI18n",
+                    "command": "extension.vueSwiftI18n.updateI18n",
                     "when": "resourceLangId == javascript",
                     "group": "1_modification"
                 }
