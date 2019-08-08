@@ -86,6 +86,11 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Whether alert tip before executing command 'Update I18n Locales Json'. \n (expect 'string', default false )"
+                },
+                "vueSwiftI18n.parentDirLevel": {
+                    "type": "number",
+                    "default": 1,
+                    "description": "The folder level which will be addded to the begin of json key'. \n (expect 'number', default 1 )"
                 }
             }
         },
@@ -241,6 +246,7 @@
     },
     "dependencies": {
         "chinese-to-pinyin": "^1.0.2",
+        "find-parent-dir": "^0.3.0",
         "flat": "^4.1.0",
         "mkdirp": "^0.5.1",
         "nanobus": "^4.4.0",

@@ -1,4 +1,3 @@
-const path = require('path');
 const fs = require('fs');
 const {
     registerCommand,
@@ -9,6 +8,7 @@ const {
     Range,
     Position,
     ViewColumn,
+    workspace,
     window,
 } = require('./vs');
 const {
@@ -18,6 +18,50 @@ const {
     scripteEndRegexp,
 } = require('./regex');
 const { langArr, operation } = require('./constant');
+const path = require('path');
+
+const connect = (first, second) => {
+    if (typeof first !== 'string' || typeof second !== 'string') {
+        return false
+    }
+    const endWithDot = /\.$/;
+    const beginWithDot = /^\./;
+    if (endWithDot.test(first)) {
+        return beginWithDot.test(second)
+            ? first + second.slice(1)
+            : first + second;
+    } else {
+        return beginWithDot.test(second)
+            ? first + second
+            : first + '.' + second;
+    }
+};
+
+const getPrefix = currentEditor => {
+    const fileName =
+        currentEditor.document.languageId === 'vue'
+            ? path.basename(currentEditor.document.uri.fsPath, '.vue')
+            : path.basename(currentEditor.document.uri.fsPath, '.js');
+    const settings = workspace.getConfiguration('vueSwiftI18n');
+    const modulePrefix = settings.get('modulePrefixFoUpdateJson');
+    const jsonNameLevel = settings.get('parentDirLevel') || 0;
+    let prefix = connect(
+        path
+            .dirname(currentEditor.document.uri.fsPath)
+            .split(path.sep)
+            .slice(-jsonNameLevel)
+            .join('.'),
+        fileName
+    );
+    if (modulePrefix) {
+        prefix = connect(
+            modulePrefix,
+            prefix
+        );
+    }
+    return prefix;
+};
+
 const defaultOption = {
     selection: new Range(new Position(0, 0), new Position(0, 0)),
     preview: false,
@@ -178,4 +222,6 @@ module.exports = {
     changeObjeValueKey,
     getEditor,
     showMessage,
+    connect,
+    getPrefix,
 };
