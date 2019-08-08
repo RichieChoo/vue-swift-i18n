@@ -1,5 +1,7 @@
 # Change Log
 
+## 0.0.6
+
 ## 0.0.5
 - Fix Vue Snippet
 
