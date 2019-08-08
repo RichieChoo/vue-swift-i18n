@@ -30,8 +30,4 @@ Warmly welcome to comment feelings when you use and propose the desired features
 
 ## License MIT
 
-## TODO
-1. SwiftI18n success tip
-2. ShowI18n after SwiftI18n Success
-3. Show corresponding decoration after UpdateJson
 
