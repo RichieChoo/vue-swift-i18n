@@ -24,13 +24,10 @@ const scriptRegexp = /((?<!=)["|'][\u4e00-\u9fa5]["|'])|((?<!=)["|'][\u4e00-\u9f
 //匹配属性中的汉字 √
 const propertyRegexp = /(\s\w+=["|'][\u4e00-\u9fa5]\S+["|'])|(\s\w+=["|'][\u4e00-\u9fa5]["|'])/g;
 
-// 单行  匹配 template下的汉字
-const templateTextRegexp = /(\>[\u4e00-\u9fa5]\S+\<)|((?<=\s)\s+[\u4e00-\u9fa5]\S+)/g;
-
 // 单行  匹配 template ><下的汉字
 const templateTextInAngleBracketsRegexp = /(\>[\u4e00-\u9fa5]\S+\<)|(\>[\u4e00-\u9fa5]\<)/g;
 
-// 单行  匹配 template 空字符开头的 汉字
+// 单行  匹配 ，配合template range 判断 是否是template中的空字符开头的 汉字
 const templateTextInLineRegexp = /((?<=\s+)[\u4e00-\u9fa5]\S+)|((?<=\s+)[\u4e00-\u9fa5])/g;
 
 // 匹配多行 $t替换的字符串
