@@ -40,7 +40,6 @@ module.exports = {
 
     scriptRegexp,
     propertyRegexp,
-    templateTextRegexp,
     templateTextInLineRegexp,
     templateTextInAngleBracketsRegexp,
     angleBracketsRegexp,
