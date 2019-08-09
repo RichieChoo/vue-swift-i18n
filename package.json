@@ -9,7 +9,7 @@
         "snippet",
         "swift"
     ],
-    "version": "0.0.9",
+    "version": "0.1.0",
     "engines": {
         "vscode": "^1.36.0"
     },
@@ -245,12 +245,8 @@
         "vscode-test": "^1.1.0"
     },
     "dependencies": {
-        "chinese-to-pinyin": "^1.0.2",
-        "find-parent-dir": "^0.3.0",
         "flat": "^4.1.0",
         "mkdirp": "^0.5.1",
-        "nanobus": "^4.4.0",
-        "postal": "^2.0.5",
         "puid": "^1.0.7"
     },
     "bugs": {
