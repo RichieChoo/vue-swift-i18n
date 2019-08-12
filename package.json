@@ -80,17 +80,22 @@
         "vueSwiftI18n.modulePrefixFoUpdateJson": {
           "type": "string",
           "default": "",
-          "description": "command 'Update I18n Locales Json' with it. \n (expect 'string', such as '' or 'hello-world' )"
+          "description": "command 'Update I18n Locales Json' properties key with it. \n (expect 'string', such as '' or 'hello-world' )"
         },
         "vueSwiftI18n.notAlertBeforeUpdateI18n": {
           "type": "boolean",
           "default": false,
-          "description": "Whether alert tip before executing command 'Update I18n Locales Json'. \n (expect 'string', default false )"
+          "description": "Whether alert tip before executing command 'Update I18n Locales Json'. \n (expect 'boolean', default false )"
         },
         "vueSwiftI18n.parentDirLevel": {
           "type": "number",
           "default": 1,
           "description": "The folder level which will be addded to the begin of json key'. \n (expect 'number', default 1 )"
+        },
+        "vueSwiftI18n.doNotDisturb": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether alert tips when executing command '. \n (expect 'boolean', default false )"
         }
       }
     },
