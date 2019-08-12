@@ -31,7 +31,7 @@ const templateTextInLineRegexp = /((?<=\s+)[\u4e00-\u9fa5]\S+)|((?<=\s+)[\u4e00-
 //匹配到特殊字符串说明前面正则匹配有问题，给出提示，去掉匹配
 const warnRegexp = /[{}<>:]/g;
 
-// 匹配多行 $t替换的字符串
+// 匹配 $t替换的字符串
 const dollarTRegexp = /(?<=\$t\(["'])[^'"]+/gm;
 module.exports = {
   templateBeginRegexp,
