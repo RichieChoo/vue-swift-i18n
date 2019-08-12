@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.3
+- Update propertyRegexp to match more case
+
+
 ## 0.1.2
 - Change mac keybindings
 

@@ -19,7 +19,7 @@ const commentRegexp = /\/\//g;
 const scriptRegexp = /((?<!=)["|'][\u4e00-\u9fa5]["|'])|((?<!=)["|'][\u4e00-\u9fa5]\S+["|'])/g;
 
 //匹配属性中的汉字 √
-const propertyRegexp = /(\s\w+=["|'][\u4e00-\u9fa5]\S+["|'])|(\s\w+=["|'][\u4e00-\u9fa5]["|'])/g;
+const propertyRegexp = /(\s\S+=["|'][\u4e00-\u9fa5]\S+["|'])|(\s\w+=["|'][\u4e00-\u9fa5]["|'])/g;
 
 // 单行  匹配 template ><下的汉字
 // const templateTextInAngleBracketsRegexp = /(\>[\u4e00-\u9fa5]\S+\<)|(\>[\u4e00-\u9fa5]\<)/g;
