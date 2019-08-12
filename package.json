@@ -9,7 +9,7 @@
     "snippet",
     "swift"
   ],
-  "version": "0.1.1",
+  "version": "0.1.2",
   "engines": {
     "vscode": "^1.36.0"
   },
@@ -103,19 +103,19 @@
       {
         "command": "extension.vueSwiftI18n.updateI18n",
         "key": "ctrl+alt+u",
-        "mac": "cmd+alt+u",
+        "mac": "ctrl+cmd+u",
         "when": "editorTextFocus"
       },
       {
         "command": "extension.vueSwiftI18n.swiftI18n",
         "key": "ctrl+alt+i",
-        "mac": "cmd+alt+i",
+        "mac": "ctrl+cmd+i",
         "when": "editorTextFocus"
       },
       {
         "command": "extension.vueSwiftI18n.showI18n",
         "key": "ctrl+alt+o",
-        "mac": "cmd+alt+o",
+        "mac": "ctrl+cmd+o",
         "when": "editorTextFocus"
       }
     ],

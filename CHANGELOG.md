@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.2
+- Change mac keybindings
+
 ## 0.1.1
 - Update regexp for Template to fix some bug
 - Do not disturb mode and config
