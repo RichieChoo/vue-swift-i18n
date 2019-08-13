@@ -19,10 +19,7 @@
   ],
   "icon": "images/icon.png",
   "activationEvents": [
-    "onCommand:extension.vueSwiftI18n.flatJson",
-    "onCommand:extension.vueSwiftI18n.swiftI18n",
-    "onCommand:extension.vueSwiftI18n.showI18n",
-    "onCommand:extension.vueSwiftI18n.updateI18n"
+    "*"
   ],
   "main": "./src/extension.js",
   "contributes": {

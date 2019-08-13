@@ -33,6 +33,11 @@ const operation = {
         cmd: 'extension.vueSwiftI18n.swiftI18n',
         title: 'Swift I18n',
     },
+    hoverI18n:{
+        cmd: 'extension.vueSwiftI18n.hoverI18n',
+        title: 'Hover I18n',
+    }
+
 };
 module.exports = {
     DEFAULT_STYLE,
