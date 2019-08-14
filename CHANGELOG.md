@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.4
+- Modify global to scope when updating json or doing i18n
+- Unflat Json after resolving json
+
 ## 0.1.3
 - Update propertyRegexp to match more case
 

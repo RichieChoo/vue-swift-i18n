@@ -203,13 +203,26 @@ const getLocales = ({
     });
   }
 };
-const changeObjeValueKey = obj => {
+const changeObjeValueKey = (obj, prefix) => {
   const result = {};
   Object.keys(obj).forEach(v => {
     if (!result[obj[v]]) {
-      result[obj[v]] = v;
+      result[obj[v]] = connect(
+        prefix,
+        v
+      );
     }
   });
+  return result;
+};
+
+const getValueFormPrefix = (_data, prefix) => {
+  let result = {};
+  try {
+    eval(`result = _data.${prefix}`);
+  } catch (error) {
+    result = {};
+  }
   return result;
 };
 
@@ -222,5 +235,6 @@ module.exports = {
   getEditor,
   showMessage,
   connect,
-  getPrefix
+  getPrefix,
+  getValueFormPrefix
 };
