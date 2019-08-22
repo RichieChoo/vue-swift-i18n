@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.5
+- Add langFile to config locales json name
+
 ## 0.1.4
 - Modify global to scope when updating json or doing i18n
 - Unflat Json after resolving json

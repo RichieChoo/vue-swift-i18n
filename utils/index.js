@@ -189,9 +189,11 @@ const getLocales = ({
 }) => {
   const dirName = path.dirname(fsPath);
   if (fs.existsSync(path.join(dirName, "package.json"))) {
-    let jsonPath = path.join(dirName, "src", "locales", "zh-cn.json");
+    const settings = workspace.getConfiguration("vueSwiftI18n");
+    const lang = settings.get("langFile"); //default "zh-cn.json"
+    let jsonPath = path.join(dirName, "src", "locales", lang);
     if (!!defaultLocalesPath) {
-      jsonPath = path.join(dirName, defaultLocalesPath, "zh-cn.json");
+      jsonPath = path.join(dirName, defaultLocalesPath, lang);
     }
     return varifyFile({ fsPath: jsonPath, showInfo, showError });
   } else {
