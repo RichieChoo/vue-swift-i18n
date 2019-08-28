@@ -189,9 +189,11 @@ const getLocales = ({
 }) => {
   const dirName = path.dirname(fsPath);
   if (fs.existsSync(path.join(dirName, "package.json"))) {
-    let jsonPath = path.join(dirName, "src", "locales", "zh-cn.json");
+    const settings = workspace.getConfiguration("vueSwiftI18n");
+    const lang = settings.get("langFile"); //default "zh-cn.json"
+    let jsonPath = path.join(dirName, "src", "locales", lang);
     if (!!defaultLocalesPath) {
-      jsonPath = path.join(dirName, defaultLocalesPath, "zh-cn.json");
+      jsonPath = path.join(dirName, defaultLocalesPath, lang);
     }
     return varifyFile({ fsPath: jsonPath, showInfo, showError });
   } else {
@@ -203,13 +205,26 @@ const getLocales = ({
     });
   }
 };
-const changeObjeValueKey = obj => {
+const changeObjeValueKey = (obj, prefix) => {
   const result = {};
   Object.keys(obj).forEach(v => {
     if (!result[obj[v]]) {
-      result[obj[v]] = v;
+      result[obj[v]] = connect(
+        prefix,
+        v
+      );
     }
   });
+  return result;
+};
+
+const getValueFormPrefix = (_data, prefix) => {
+  let result = {};
+  try {
+    eval(`result = _data.${prefix}`);
+  } catch (error) {
+    result = {};
+  }
   return result;
 };
 
@@ -222,5 +237,6 @@ module.exports = {
   getEditor,
   showMessage,
   connect,
-  getPrefix
+  getPrefix,
+  getValueFormPrefix
 };
