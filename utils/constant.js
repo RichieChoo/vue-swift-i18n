@@ -17,25 +17,29 @@ const langArr = ['javascript', 'vue'];
 
 const operation = {
     flatJson: {
-        cmd: 'extension.vueSwiftI18n.flatJson',
+        cmd: 'vueSwiftI18n.flatJson',
         title: 'Flat Json',
     },
     showI18n: {
-        cmd: 'extension.vueSwiftI18n.showI18n',
+        cmd: 'vueSwiftI18n.showI18n',
         title: 'Show I18n Translate Detail',
     },
 
     updateI18n: {
-        cmd: 'extension.vueSwiftI18n.updateI18n',
+        cmd: 'vueSwiftI18n.updateI18n',
         title: 'Update I18n Locales Json',
     },
     swiftI18n: {
-        cmd: 'extension.vueSwiftI18n.swiftI18n',
+        cmd: 'vueSwiftI18n.swiftI18n',
         title: 'Swift I18n',
     },
     hoverI18n:{
-        cmd: 'extension.vueSwiftI18n.hoverI18n',
+        cmd: 'vueSwiftI18n.hoverI18n',
         title: 'Hover I18n',
+    },
+    openI18nFile:{
+        cmd: 'vueSwiftI18n.openI18nFile',
+        title: 'Open File',
     }
 
 };

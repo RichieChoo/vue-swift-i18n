@@ -23,7 +23,8 @@ A Visual Studio Code extension with rich support for the i18n in Vue,including f
 1. Update  or create a zh-cn.json for i18n with unique key
 2. I18n swiftly in a vue or javascript file with zh-cn.json
 3. Show the  corresponding value for i18n key in a vue or javascript file
-4. Flat json or a folder contains json file
+4. Provide showing and jumping hover box for i18n key
+5. Flat json or a folder contains json file
 
 ## RFC
 Warmly welcome to comment feelings when you use and propose the desired features you want.

@@ -32,7 +32,7 @@ const templateTextInLineRegexp = /((?<=\s+)[\u4e00-\u9fa5]\S+)|((?<=\s+)[\u4e00-
 const warnRegexp = /[{}<>:]/g;
 
 // 匹配 $t替换的字符串
-const dollarTRegexp = /(?<=\$t\(["'])[^'"]+/gm;
+const dollarTRegexp = /(?<=(\$t|i18n\.t)\(["'])[^'"]+/gm;
 module.exports = {
   templateBeginRegexp,
   templateEndRegexp,

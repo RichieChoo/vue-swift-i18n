@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.6
+- provide hover for i18n key in vue and js file
+- provide jumps and to quick find the key in i18n json
+
 ## 0.1.5
 - Add langFile to config locales json name
 

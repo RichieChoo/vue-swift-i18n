@@ -1,268 +1,277 @@
 {
-  "name": "vue-swift-i18n",
-  "displayName": "vue-swift-i18n",
-  "description": "swift i18n plugin for vue developer",
-  "publisher": "RichieChoo",
-  "keywords": [
-    "vue",
-    "i18n",
-    "snippet",
-    "swift"
-  ],
-  "version": "0.1.5",
-  "engines": {
-    "vscode": "^1.36.0"
-  },
-  "categories": [
-    "Programming Languages",
-    "Snippets"
-  ],
-  "icon": "images/icon.png",
-  "activationEvents": [
-    "*"
-  ],
-  "main": "./src/extension.js",
-  "contributes": {
-    "languages": [
-      {
-        "id": "vue",
-        "aliases": [
-          "Vue",
-          "vue"
-        ],
-        "extensions": [
-          ".vue"
-        ],
-        "configuration": "./syntaxes/vue.configuration.json"
-      }
-    ],
-    "grammars": [
-      {
-        "language": "vue",
-        "scopeName": "text.html.vue",
-        "path": "./syntaxes/vue.tmLanguage"
-      }
-    ],
-    "commands": [
-      {
-        "command": "extension.vueSwiftI18n.flatJson",
-        "title": "Flat Json"
-      },
-      {
-        "command": "extension.vueSwiftI18n.showI18n",
-        "title": "Show I18n Translate Detail"
-      },
-      {
-        "command": "extension.vueSwiftI18n.updateI18n",
-        "title": "Update I18n Locales Json"
-      },
-      {
-        "command": "extension.vueSwiftI18n.swiftI18n",
-        "title": "Swift I18n",
-        "icon": {
-          "light": "./images/icon-light.svg",
-          "dark": "./images/icon-dark.svg"
-        }
-      }
-    ],
-    "configuration": {
-      "type": "object",
-      "title": "Vue-Swift-I18n",
-      "properties": {
-        "vueSwiftI18n.defaultLocalesPath": {
-          "type": "string",
-          "default": "src/locales",
-          "description": "Specify the 'locales' folder path for vue-swift-i18n. \n (expect 'string', default 'src/locales')"
-        },
-        "vueSwiftI18n.modulePrefixFoUpdateJson": {
-          "type": "string",
-          "default": "",
-          "description": "command 'Update I18n Locales Json' properties key with it. \n (expect 'string', such as '' or 'hello-world' )"
-        },
-        "vueSwiftI18n.notAlertBeforeUpdateI18n": {
-          "type": "boolean",
-          "default": false,
-          "description": "Whether alert tip before executing command 'Update I18n Locales Json'. \n (expect 'boolean', default false )"
-        },
-        "vueSwiftI18n.parentDirLevel": {
-          "type": "number",
-          "default": 1,
-          "description": "The folder level which will be addded to the begin of json key'. \n (expect 'number', default 1 )"
-        },
-        "vueSwiftI18n.doNotDisturb": {
-          "type": "boolean",
-          "default": false,
-          "description": "Whether alert tips when executing command '. \n (expect 'boolean', default false )"
-        },
-        "vueSwiftI18n.langFile": {
-          "type": "string",
-          "default": "zh-cn.json",
-          "description": "file name for locales json'. \n (expect 'string', default zh-cn.json )"
-        }
-      }
-    },
-    "keybindings": [
-      {
-        "command": "extension.vueSwiftI18n.updateI18n",
-        "key": "ctrl+alt+u",
-        "mac": "ctrl+cmd+u",
-        "when": "editorTextFocus"
-      },
-      {
-        "command": "extension.vueSwiftI18n.swiftI18n",
-        "key": "ctrl+alt+i",
-        "mac": "ctrl+cmd+i",
-        "when": "editorTextFocus"
-      },
-      {
-        "command": "extension.vueSwiftI18n.showI18n",
-        "key": "ctrl+alt+o",
-        "mac": "ctrl+cmd+o",
-        "when": "editorTextFocus"
-      }
-    ],
-    "menus": {
-      "editor/context": [
-        {
-          "when": "editorFocus && resourceLangId == json",
-          "command": "extension.vueSwiftI18n.flatJson",
-          "group": "navigation"
-        },
-        {
-          "when": "editorFocus &&  resourceLangId == javascript",
-          "command": "extension.vueSwiftI18n.updateI18n",
-          "group": "1_modification@6"
-        },
-        {
-          "when": "editorFocus &&  resourceLangId == vue",
-          "command": "extension.vueSwiftI18n.updateI18n",
-          "group": "1_modification@6"
-        },
-        {
-          "when": "editorFocus &&  resourceLangId == javascript",
-          "command": "extension.vueSwiftI18n.swiftI18n",
-          "group": "1_modification@7"
-        },
-        {
-          "when": "editorFocus &&  resourceLangId == vue",
-          "command": "extension.vueSwiftI18n.swiftI18n",
-          "group": "1_modification@7"
-        },
-        {
-          "when": "editorFocus && resourceLangId == vue",
-          "command": "extension.vueSwiftI18n.showI18n",
-          "group": "1_modification@8"
-        },
-        {
-          "when": "editorFocus && resourceLangId == javascript",
-          "command": "extension.vueSwiftI18n.showI18n",
-          "group": "1_modification@8"
-        }
-      ],
-      "explorer/context": [
-        {
-          "command": "extension.vueSwiftI18n.flatJson",
-          "when": "explorerResourceIsFolder",
-          "group": "navigation"
-        },
-        {
-          "command": "extension.vueSwiftI18n.flatJson",
-          "when": "resourceLangId == json",
-          "group": "navigation"
-        },
-        {
-          "command": "extension.vueSwiftI18n.updateI18n",
-          "when": "resourceLangId == vue",
-          "group": "1_modification@6"
-        },
-        {
-          "command": "extension.vueSwiftI18n.updateI18n",
-          "when": "resourceLangId == javascript",
-          "group": "1_modification@6"
-        },
-        {
-          "command": "extension.vueSwiftI18n.swiftI18n",
-          "when": "resourceLangId == vue",
-          "group": "1_modification@7"
-        },
-        {
-          "command": "extension.vueSwiftI18n.swiftI18n",
-          "when": "resourceLangId == javascript",
-          "group": "1_modification@7"
-        },
-        {
-          "command": "extension.vueSwiftI18n.showI18n",
-          "when": "resourceLangId == vue",
-          "group": "1_modification@8"
-        },
-        {
-          "command": "extension.vueSwiftI18n.showI18n",
-          "when": "resourceLangId == javascript",
-          "group": "1_modification@8"
-        }
-      ]
-    },
-    "snippets": [
-      {
-        "language": "javascript",
-        "path": "./snippets/tt.json"
-      },
-      {
-        "language": "typescript",
-        "path": "./snippets/tt.json"
-      },
-      {
-        "language": "html",
-        "path": "./snippets/tt.json"
-      },
-      {
-        "language": "html",
-        "path": "./snippets/tt.json"
-      },
-      {
-        "language": "vue-html",
-        "path": "./snippets/tt.json"
-      },
-      {
-        "language": "html",
-        "path": "./snippets/tt.json"
-      },
-      {
-        "language": "vue",
-        "path": "./snippets/tt.json"
-      },
-      {
-        "language": "jade",
-        "path": "./snippets/tt.json"
-      }
-    ]
-  },
-  "scripts": {
-    "test": "node ./test/runTest.js"
-  },
-  "devDependencies": {
-    "@types/glob": "^7.1.1",
-    "@types/mocha": "^5.2.6",
-    "@types/node": "^10.14.14",
-    "@types/vscode": "^1.36.0",
-    "eslint": "^5.13.0",
-    "glob": "^7.1.4",
-    "mocha": "^6.2.0",
-    "typescript": "^3.3.1",
-    "vscode-test": "^1.1.0"
-  },
-  "dependencies": {
-    "flat": "^4.1.0",
-    "mkdirp": "^0.5.1",
-    "puid": "^1.0.7",
-    "unflatten": "^1.0.4"
-  },
-  "bugs": {
-    "url": "https://github.com/RichieChoo/vue-swift-i18n/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/RichieChoo/vue-swift-i18n"
-  },
-  "homepage": "https://github.com/RichieChoo/vue-swift-i18n/blob/master/README.md"
+	"name": "vue-swift-i18n",
+	"displayName": "vue-swift-i18n",
+	"description": "swift i18n plugin for vue developer",
+	"publisher": "RichieChoo",
+	"keywords": [
+		"vue",
+		"i18n",
+		"snippet",
+		"developer-tool"
+	],
+	"version": "0.1.6",
+	"engines": {
+		"vscode": "^1.37.1"
+	},
+	"categories": [
+		"Programming Languages",
+		"Snippets"
+	],
+	"icon": "images/icon.png",
+	"activationEvents": [
+		"*"
+	],
+	"main": "./src/extension.js",
+	"contributes": {
+		"languages": [
+			{
+				"id": "vue",
+				"aliases": [
+					"Vue",
+					"vue"
+				],
+				"extensions": [
+					".vue"
+				],
+				"configuration": "./syntaxes/vue.configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "vue",
+				"scopeName": "text.html.vue",
+				"path": "./syntaxes/vue.tmLanguage"
+			}
+		],
+		"commands": [
+			{
+				"command": "vueSwiftI18n.openI18nFile",
+				"title": "Open File"
+			},
+			{
+				"command": "vueSwiftI18n.flatJson",
+				"title": "Flat Json"
+			},
+			{
+				"command": "vueSwiftI18n.showI18n",
+				"title": "Show I18n Translate Detail"
+			},
+			{
+				"command": "vueSwiftI18n.updateI18n",
+				"title": "Update I18n Locales Json"
+			},
+			{
+				"command": "vueSwiftI18n.swiftI18n",
+				"title": "Swift I18n",
+				"icon": {
+					"light": "./images/icon-light.svg",
+					"dark": "./images/icon-dark.svg"
+				}
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Vue-Swift-I18n",
+			"properties": {
+				"vueSwiftI18n.defaultLocalesPath": {
+					"type": "string",
+					"default": "src/locales",
+					"description": "Specify the 'locales' folder path for vue-swift-i18n. \n (expect 'string', default 'src/locales')"
+				},
+				"vueSwiftI18n.modulePrefixFoUpdateJson": {
+					"type": "string",
+					"default": "",
+					"description": "command 'Update I18n Locales Json' properties key with it. \n (expect 'string', such as '' or 'hello-world' )"
+				},
+				"vueSwiftI18n.notAlertBeforeUpdateI18n": {
+					"type": "boolean",
+					"default": false,
+					"description": "Whether alert tip before executing command 'Update I18n Locales Json'. \n (expect 'boolean', default false )"
+				},
+				"vueSwiftI18n.parentDirLevel": {
+					"type": "number",
+					"default": 1,
+					"description": "The folder level which will be addded to the begin of json key'. \n (expect 'number', default 1 )"
+				},
+				"vueSwiftI18n.doNotDisturb": {
+					"type": "boolean",
+					"default": false,
+					"description": "Whether alert tips when executing command '. \n (expect 'boolean', default false )"
+				},
+				"vueSwiftI18n.langFile": {
+					"type": "string",
+					"default": "zh-cn.json",
+					"description": "file name for locales json'. \n (expect 'string', default zh-cn.json )"
+				},
+				"vueSwiftI18n.i18nValueHover": {
+					"type": "boolean",
+					"default": false,
+					"description": "Whether show i18n value for hover key in vue or js file'.\n (expect 'boolean', default false )"
+				}
+			}
+		},
+		"keybindings": [
+			{
+				"command": "vueSwiftI18n.updateI18n",
+				"key": "ctrl+alt+u",
+				"mac": "ctrl+cmd+u",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "vueSwiftI18n.swiftI18n",
+				"key": "ctrl+alt+i",
+				"mac": "ctrl+cmd+i",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "vueSwiftI18n.showI18n",
+				"key": "ctrl+alt+o",
+				"mac": "ctrl+cmd+o",
+				"when": "editorTextFocus"
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"when": "editorFocus && resourceLangId == json",
+					"command": "vueSwiftI18n.flatJson",
+					"group": "navigation"
+				},
+				{
+					"when": "editorFocus &&  resourceLangId == javascript",
+					"command": "vueSwiftI18n.updateI18n",
+					"group": "1_modification@6"
+				},
+				{
+					"when": "editorFocus &&  resourceLangId == vue",
+					"command": "vueSwiftI18n.updateI18n",
+					"group": "1_modification@6"
+				},
+				{
+					"when": "editorFocus &&  resourceLangId == javascript",
+					"command": "vueSwiftI18n.swiftI18n",
+					"group": "1_modification@7"
+				},
+				{
+					"when": "editorFocus &&  resourceLangId == vue",
+					"command": "vueSwiftI18n.swiftI18n",
+					"group": "1_modification@7"
+				},
+				{
+					"when": "editorFocus && resourceLangId == vue",
+					"command": "vueSwiftI18n.showI18n",
+					"group": "1_modification@8"
+				},
+				{
+					"when": "editorFocus && resourceLangId == javascript",
+					"command": "vueSwiftI18n.showI18n",
+					"group": "1_modification@8"
+				}
+			],
+			"explorer/context": [
+				{
+					"command": "vueSwiftI18n.flatJson",
+					"when": "explorerResourceIsFolder",
+					"group": "navigation"
+				},
+				{
+					"command": "vueSwiftI18n.flatJson",
+					"when": "resourceLangId == json",
+					"group": "navigation"
+				},
+				{
+					"command": "vueSwiftI18n.updateI18n",
+					"when": "resourceLangId == vue",
+					"group": "1_modification@6"
+				},
+				{
+					"command": "vueSwiftI18n.updateI18n",
+					"when": "resourceLangId == javascript",
+					"group": "1_modification@6"
+				},
+				{
+					"command": "vueSwiftI18n.swiftI18n",
+					"when": "resourceLangId == vue",
+					"group": "1_modification@7"
+				},
+				{
+					"command": "vueSwiftI18n.swiftI18n",
+					"when": "resourceLangId == javascript",
+					"group": "1_modification@7"
+				},
+				{
+					"command": "vueSwiftI18n.showI18n",
+					"when": "resourceLangId == vue",
+					"group": "1_modification@8"
+				},
+				{
+					"command": "vueSwiftI18n.showI18n",
+					"when": "resourceLangId == javascript",
+					"group": "1_modification@8"
+				}
+			]
+		},
+		"snippets": [
+			{
+				"language": "javascript",
+				"path": "./snippets/tt.json"
+			},
+			{
+				"language": "typescript",
+				"path": "./snippets/tt.json"
+			},
+			{
+				"language": "html",
+				"path": "./snippets/tt.json"
+			},
+			{
+				"language": "html",
+				"path": "./snippets/tt.json"
+			},
+			{
+				"language": "vue-html",
+				"path": "./snippets/tt.json"
+			},
+			{
+				"language": "html",
+				"path": "./snippets/tt.json"
+			},
+			{
+				"language": "vue",
+				"path": "./snippets/tt.json"
+			},
+			{
+				"language": "jade",
+				"path": "./snippets/tt.json"
+			}
+		]
+	},
+	"scripts": {
+		"test": "node ./test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^5.2.6",
+		"@types/node": "^10.14.14",
+		"@types/vscode": "^1.37.0",
+		"eslint": "^5.13.0",
+		"glob": "^7.1.4",
+		"mocha": "^6.2.0",
+		"typescript": "^3.3.1",
+		"vscode-test": "^1.1.0"
+	},
+	"dependencies": {
+		"flat": "^4.1.0",
+		"mkdirp": "^0.5.1",
+		"puid": "^1.0.7",
+		"unflatten": "^1.0.4"
+	},
+	"bugs": {
+		"url": "https://github.com/RichieChoo/vue-swift-i18n/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/RichieChoo/vue-swift-i18n"
+	},
+	"homepage": "https://github.com/RichieChoo/vue-swift-i18n/blob/master/README.md"
 }
