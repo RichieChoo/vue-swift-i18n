@@ -9,7 +9,7 @@
 		"snippet",
 		"developer-tool"
 	],
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"engines": {
 		"vscode": "^1.37.1"
 	},
@@ -105,8 +105,8 @@
 				},
 				"vueSwiftI18n.i18nValueHover": {
 					"type": "boolean",
-					"default": false,
-					"description": "Whether show i18n value for hover key in vue or js file'.\n (expect 'boolean', default false )"
+					"default": true,
+					"description": "Whether show i18n value for hover key in vue or js file'.\n (expect 'boolean', default true )"
 				}
 			}
 		},
