@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.2.0
+- modify gif and hover default setting
+
 ## 0.1.7
 - fix hover bug
 
