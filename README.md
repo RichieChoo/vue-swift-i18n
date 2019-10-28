@@ -10,7 +10,6 @@
 )](https://marketplace.visualstudio.com/items?itemName=RichieChoo.vue-swift-i18n)
 [![](https://vsmarketplacebadge.apphb.com/trending-monthly/RichieChoo.vue-swift-i18n.svg
 )](https://marketplace.visualstudio.com/items?itemName=RichieChoo.vue-swift-i18n)
-[![996.icu][996.icu]][996.icu-url]
 
 A Visual Studio Code extension with rich support for the i18n in Vue,including features such as flating json file or flat json files in a folder,i18n snippets and more !
 
