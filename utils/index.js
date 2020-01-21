@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require("fs");
 const {
 	registerCommand,
 	executeCommand,
@@ -9,19 +9,19 @@ const {
 	Position,
 	ViewColumn,
 	workspace,
-	window,
-} = require('./vs');
+	window
+} = require("./vs");
 const {
 	templateBeginRegexp,
 	templateEndRegexp,
 	scriptBeginRegexp,
-	scripteEndRegexp,
-} = require('./regex');
-const { langArr, operation } = require('./constant');
-const path = require('path');
+	scripteEndRegexp
+} = require("./regex");
+const { langArr, operation } = require("./constant");
+const path = require("path");
 
 const connect = (first, second) => {
-	if (typeof first !== 'string' || typeof second !== 'string') {
+	if (typeof first !== "string" || typeof second !== "string") {
 		return false;
 	}
 	const endWithDot = /\.$/;
@@ -29,38 +29,35 @@ const connect = (first, second) => {
 	if (endWithDot.test(first)) {
 		return beginWithDot.test(second) ? first + second.slice(1) : first + second;
 	} else {
-		return beginWithDot.test(second) ? first + second : first + '.' + second;
+		return beginWithDot.test(second) ? first + second : first + "." + second;
 	}
 };
 
 const getPrefix = currentEditor => {
 	const fileName =
-		currentEditor.document.languageId === 'vue'
-			? path.basename(currentEditor.document.uri.fsPath, '.vue')
-			: path.basename(currentEditor.document.uri.fsPath, '.js');
-	const settings = workspace.getConfiguration('vueSwiftI18n');
-	const modulePrefix = settings.get('modulePrefixFoUpdateJson');
-	const jsonNameLevel = settings.get('parentDirLevel') || 0;
+		currentEditor.document.languageId === "vue"
+			? path.basename(currentEditor.document.uri.fsPath, ".vue")
+			: path.basename(currentEditor.document.uri.fsPath, ".js");
+	const settings = workspace.getConfiguration("vueSwiftI18n");
+	const modulePrefix = settings.get("modulePrefixFoUpdateJson");
+	const jsonNameLevel = settings.get("parentDirLevel") || 0;
 	let prefix = connect(
 		path
 			.dirname(currentEditor.document.uri.fsPath)
 			.split(path.sep)
 			.slice(-jsonNameLevel)
-			.join('.'),
+			.join("."),
 		fileName
 	);
 	if (modulePrefix) {
-		prefix = connect(
-			modulePrefix,
-			prefix
-		);
+		prefix = connect(modulePrefix, prefix);
 	}
 	return prefix;
 };
 
 const defaultOption = {
 	selection: new Range(new Position(0, 0), new Position(0, 0)),
-	preview: false,
+	preview: false
 };
 const openFileByPath = (fPath, option) => {
 	return open(file(fPath), option || defaultOption);
@@ -72,7 +69,7 @@ const getCellRange = ({ editor, regex, line, lineEnd }) =>
 const getRange = editor => {
 	const range = {
 		template: {},
-		script: {},
+		script: {}
 	};
 	const lineCount = editor.document.lineCount;
 	for (let i = 0; i < lineCount; i++) {
@@ -81,25 +78,25 @@ const getRange = editor => {
 			editor,
 			regex: templateBeginRegexp,
 			line: i,
-			lineEnd: line.range.end.character,
+			lineEnd: line.range.end.character
 		});
 		const tEnd = getCellRange({
 			editor,
 			regex: templateEndRegexp,
 			line: i,
-			lineEnd: line.range.end.character,
+			lineEnd: line.range.end.character
 		});
 		const sBegin = getCellRange({
 			editor,
 			regex: scriptBeginRegexp,
 			line: i,
-			lineEnd: line.range.end.character,
+			lineEnd: line.range.end.character
 		});
 		const sEnd = getCellRange({
 			editor,
 			regex: scripteEndRegexp,
 			line: i,
-			lineEnd: line.range.end.character,
+			lineEnd: line.range.end.character
 		});
 		if (tBegin) {
 			range.template.begin = tBegin.start.line;
@@ -122,24 +119,24 @@ const getEditor = editor => {
 	return currentEditor;
 };
 const showMessage = ({
-	type = 'info',
+	type = "info",
 	message,
 	file,
 	editor,
 	callback,
-	needOpen = true,
+	needOpen = true
 }) => {
-	const settings = workspace.getConfiguration('vueSwiftI18n');
-	const doNotDisturb = settings.get('doNotDisturb');
-	if (doNotDisturb && type === 'info') return;
+	const settings = workspace.getConfiguration("vueSwiftI18n");
+	const doNotDisturb = settings.get("doNotDisturb");
+	if (doNotDisturb && type === "info") return;
 
 	const actions = [
-		'Got it',
+		"Got it",
 		callback && callback.name,
-		needOpen && 'View it',
+		needOpen && "View it"
 	].filter(v => !!v);
 
-	const showMessage = type === 'error' ? msg.error : msg.info;
+	const showMessage = type === "error" ? msg.error : msg.info;
 
 	const viewColumn = editor
 		? editor.viewColumn + 1
@@ -148,11 +145,11 @@ const showMessage = ({
 		: 1;
 
 	showMessage(message, ...actions).then(val => {
-		if (val === 'View it') {
+		if (val === "View it") {
 			openFileByPath(file, {
 				selection: new Range(new Position(0, 0), new Position(0, 0)),
 				preview: false,
-				viewColumn,
+				viewColumn
 			});
 		}
 		if (callback && val === callback.name) {
@@ -166,19 +163,19 @@ const varifyFile = ({ fsPath, showError, showInfo }) => {
 		//TODO: 跳转到国际化设置路径!
 		showError &&
 			showMessage({
-				type: 'error',
+				type: "error",
 				message: `Not Found File:${fsPath}`,
 				needOpen: false,
 				callback: {
 					name: operation.updateI18n.title,
-					func: () => executeCommand(operation.updateI18n.cmd),
-				},
+					func: () => executeCommand(operation.updateI18n.cmd)
+				}
 			});
 	} else {
 		showInfo &&
 			showMessage({
 				message: `Get Locales Path:${fsPath}`,
-				file: fsPath,
+				file: fsPath
 			});
 		exist = true;
 	}
@@ -189,13 +186,13 @@ const getLocales = ({
 	fsPath,
 	defaultLocalesPath,
 	showInfo = false,
-	showError = true,
+	showError = true
 }) => {
 	const dirName = path.dirname(fsPath);
-	if (fs.existsSync(path.join(dirName, 'package.json'))) {
-		const settings = workspace.getConfiguration('vueSwiftI18n');
-		const lang = settings.get('langFile'); //default "zh-cn.json"
-		let jsonPath = path.join(dirName, 'src', 'locales', lang);
+	if (fs.existsSync(path.join(dirName, "package.json"))) {
+		const settings = workspace.getConfiguration("vueSwiftI18n");
+		const lang = settings.get("langFile"); //default "zh-cn.json"
+		let jsonPath = path.join(dirName, "src", "locales", lang);
 		if (!!defaultLocalesPath) {
 			jsonPath = path.join(dirName, defaultLocalesPath, lang);
 		}
@@ -205,7 +202,7 @@ const getLocales = ({
 			fsPath: dirName,
 			defaultLocalesPath,
 			showInfo,
-			showError,
+			showError
 		});
 	}
 };
@@ -213,10 +210,7 @@ const changeObjeValueKey = (obj, prefix) => {
 	const result = {};
 	Object.keys(obj).forEach(v => {
 		if (!result[obj[v]]) {
-			result[obj[v]] = connect(
-				prefix,
-				v
-			);
+			result[obj[v]] = connect(prefix, v);
 		}
 	});
 	return result;
@@ -224,8 +218,12 @@ const changeObjeValueKey = (obj, prefix) => {
 
 const getValueFormPrefix = (_data, prefix) => {
 	let result = {};
+	const str = prefix
+		.split(".")
+		.map((v, p) => `["${v}"]`)
+		.join("");
 	try {
-		eval(`result = _data.${prefix}`);
+		eval(`result = _data${str}`);
 	} catch (error) {
 		result = {};
 	}
@@ -242,5 +240,5 @@ module.exports = {
 	showMessage,
 	connect,
 	getPrefix,
-	getValueFormPrefix,
+	getValueFormPrefix
 };
