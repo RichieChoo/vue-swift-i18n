@@ -135,7 +135,7 @@
 				{
 					"when": "editorFocus && resourceLangId == json",
 					"command": "vueSwiftI18n.flatJson",
-					"group": "navigation"
+					"group": "1_modification@6"
 				},
 				{
 					"when": "editorFocus &&  resourceLangId == javascript",
@@ -172,12 +172,12 @@
 				{
 					"command": "vueSwiftI18n.flatJson",
 					"when": "explorerResourceIsFolder",
-					"group": "navigation"
+					"group": "1_modification@6"
 				},
 				{
 					"command": "vueSwiftI18n.flatJson",
 					"when": "resourceLangId == json",
-					"group": "navigation"
+					"group": "1_modification@6"
 				},
 				{
 					"command": "vueSwiftI18n.updateI18n",
@@ -264,7 +264,8 @@
 		"flat": "^4.1.0",
 		"mkdirp": "^0.5.1",
 		"puid": "^1.0.7",
-		"unflatten": "^1.0.4"
+		"unflatten": "^1.0.4",
+		"validator": "^12.1.0"
 	},
 	"bugs": {
 		"url": "https://github.com/RichieChoo/vue-swift-i18n/issues"

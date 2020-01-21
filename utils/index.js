@@ -1,4 +1,5 @@
 const fs = require("fs");
+const validator = require("validator");
 const {
 	registerCommand,
 	executeCommand,
@@ -17,19 +18,97 @@ const {
 	scriptBeginRegexp,
 	scripteEndRegexp
 } = require("./regex");
-const { langArr, operation } = require("./constant");
+const {
+	langArr,
+	operation,
+	customConfigFileName,
+	pkgFileName
+} = require("./constant");
 const path = require("path");
+const settings = workspace.getConfiguration("vueSwiftI18n");
+const connect = require("./connect");
+const isObject = obj =>
+	Object.prototype.toString.call(obj) === "[object Object]";
+const getCustomSettingKey = (customSetting, key) =>
+	customSetting.hasOwnProperty(key) ? customSetting[key] : settings.get(key);
 
-const connect = (first, second) => {
-	if (typeof first !== "string" || typeof second !== "string") {
-		return false;
-	}
-	const endWithDot = /\.$/;
-	const beginWithDot = /^\./;
-	if (endWithDot.test(first)) {
-		return beginWithDot.test(second) ? first + second.slice(1) : first + second;
+const showMessage = ({
+	type = "info",
+	message,
+	file,
+	editor,
+	callback,
+	needOpen = true
+}) => {
+	const doNotDisturb = settings.get("doNotDisturb"); //此配置在richierc.json无效
+	if (doNotDisturb && type === "info") return;
+
+	const actions = [
+		"Got it",
+		callback && callback.name,
+		needOpen && "View it"
+	].filter(v => !!v);
+
+	const vsMsg = type === "error" ? msg.error : msg.info;
+
+	const viewColumn = editor
+		? editor.viewColumn + 1
+		: getEditor(editor)
+		? getEditor(editor).viewColumn + 1
+		: 1;
+
+	vsMsg(message, ...actions).then(val => {
+		if (val === "View it") {
+			openFileByPath(file, {
+				selection: new Range(new Position(0, 0), new Position(0, 0)),
+				preview: false,
+				viewColumn
+			});
+		}
+		if (callback && val === callback.name) {
+			callback.func();
+		}
+	});
+};
+
+//获取配置项
+const getCustomSetting = (fsPath, key) => {
+	const dirName = path.dirname(fsPath);
+	if (fs.existsSync(path.join(dirName, pkgFileName))) {
+		const customPath = path.join(dirName, customConfigFileName);
+		if (fs.existsSync(customPath)) {
+			const data = fs.readFileSync(customPath);
+			let customSetting = validator.isJSON(data.toString())
+				? JSON.parse(data.toString())
+				: {};
+			if (!validator.isJSON(data.toString())) {
+				showMessage({
+					type: "error",
+					file: customPath,
+					message: `'${customPath}' is not a right json, custom setting will not work`
+				});
+			}
+			if (typeof key === "string") {
+				return getCustomSettingKey(customSetting, key);
+			}
+			if (Array.isArray(key)) {
+				return key.reduce((p, c) => {
+					p[c] = getCustomSettingKey(customSetting, c);
+					return p;
+				}, {});
+			}
+			if (isObject(key)) {
+				for (const i in key) {
+					if (key.hasOwnProperty(i)) {
+						key[i] = getCustomSettingKey(customSetting, key[i]);
+					}
+				}
+				return key;
+			}
+		}
+		return {};
 	} else {
-		return beginWithDot.test(second) ? first + second : first + "." + second;
+		return getCustomSetting(dirName, key);
 	}
 };
 
@@ -38,9 +117,13 @@ const getPrefix = currentEditor => {
 		currentEditor.document.languageId === "vue"
 			? path.basename(currentEditor.document.uri.fsPath, ".vue")
 			: path.basename(currentEditor.document.uri.fsPath, ".js");
-	const settings = workspace.getConfiguration("vueSwiftI18n");
-	const modulePrefix = settings.get("modulePrefixFoUpdateJson");
-	const jsonNameLevel = settings.get("parentDirLevel") || 0;
+	const { modulePrefix, jsonNameLevel = 0 } = getCustomSetting(
+		currentEditor.document.uri.fsPath,
+		{
+			modulePrefix: "modulePrefixFoUpdateJson",
+			jsonNameLevel: "parentDirLevel"
+		}
+	);
 	let prefix = connect(
 		path
 			.dirname(currentEditor.document.uri.fsPath)
@@ -118,45 +201,7 @@ const getEditor = editor => {
 	if (stopFlag) return false;
 	return currentEditor;
 };
-const showMessage = ({
-	type = "info",
-	message,
-	file,
-	editor,
-	callback,
-	needOpen = true
-}) => {
-	const settings = workspace.getConfiguration("vueSwiftI18n");
-	const doNotDisturb = settings.get("doNotDisturb");
-	if (doNotDisturb && type === "info") return;
 
-	const actions = [
-		"Got it",
-		callback && callback.name,
-		needOpen && "View it"
-	].filter(v => !!v);
-
-	const showMessage = type === "error" ? msg.error : msg.info;
-
-	const viewColumn = editor
-		? editor.viewColumn + 1
-		: getEditor(editor)
-		? getEditor(editor).viewColumn + 1
-		: 1;
-
-	showMessage(message, ...actions).then(val => {
-		if (val === "View it") {
-			openFileByPath(file, {
-				selection: new Range(new Position(0, 0), new Position(0, 0)),
-				preview: false,
-				viewColumn
-			});
-		}
-		if (callback && val === callback.name) {
-			callback.func();
-		}
-	});
-};
 const varifyFile = ({ fsPath, showError, showInfo }) => {
 	let exist = false;
 	if (!fs.existsSync(fsPath)) {
@@ -181,7 +226,6 @@ const varifyFile = ({ fsPath, showError, showInfo }) => {
 	}
 	return { localesPath: fsPath, exist };
 };
-
 const getLocales = ({
 	fsPath,
 	defaultLocalesPath,
@@ -189,9 +233,8 @@ const getLocales = ({
 	showError = true
 }) => {
 	const dirName = path.dirname(fsPath);
-	if (fs.existsSync(path.join(dirName, "package.json"))) {
-		const settings = workspace.getConfiguration("vueSwiftI18n");
-		const lang = settings.get("langFile"); //default "zh-cn.json"
+	if (fs.existsSync(path.join(dirName, pkgFileName))) {
+		const lang = getCustomSetting(path.join(dirName, pkgFileName), "langFile"); //default "zh-cn.json"
 		let jsonPath = path.join(dirName, "src", "locales", lang);
 		if (!!defaultLocalesPath) {
 			jsonPath = path.join(dirName, defaultLocalesPath, lang);
@@ -240,5 +283,6 @@ module.exports = {
 	showMessage,
 	connect,
 	getPrefix,
-	getValueFormPrefix
+	getValueFormPrefix,
+	getCustomSetting
 };

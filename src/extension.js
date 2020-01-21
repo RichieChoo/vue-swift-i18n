@@ -10,6 +10,8 @@ const openI18nFile = require("./openI18nFile");
 function activate(context) {
   // 注册功能
 
+
+
   // 扁平化 处理 json
   flatJson(context);
 
