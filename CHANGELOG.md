@@ -1,6 +1,7 @@
 # Change Log
-## 0.2.2
-fix no richierc.json bug
+## 0.2.3
+- fix no richierc.json bug
+- fix show message bug
 
 ## 0.2.1
 - add module config file : richierc.json

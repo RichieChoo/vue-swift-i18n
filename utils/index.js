@@ -80,7 +80,7 @@ const getCustomSetting = (fsPath, key) => {
 		let customSetting = validator.isJSON(data.toString())
 			? JSON.parse(data.toString())
 			: {};
-		if (!validator.isJSON(data.toString())) {
+		if (fs.existsSync(customPath) && !validator.isJSON(data.toString())) {
 			showMessage({
 				type: "error",
 				file: customPath,
