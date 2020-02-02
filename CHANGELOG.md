@@ -1,4 +1,9 @@
 # Change Log
+## 0.2.2
+fix no richierc.json bug
+
+## 0.2.1
+- add module config file : richierc.json
 
 ## 0.2.0
 - modify gif and hover default setting

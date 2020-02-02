@@ -54,8 +54,8 @@ const showMessage = ({
 	const viewColumn = editor
 		? editor.viewColumn + 1
 		: getEditor(editor)
-		? getEditor(editor).viewColumn + 1
-		: 1;
+			? getEditor(editor).viewColumn + 1
+			: 1;
 
 	vsMsg(message, ...actions).then(val => {
 		if (val === "View it") {
@@ -76,35 +76,33 @@ const getCustomSetting = (fsPath, key) => {
 	const dirName = path.dirname(fsPath);
 	if (fs.existsSync(path.join(dirName, pkgFileName))) {
 		const customPath = path.join(dirName, customConfigFileName);
-		if (fs.existsSync(customPath)) {
-			const data = fs.readFileSync(customPath);
-			let customSetting = validator.isJSON(data.toString())
-				? JSON.parse(data.toString())
-				: {};
-			if (!validator.isJSON(data.toString())) {
-				showMessage({
-					type: "error",
-					file: customPath,
-					message: `'${customPath}' is not a right json, custom setting will not work`
-				});
-			}
-			if (typeof key === "string") {
-				return getCustomSettingKey(customSetting, key);
-			}
-			if (Array.isArray(key)) {
-				return key.reduce((p, c) => {
-					p[c] = getCustomSettingKey(customSetting, c);
-					return p;
-				}, {});
-			}
-			if (isObject(key)) {
-				for (const i in key) {
-					if (key.hasOwnProperty(i)) {
-						key[i] = getCustomSettingKey(customSetting, key[i]);
-					}
+		const data = fs.existsSync(customPath) ? fs.readFileSync(customPath) : "";
+		let customSetting = validator.isJSON(data.toString())
+			? JSON.parse(data.toString())
+			: {};
+		if (!validator.isJSON(data.toString())) {
+			showMessage({
+				type: "error",
+				file: customPath,
+				message: `'${customPath}' is not a right json, custom setting will not work`
+			});
+		}
+		if (typeof key === "string") {
+			return getCustomSettingKey(customSetting, key);
+		}
+		if (Array.isArray(key)) {
+			return key.reduce((p, c) => {
+				p[c] = getCustomSettingKey(customSetting, c);
+				return p;
+			}, {});
+		}
+		if (isObject(key)) {
+			for (const i in key) {
+				if (key.hasOwnProperty(i)) {
+					key[i] = getCustomSettingKey(customSetting, key[i]);
 				}
-				return key;
 			}
+			return key;
 		}
 		return {};
 	} else {
