@@ -23,7 +23,7 @@
 
 ## 快速开始
 
-1. 安装（商店搜索`**vue-swift-i18n**`，或者ctrl+p,输入**`ext install RichieChoo.vue-swift-i18n`**）
+1. 安装（商店搜索`vue-swift-i18n`，或者ctrl+p,输入`ext install RichieChoo.vue-swift-i18n`）
 1. 使用，见下图：
 
 ![swift3.gif](https://cdn.nlark.com/yuque/0/2019/gif/111625/1565579740171-8872bfd0-690b-43f3-8474-4f8c890aebdd.gif#align=left&display=inline&height=1080&name=swift3.gif&originHeight=1080&originWidth=1920&size=1569758&status=done&width=1920)
