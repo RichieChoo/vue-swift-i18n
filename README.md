@@ -36,6 +36,8 @@
 1. xxx.json文件中，生成扁平化的locales的xxx_flat.json文件,方便取值复制,详情见[[传送门]](#AupC0)
 1. 在vue/js中提供，提供t,tt,ttt代码提示,详情见[[传送门]](#8c0Fn)
 
+## 设计
+![design.png](https://cdn.nlark.com/yuque/0/2020/png/111625/1582165204110-151c4717-556e-443e-8975-cb29cbcbe83f.png?x-oss-process=image/resize,w_1418)
 
 ## 详述
 约定：**汉字**--`汉字开头的连续非空字符串`
