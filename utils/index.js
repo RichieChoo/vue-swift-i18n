@@ -259,6 +259,7 @@ const changeObjeValueKey = (obj, prefix) => {
 
 const getValueFormPrefix = (_data, prefix) => {
 	let result = {};
+	//str存在特殊字符时，需要替换为[]
 	const str = prefix
 		.split(".")
 		.map((v, p) => `["${v}"]`)

@@ -4,6 +4,7 @@ const constants = {
 	langArr: ["javascript", "vue"],
 	operation: {
 		flatJson: { cmd: "vueSwiftI18n.flatJson", title: "Flat Json" },
+		unFlatJson: { cmd: "vueSwiftI18n.unFlatJson", title: "unFlat Json" },
 		showI18n: {
 			cmd: "vueSwiftI18n.showI18n",
 			title: "Show I18n Translate Detail"
