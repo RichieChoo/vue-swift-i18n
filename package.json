@@ -53,6 +53,10 @@
 				"title": "Flat Json"
 			},
 			{
+				"command": "vueSwiftI18n.unFlatJson",
+				"title": "UnFlat Json"
+			},
+			{
 				"command": "vueSwiftI18n.showI18n",
 				"title": "Show I18n Translate Detail"
 			},
@@ -78,6 +82,21 @@
 					"default": "src/locales",
 					"description": "Specify the 'locales' folder path for vue-swift-i18n. \n (expect 'string', default 'src/locales')"
 				},
+				"vueSwiftI18n.doNotDisturb": {
+					"type": "boolean",
+					"default": false,
+					"description": "Whether alert tips when executing command '. \n (expect 'boolean', default false )"
+				},
+				"vueSwiftI18n.i18nValueHover": {
+					"type": "boolean",
+					"default": true,
+					"description": "Whether show i18n value for hover key in vue or js file'.\n (expect 'boolean', default true )"
+				},
+				"vueSwiftI18n.langFile": {
+					"type": "string",
+					"default": "zh-cn.json",
+					"description": "file name for locales json'. \n (expect 'string', default zh-cn.json )"
+				},
 				"vueSwiftI18n.modulePrefixFoUpdateJson": {
 					"type": "string",
 					"default": "",
@@ -92,21 +111,6 @@
 					"type": "number",
 					"default": 1,
 					"description": "The folder level which will be addded to the begin of json key'. \n (expect 'number', default 1 )"
-				},
-				"vueSwiftI18n.doNotDisturb": {
-					"type": "boolean",
-					"default": false,
-					"description": "Whether alert tips when executing command '. \n (expect 'boolean', default false )"
-				},
-				"vueSwiftI18n.langFile": {
-					"type": "string",
-					"default": "zh-cn.json",
-					"description": "file name for locales json'. \n (expect 'string', default zh-cn.json )"
-				},
-				"vueSwiftI18n.i18nValueHover": {
-					"type": "boolean",
-					"default": true,
-					"description": "Whether show i18n value for hover key in vue or js file'.\n (expect 'boolean', default true )"
 				}
 			}
 		},
@@ -135,6 +139,11 @@
 				{
 					"when": "editorFocus && resourceLangId == json",
 					"command": "vueSwiftI18n.flatJson",
+					"group": "1_modification@6"
+				},
+				{
+					"when": "editorFocus && resourceLangId == json",
+					"command": "vueSwiftI18n.unFlatJson",
 					"group": "1_modification@6"
 				},
 				{
@@ -169,16 +178,6 @@
 				}
 			],
 			"explorer/context": [
-				{
-					"command": "vueSwiftI18n.flatJson",
-					"when": "explorerResourceIsFolder",
-					"group": "1_modification@6"
-				},
-				{
-					"command": "vueSwiftI18n.flatJson",
-					"when": "resourceLangId == json",
-					"group": "1_modification@6"
-				},
 				{
 					"command": "vueSwiftI18n.updateI18n",
 					"when": "resourceLangId == vue",
