@@ -3,7 +3,6 @@
 ## 0.2.4
 - add unflat json
 
--
 ## 0.2.3
 - fix no richierc.json bug
 - fix show message bug
