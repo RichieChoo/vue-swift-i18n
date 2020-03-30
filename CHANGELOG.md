@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.2.6
+- add puidType
+
 ## 0.2.5
 - add generate richierc.json command(read custom setting or not)
 
