@@ -133,6 +133,7 @@ const getPrefix = currentEditor => {
 			.dirname(currentEditor.document.uri.fsPath)
 			.split(path.sep)
 			.slice(-jsonNameLevel)
+			.filter(v => !!v)
 			.join("."),
 		fileName
 	);

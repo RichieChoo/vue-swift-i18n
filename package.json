@@ -5,11 +5,14 @@
 	"publisher": "RichieChoo",
 	"keywords": [
 		"vue",
+		"vue i18n",
+		"vue-i18n",
+		"fast i18n",
+		"i18n tool",
 		"i18n",
-		"snippet",
 		"developer-tool"
 	],
-	"version": "0.2.5",
+	"version": "0.2.6",
 	"engines": {
 		"vscode": "^1.37.1"
 	},
@@ -65,6 +68,10 @@
 				"title": "Update I18n Locales Json"
 			},
 			{
+				"command": "vueSwiftI18n.generateRichieRC",
+				"title": "Generate scope config file"
+			},
+			{
 				"command": "vueSwiftI18n.swiftI18n",
 				"title": "Swift I18n",
 				"icon": {
@@ -97,6 +104,11 @@
 					"default": "zh-cn.json",
 					"description": "file name for locales json'. \n (expect 'string', default zh-cn.json )"
 				},
+				"vueSwiftI18n.puidType": {
+					"type": "string",
+					"default": "short",
+					"description": "Long or short type puid in locales json'. \n (expect 'string', default zh-cn.json )"
+				},
 				"vueSwiftI18n.modulePrefixFoUpdateJson": {
 					"type": "string",
 					"default": "",
@@ -115,6 +127,12 @@
 			}
 		},
 		"keybindings": [
+			{
+				"command": "vueSwiftI18n.generateRichieRC",
+				"key": "ctrl+alt+g",
+				"mac": "ctrl+cmd+g",
+				"when": "editorTextFocus"
+			},
 			{
 				"command": "vueSwiftI18n.updateI18n",
 				"key": "ctrl+alt+u",
@@ -148,6 +166,16 @@
 				},
 				{
 					"when": "editorFocus &&  resourceLangId == javascript",
+					"command": "vueSwiftI18n.generateRichieRC",
+					"group": "1_modification@5"
+				},
+				{
+					"when": "editorFocus &&  resourceLangId == vue",
+					"command": "vueSwiftI18n.generateRichieRC",
+					"group": "1_modification@5"
+				},
+				{
+					"when": "editorFocus &&  resourceLangId == javascript",
 					"command": "vueSwiftI18n.updateI18n",
 					"group": "1_modification@6"
 				},
@@ -178,6 +206,16 @@
 				}
 			],
 			"explorer/context": [
+				{
+					"command": "vueSwiftI18n.generateRichieRC",
+					"when": "resourceLangId == vue",
+					"group": "1_modification@5"
+				},
+				{
+					"command": "vueSwiftI18n.generateRichieRC",
+					"when": "resourceLangId == javascript",
+					"group": "1_modification@5"
+				},
 				{
 					"command": "vueSwiftI18n.updateI18n",
 					"when": "resourceLangId == vue",

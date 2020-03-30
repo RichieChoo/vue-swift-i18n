@@ -29,6 +29,7 @@ const constants = {
 	},
 	defaultConfig: {
 		defaultLocalesPath: "src/locales",
+		puidType: "short",
 		i18nValueHover: true,
 		langFile: "zh-cn.json",
 		modulePrefixFoUpdateJson: "",
