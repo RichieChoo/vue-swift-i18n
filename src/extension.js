@@ -6,30 +6,34 @@ const flatJson = require("./flatJson");
 const updateI18n = require("./updateI18n");
 const hoverI18n = require("./hoverI18n");
 const openI18nFile = require("./openI18nFile");
+const generateRichieRC = require("./generateRichieRC");
 
 function activate(context) {
-	// 注册功能
+	// register
 
-	// 扁平化 处理 json
+	// flat json
 	flatJson(context);
 
-	// 反扁平 处理 json
+	// unFlat json
 	flatJson(context, true);
 
-	// 国际化替换
+	// i18n replace
 	swiftI18n(context);
 
-	// 查看国际化替换
+	// show i18n replace detail
 	showI18n(context);
 
-	// 根据文件中文自动生成国际化json
+	// generate i18n json by regexp
 	updateI18n(context);
 
-	// 悬浮展示
+	// hover show i18n detail
 	hoverI18n(context);
 
-	// 跳转到国际化配置文件
+	// jump to i18n file
 	openI18nFile(context);
+
+	// generate config file : richierc.json
+	generateRichieRC(context)
 }
 exports.activate = activate;
 function deactivate() {

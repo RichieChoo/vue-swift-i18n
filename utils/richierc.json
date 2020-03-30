@@ -1,9 +1,0 @@
-{
-	"defaultLocalesPath": "src/locales",
-	"doNotDisturb": false,
-	"i18nValueHover": true,
-	"langFile": "zh-cn.json",
-	"modulePrefixFoUpdateJson": "",
-	"notAlertBeforeUpdateI18n": false,
-	"parentDirLevel": 1
-}

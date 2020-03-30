@@ -9,7 +9,7 @@
 		"snippet",
 		"developer-tool"
 	],
-	"version": "0.2.4",
+	"version": "0.2.5",
 	"engines": {
 		"vscode": "^1.37.1"
 	},

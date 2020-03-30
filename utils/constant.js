@@ -13,6 +13,10 @@ const constants = {
 			cmd: "vueSwiftI18n.updateI18n",
 			title: "Update I18n Locales Json"
 		},
+		generateRichieRC: {
+			cmd: "vueSwiftI18n.generateRichieRC",
+			title: "Generate scope config file"
+		},
 		swiftI18n: { cmd: "vueSwiftI18n.swiftI18n", title: "Swift I18n" },
 		hoverI18n: { cmd: "vueSwiftI18n.hoverI18n", title: "Hover I18n" },
 		openI18nFile: { cmd: "vueSwiftI18n.openI18nFile", title: "Open File" }
@@ -23,11 +27,15 @@ const constants = {
 			'Congratulations, your extension "vue-swift-i18n" is now active!',
 		noUri: "please selected a json file first"
 	},
+	defaultConfig: {
+		defaultLocalesPath: "src/locales",
+		i18nValueHover: true,
+		langFile: "zh-cn.json",
+		modulePrefixFoUpdateJson: "",
+		notAlertBeforeUpdateI18n: false,
+		parentDirLevel: 1
+	},
 	pkgFileName: "package.json",
-	customConfigFileName: "richierc.json",
-	customConfig: {},
-	updateCustomConfig(newConfig = {}) {
-		this.customConfig = Object.assign(this.customConfig, newConfig);
-	}
+	customConfigFileName: "richierc.json"
 };
 module.exports = constants;
