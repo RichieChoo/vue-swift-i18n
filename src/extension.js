@@ -33,7 +33,9 @@ function activate(context) {
 	openI18nFile(context);
 
 	// generate config file : richierc.json
-	generateRichieRC(context)
+	generateRichieRC(context);
+
+	msg.info(`${plugin.name} activated`);
 }
 exports.activate = activate;
 function deactivate() {
