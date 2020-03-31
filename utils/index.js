@@ -32,7 +32,9 @@ const isObject = obj =>
 	Object.prototype.toString.call(obj) === "[object Object]";
 
 const getCustomSettingKey = (customSetting, key) =>
-	customSetting.hasOwnProperty(key) ? customSetting[key] : settings.get(key);
+	customSetting && customSetting.hasOwnProperty(key)
+		? customSetting[key]
+		: settings.get(key);
 
 const showMessage = ({
 	type = "info",
@@ -94,6 +96,7 @@ const getCustomSetting = (fsPath, key, forceIgnoreCustomSetting = false) => {
 			});
 		}
 		if (typeof key === "string") {
+			const data = getCustomSettingKey(customSetting, key);
 			return getCustomSettingKey(customSetting, key);
 		}
 		if (Array.isArray(key)) {
@@ -248,7 +251,7 @@ const getLocales = ({
 			path.join(dirName, pkgFileName),
 			"defaultLocalesPath"
 		);
-		let jsonPath = path.join(dirName, localesPath, lang);
+		let jsonPath = path.join(dirName, localesPath || "", lang);
 		if (!!defaultLocalesPath) {
 			jsonPath = path.join(dirName, defaultLocalesPath, lang);
 		}

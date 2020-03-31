@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.2.9
+-  fix package.json bug and add  sort package.json
+
 ## 0.2.8
 - fix dependences bug
 
