@@ -121,20 +121,8 @@
 ## 新增功能
 1. 国际化json文件名可配置
 1. 悬浮展示i18n value，跳转json文件
-1. 增加`richierc.json`配置文件,优先级高于vscode配置项目(意义相同),具体配置如下:
-    richierc.json
-    ```
-      {
-        "modulePrefixFoUpdateJson": "",
-        "defaultLocalesPath": "",
-        "i18nValueHover": true,
-        "langFile": "zh-cn.json",
-        "notAlertBeforeUpdateI18n": false,
-        "parentDirLevel": 1
-      }
-
-    ```
-
+1. 增加一键生成`richierc.json`配置文件,优先级高于vscode配置(适用于自定义项目)
+1. 增加puidType配置，默认使用`short`类型（12位),提供`long`类型（24位），生成唯一key
 ## RFC
 
 

@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.2.8
+- fix dependences bug
+
 ## 0.2.6
 - add puidType
 
