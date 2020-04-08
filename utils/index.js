@@ -115,7 +115,7 @@ const getCustomSetting = (fsPath, key, forceIgnoreCustomSetting = false) => {
 		}
 		return {};
 	} else {
-		return getCustomSetting(dirName, key);
+		return getCustomSetting(dirName, key,forceIgnoreCustomSetting);
 	}
 };
 

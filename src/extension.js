@@ -35,11 +35,11 @@ function activate(context) {
 	// generate config file : richierc.json
 	generateRichieRC(context);
 
-	msg.info(`${plugin.name} activated`);
+	msg.info(`${plugin.name} 已激活！`);
 }
 exports.activate = activate;
 function deactivate() {
-	msg.info(`${plugin.name} deactivated`);
+	msg.info(`${plugin.name} 已移除！`);
 }
 
 module.exports = {
