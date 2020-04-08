@@ -46,48 +46,59 @@
 
 1. 汉字检索原则
 
-①位于<template></template>中的**`>`**与**`<` **之间的**汉字**，如<span>汉字123</span><br />②位于<template></template>中的标签属性的**汉字**，如<span title="汉字"></span><br />③位于<template></template>中的**`{{`**与**`}}`**之间的**汉字**，如<span>{{test ? "汉字" : "中文" }}</span><br />④位于<script></script>中的`**"**`与`**"**`之间的汉字，**`'`**与`**'**`之间的**汉字**
-
+① 位于`<template></template>`中的汉字，如`<span>汉字123</span>`
+② 位于`<template></template>`中的标签属性的汉字，如`<span title="汉字"></span>`
+③ 位于`<template></template>`中的`{{`与`}}`之间的汉字，如`<span>{{test ? "汉字" : "中文" }}</span>`
+④ 位于<script></script>中的`"`与`"`之间的汉字，`'`与`'`之间的**汉字**
+⑤ 过滤单行注释
 2. 生成更新Json路径配置,见[路径及JSON](#r4EQa)
-2. 生成更新原则
+3. 生成更新原则
 
-①当json为空或者文件不存在，将检测的**汉字**当做value，将[modulePrefix].[parents(level读取)].[当前vue文件名字]+唯一Id当做key，存储在json中<br />②当json文件不为空，执行智能替换<br />备注：主要是防止国际化后，执行JSON生成命令误操作，会导致json数据为空或错误<br />③智能替换：<br />i.相同val时，新的key,val替换原来的key,val<br />ii.不同val时，保存新增key,val和原有的key,val<br />
+① 当json为空或者文件不存在，将检测的**汉字**当做value，将[modulePrefix].[parents(level读取)].[当前vue文件名字]+唯一Id当做key，存储在json中
+② 当json文件不为空，执行智能替换
+备注：主要是防止国际化后，执行JSON生成命令误操作，会导致json数据为空或错误
+③ 智能替换：
+i. 相同val时，新的key,val替换原来的key,val
+ii. 不同val时，保存新增key,val和原有的key,val
 
 ### 二、国际化替换(Ctrl+Alt+I)
 
 1. 替换原则
+① 汉字检索原则1，**汉字123**替换为 **`{{$t('unique-key')}}`**
+② 汉字检索原则2，**`title="汉字"`** 替换为 **`:title="$t('unique-key')"`**
+③ 汉字检索原则3，**汉字**替换为 **`$t('unique-key')`**
+④ 汉字检索原则4，**汉字**替换为 **`this.$t('unique-key')`**
 
-①汉字检索原则1，**汉字123 **替换为 **{{$t('unique-key')}}**<br />②汉字检索原则2，**title="汉字"** 替换为 **:title="$t('unique-key')"**<br />③汉字检索原则3，**汉字 **替换为 **$t('unique-key')**<br />④汉字检索原则4，**汉字 **替换为 **this.$t('unique-key')**
-
-2. 相关正则，见[[](https://github.com/RichieChoo/vue-swift-i18n/blob/master/utils/regex.js)[传送门](https://github.com/RichieChoo/vue-swift-i18n/blob/master/utils/regex.js)[]](https://github.com/RichieChoo/vue-swift-i18n/blob/master/utils/regex.js)
+1. 相关正则，见[传送门](https://github.com/RichieChoo/vue-swift-i18n/blob/master/utils/regex.js)
 2. 替换依据Json,见[路径及JSON](#r4EQa)
 
 ### 三、国际化提示(Ctrl+Alt+O)
 
 1. 提示原则
-
-①正则：`/(?<=\$t\(["'])[^'"]+/gm` 匹配已替换的字符串，<br />②用新生成的唯一key而不是json的key来标识，为了防止json中的key被使用多次
+① 正则：`/(?<=\$t\(["'])[^'"]+/gm` 匹配已替换的字符串
+② 用新生成的唯一key而不是json的key来标识，为了防止json中的key被使用多次
 
 2. 提示依据Json,见[路径及JSON](#r4EQa)
 
 ### 四、Json扁平处理
 
 1. 扁平化原则：
-
-①将所有的有value的key的所有父对象和key用`**.**`连接<br />②Json扁平处理没有提供快捷键，通过右键文件夹或者json文件来执行命令
-
+① 将所有的有value的key的所有父对象和key用`.`连接
+② Json扁平处理没有提供快捷键，通过右键文件夹或者json文件来执行命令
 2. 扁平依据选中json，生成/更新xxx_flat.json与json文件路径同级
 
 ### 五、路径及JSON
 根目录：认定当前项目`package.json`为根目录<br />当前文件：执行Json生成等命令所在的文件
 
 1. 路径
-
-①默认路径：`[根目录]/src/locales/zh-cn.json`为默认json路径<br />②提供字符串配置项：`**Default Locales Path**`,如"test",则对应的json路径：`[根目录]/``test/zh-cn.json`
+① 默认路径：**`[根目录]/src/locales/zh-cn.json`** 为默认json路径
+② 提供字符串配置项：**`Default Locales Path`**,如"test",则对应的json路径：**`[根目录]/``test/zh-cn.json`**
 
 2. json文件的属性名及value
 
-①默认：**[当前文件的父文件夹名].[当前文件名(无后缀)]**<br />②提供数字层级配置项：`**Parent Dir Level**`**,**如** 3 **则代表属性名头部添加取**3**层父文件夹名<br />③提供字符串配置项：`**Module Prefix Fo Update JSON**`，如 “sdm-ui”，会把“sdm-ui"添加到父文件夹名        之前<br />④其他配置项：
+① 默认：**[当前文件的父文件夹名].[当前文件名(无后缀)]**
+② 提供数字层级配置项：**`Parent Dir Level`**,如**3**则代表属性名头部添加取**3**层父文件夹名
+③ 提供字符串配置项：`**Module Prefix Fo Update JSON**`，如 “sdm-ui”，会把“sdm-ui"添加到父文件夹名        之前<br />④其他配置项：
 
   - **`Not Alert Before Update I18n`**，默认提示，若为true则会直接更新json不弹窗提醒
   - **`Do Not Disturb`**,默认false,若为true则会关闭任何命令提醒
@@ -96,7 +107,10 @@
 
 
 ### 六、代码提示
-①汉字检索原则1，`**tt**`** **替换为 {{$t('剪切板内容')}}<br />②汉字检索原则2，**`t`** 替换为 $t('剪切板内容')，手动加`：`<br />③汉字检索原则3，`**t**`** **替换为 $t('剪切板内容')<br />④汉字检索原则4，**`ttt`**** **替换为 this.$t('剪切板内容')
+① 汉字检索原则1，**`tt`** 替换为 **`{{$t('剪切板内容')}}`**
+② 汉字检索原则2，**`t`** 替换为 **`$t('剪切板内容')`**，需手动加`：`
+③ 汉字检索原则3，**`t`** 替换为 **`$t('剪切板内容')`**
+④ 汉字检索原则4，**`ttt`** 替换为 **`this.$t('剪切板内容')`**
 
 
 ## 文档及帮助
@@ -115,8 +129,8 @@
 
 ## 其他推荐
 
-1. vscode正则 **[\u4e00-\u9fa5] **查找汉字
-1. vscode插件expand-region来扩展选择,方便选中复制
+1. vscode正则 `[\u4e00-\u9fa5]` 查找汉字
+2. vscode插件expand-region来扩展选择,方便选中复制
 
 ## 新增功能
 1. 国际化json文件名可配置
