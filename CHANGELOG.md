@@ -1,4 +1,6 @@
 # Change Log
+## 0.2.11
+- update gif
 
 ## 0.2.10
 -  fix richie.json generate bug

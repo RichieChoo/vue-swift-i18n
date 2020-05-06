@@ -23,10 +23,11 @@
 
 ## 快速开始
 
-1. 安装（商店搜索`vue-swift-i18n`，或者ctrl+p,输入`ext install RichieChoo.vue-swift-i18n`）
-1. 使用，见下图：
+1. 安装
+   （商店搜索**vue-swift-i18n**，或者ctrl+p,输入**ext install RichieChoo.vue-swift-i18n**
+2. 使用，见下图：
 
-![swift3.gif](https://cdn.nlark.com/yuque/0/2019/gif/111625/1565579740171-8872bfd0-690b-43f3-8474-4f8c890aebdd.gif#align=left&display=inline&height=1080&name=swift3.gif&originHeight=1080&originWidth=1920&size=1569758&status=done&width=1920)
+![swift3.gif](https://cdn.nlark.com/yuque/0/2020/gif/111625/1588754860502-5efa916d-2d17-4f8b-b047-7e9055c3042e.gif  "vue-swift-i18n")
 
 ## 功能
 
@@ -49,7 +50,7 @@
 ① 位于`<template></template>`中的汉字，如`<span>汉字123</span>`
 ② 位于`<template></template>`中的标签属性的汉字，如`<span title="汉字"></span>`
 ③ 位于`<template></template>`中的`{{`与`}}`之间的汉字，如`<span>{{test ? "汉字" : "中文" }}</span>`
-④ 位于<script></script>中的`"`与`"`之间的汉字，`'`与`'`之间的**汉字**
+④ 位于`<script></script>`中的`"`与`"`之间的汉字，`'`与`'`之间的**汉字**
 ⑤ 过滤单行注释
 2. 生成更新Json路径配置,见[路径及JSON](#r4EQa)
 3. 生成更新原则
