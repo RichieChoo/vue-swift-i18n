@@ -27,7 +27,7 @@
    （商店搜索**vue-swift-i18n**，或者ctrl+p,输入**ext install RichieChoo.vue-swift-i18n**
 2. 使用，见下图：
 
-![vue-swift-i18n](https://cdn.nlark.com/yuque/0/2020/gif/111625/1588754860502-5efa916d-2d17-4f8b-b047-7e9055c3042e.gif "vue-swift-i18n")
+![gif](https://cdn.nlark.com/yuque/0/2020/gif/111625/1588754860502-5efa916d-2d17-4f8b-b047-7e9055c3042e.gif)
 
 ## 功能
 
