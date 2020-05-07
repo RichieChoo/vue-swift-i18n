@@ -106,7 +106,7 @@ const getCustomSetting = (fsPath, key) => {
 		}
 		return {};
 	} else {
-		return getCustomSetting(dirName, key);
+		return getCustomSetting(dirName, key, forceIgnoreCustomSetting);
 	}
 };
 
@@ -144,8 +144,9 @@ const openFileByPath = (fPath, option) => {
 	return open(file(fPath), option || defaultOption);
 };
 
-const getCellRange = ({ editor, regex, line, lineEnd }) =>
-	editor.document.getWordRangeAtPosition(new Position(line, lineEnd), regex);
+const getCellRange = ({ editor, regex, line }) =>
+	//zero base charactor is 0
+	editor.document.getWordRangeAtPosition(new Position(line, 0), regex);
 
 const getRange = editor => {
 	const range = {
@@ -159,25 +160,21 @@ const getRange = editor => {
 			editor,
 			regex: templateBeginRegexp,
 			line: i,
-			lineEnd: line.range.end.character
 		});
 		const tEnd = getCellRange({
 			editor,
 			regex: templateEndRegexp,
 			line: i,
-			lineEnd: line.range.end.character
 		});
 		const sBegin = getCellRange({
 			editor,
 			regex: scriptBeginRegexp,
 			line: i,
-			lineEnd: line.range.end.character
 		});
 		const sEnd = getCellRange({
 			editor,
 			regex: scripteEndRegexp,
 			line: i,
-			lineEnd: line.range.end.character
 		});
 		if (tBegin) {
 			range.template.begin = tBegin.start.line;
