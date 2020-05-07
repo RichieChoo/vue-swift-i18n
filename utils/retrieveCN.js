@@ -102,6 +102,11 @@ module.exports = (currentEditor, puidType) => {
 				i >= template.begin;
 			const inVueScript =
 				script.begin && script.end && i <= script.end && i >= script.begin;
+			if (inVueTemplate) {
+
+			}
+			if (inVueScript) {
+			}
 		}
 		//过滤单行注释，多行注释不考虑
 		if (!lineText.match(commentRegexp)) {
