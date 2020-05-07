@@ -22,15 +22,19 @@ const {
 	langArr,
 	operation,
 	customConfigFileName,
-	pkgFileName
+	pkgFileName,
+	defaultConfig
 } = require("./constant");
 const path = require("path");
 const settings = workspace.getConfiguration("vueSwiftI18n");
 const connect = require("./connect");
 const isObject = obj =>
 	Object.prototype.toString.call(obj) === "[object Object]";
+
 const getCustomSettingKey = (customSetting, key) =>
-	customSetting.hasOwnProperty(key) ? customSetting[key] : settings.get(key);
+	customSetting && customSetting.hasOwnProperty(key)
+		? customSetting[key]
+		: settings.get(key);
 
 const showMessage = ({
 	type = "info",
@@ -40,9 +44,6 @@ const showMessage = ({
 	callback,
 	needOpen = true
 }) => {
-	const doNotDisturb = settings.get("doNotDisturb"); //此配置在richierc.json无效
-	if (doNotDisturb && type === "info") return;
-
 	const actions = [
 		"Got it",
 		callback && callback.name,
@@ -54,8 +55,8 @@ const showMessage = ({
 	const viewColumn = editor
 		? editor.viewColumn + 1
 		: getEditor(editor)
-			? getEditor(editor).viewColumn + 1
-			: 1;
+		? getEditor(editor).viewColumn + 1
+		: 1;
 
 	vsMsg(message, ...actions).then(val => {
 		if (val === "View it") {
@@ -72,15 +73,22 @@ const showMessage = ({
 };
 
 //获取配置项
-const getCustomSetting = (fsPath, key) => {
+const getCustomSetting = (fsPath, key, forceIgnoreCustomSetting = false) => {
 	const dirName = path.dirname(fsPath);
 	if (fs.existsSync(path.join(dirName, pkgFileName))) {
 		const customPath = path.join(dirName, customConfigFileName);
-		const data = fs.existsSync(customPath) ? fs.readFileSync(customPath) : "";
+		const data =
+			fs.existsSync(customPath) && !forceIgnoreCustomSetting
+				? fs.readFileSync(customPath)
+				: "";
 		let customSetting = validator.isJSON(data.toString())
 			? JSON.parse(data.toString())
 			: {};
-		if (fs.existsSync(customPath) && !validator.isJSON(data.toString())) {
+		if (
+			fs.existsSync(customPath) &&
+			!forceIgnoreCustomSetting &&
+			!validator.isJSON(data.toString())
+		) {
 			showMessage({
 				type: "error",
 				file: customPath,
@@ -88,6 +96,7 @@ const getCustomSetting = (fsPath, key) => {
 			});
 		}
 		if (typeof key === "string") {
+			const data = getCustomSettingKey(customSetting, key);
 			return getCustomSettingKey(customSetting, key);
 		}
 		if (Array.isArray(key)) {
@@ -127,6 +136,7 @@ const getPrefix = currentEditor => {
 			.dirname(currentEditor.document.uri.fsPath)
 			.split(path.sep)
 			.slice(-jsonNameLevel)
+			.filter(v => !!v)
 			.join("."),
 		fileName
 	);
@@ -189,6 +199,7 @@ const getRange = editor => {
 	}
 	return range;
 };
+
 const getEditor = editor => {
 	let currentEditor = editor || window.activeTextEditor;
 	const stopFlag =
@@ -221,16 +232,23 @@ const varifyFile = ({ fsPath, showError, showInfo }) => {
 	}
 	return { localesPath: fsPath, exist };
 };
+
 const getLocales = ({
 	fsPath,
+	isGetRootPath = false,
 	defaultLocalesPath,
 	showInfo = false,
 	showError = true
 }) => {
 	const dirName = path.dirname(fsPath);
 	if (fs.existsSync(path.join(dirName, pkgFileName))) {
+		if (isGetRootPath) return dirName;
 		const lang = getCustomSetting(path.join(dirName, pkgFileName), "langFile"); //default "zh-cn.json"
-		let jsonPath = path.join(dirName, "src", "locales", lang);
+		const localesPath = getCustomSetting(
+			path.join(dirName, pkgFileName),
+			"defaultLocalesPath"
+		);
+		let jsonPath = path.join(dirName, localesPath || "", lang);
 		if (!!defaultLocalesPath) {
 			jsonPath = path.join(dirName, defaultLocalesPath, lang);
 		}
@@ -238,12 +256,14 @@ const getLocales = ({
 	} else {
 		return getLocales({
 			fsPath: dirName,
+			isGetRootPath,
 			defaultLocalesPath,
 			showInfo,
 			showError
 		});
 	}
 };
+
 const changeObjeValueKey = (obj, prefix) => {
 	const result = {};
 	Object.keys(obj).forEach(v => {

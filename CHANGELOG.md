@@ -1,4 +1,21 @@
 # Change Log
+## 0.2.11
+- update gif
+
+## 0.2.10
+-  fix richie.json generate bug
+
+## 0.2.9
+-  fix package.json bug and add  sort package.json
+
+## 0.2.8
+- fix dependences bug
+
+## 0.2.6
+- add puidType
+
+## 0.2.5
+- add generate richierc.json command(read custom setting or not)
 
 ## 0.2.4
 - add unflat json
