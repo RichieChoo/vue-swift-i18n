@@ -19,6 +19,7 @@ const {
 	scriptRegexp,
 	propertyRegexp,
 	templateTextInAngleBracketsRegexp,
+	angleBracketSpaceRegexp,
 	templateTextInLineRegexp,
 	angleBracketsRegexp,
 	quotationRegexp,
@@ -70,10 +71,9 @@ const getlinesObj = (arr, puid) =>
 module.exports = (currentEditor, puidType) => {
 	if (!currentEditor || !currentEditor.document) return {};
 	const { lineCount, languageId, lineAt } = currentEditor.document;
-	const isJavascript = languageId === "javscript";
+	const isJavascript = languageId === "javascript";
 	const isVue = languageId === "vue";
 	const { template, script } = getRange(currentEditor);
-	const prefix = getPrefix(currentEditor);
 	const lines = [];
 	for (let i = 0; i < lineCount; i++) {
 		const lineText = lineAt(i).text;
@@ -84,7 +84,7 @@ module.exports = (currentEditor, puidType) => {
 			continue;
 		}
 		//js文件(诸如mixin.js等)
-		if (isJavascript && lineText.match(scriptRegexp)) {
+		if (isJavascript) {
 			cnWordArr = getLineCnWord({
 				lineText,
 				reg: scriptRegexp,
@@ -95,64 +95,64 @@ module.exports = (currentEditor, puidType) => {
 
 		//vue文件
 		if (isVue) {
-			const inVueTemplate =
-				template.begin &&
-				template.end &&
-				i <= template.end &&
-				i >= template.begin;
-			const inVueScript =
-				script.begin && script.end && i <= script.end && i >= script.begin;
+			const inVueTemplate = i <= template.end && i >= template.begin;
+			const inVueScript = i <= script.end && i >= script.begin;
 			if (inVueTemplate) {
-
+				const text = lineText;
+				const inAngleBracketSpacet = lineText.match(angleBracketSpaceRegexp);
+				const inText = lineText.match(templateTextInLineRegexp);
+				const warning = lineText.match(warnRegexp);
+				if (inAngleBracketSpacet && !warning) {
+				}
 			}
 			if (inVueScript) {
 			}
 		}
-		//过滤单行注释，多行注释不考虑
-		if (!lineText.match(commentRegexp)) {
-			//匹配 template ><下的汉字
-			if (lineText.match(templateTextInAngleBracketsRegexp)) {
-				cnWordArr = getLineCnWord({
-					lineText,
-					reg: templateTextInAngleBracketsRegexp,
-					resoloveReg: spaceRegexp
-				});
-			}
+		// //过滤单行注释，多行注释不考虑
+		// if (!lineText.match(commentRegexp)) {
+		// 	//匹配 template ><下的汉字
+		// 	if (lineText.match(templateTextInAngleBracketsRegexp)) {
+		// 		cnWordArr = getLineCnWord({
+		// 			lineText,
+		// 			reg: templateTextInAngleBracketsRegexp,
+		// 			resoloveReg: spaceRegexp
+		// 		});
+		// 	}
 
-			//配合template range 判断 是否是template中的, warnRegexp判断是一整行 空字符开头结尾的 汉字
-			if (
-				lineText.match(templateTextInLineRegexp) &&
-				!lineText.match(warnRegexp) &&
-				isTemplate
-			) {
-				cnWordArr = getLineCnWord({
-					lineText,
-					reg: templateTextInLineRegexp,
-					resoloveReg: firstSpaceRegexp,
-					initWordArr: cnWordArr
-				});
-			}
+		// 	//配合template range 判断 是否是template中的, warnRegexp判断是一整行 空字符开头结尾的 汉字
+		// 	if (
+		// 		lineText.match(templateTextInLineRegexp) &&
+		// 		!lineText.match(warnRegexp) &&
+		// 		isTemplate
+		// 	) {
+		// 		cnWordArr = getLineCnWord({
+		// 			lineText,
+		// 			reg: templateTextInLineRegexp,
+		// 			resoloveReg: firstSpaceRegexp,
+		// 			initWordArr: cnWordArr
+		// 		});
+		// 	}
 
-			//匹配属性中的汉字
-			if (lineText.match(propertyRegexp)) {
-				cnWordArr = getLineCnWord({
-					lineText,
-					reg: propertyRegexp,
-					resoloveReg: quotationRegexp,
-					initWordArr: cnWordArr
-				});
-			}
+		// 	//匹配属性中的汉字
+		// 	if (lineText.match(propertyRegexp)) {
+		// 		cnWordArr = getLineCnWord({
+		// 			lineText,
+		// 			reg: propertyRegexp,
+		// 			resoloveReg: quotationRegexp,
+		// 			initWordArr: cnWordArr
+		// 		});
+		// 	}
 
-			//匹配script中的汉字
-			if (lineText.match(scriptRegexp)) {
-				cnWordArr = getLineCnWord({
-					lineText,
-					reg: scriptRegexp,
-					resoloveReg: quotationRegexp,
-					initWordArr: cnWordArr
-				});
-			}
-		}
+		// 	//匹配script中的汉字
+		// 	if (lineText.match(scriptRegexp)) {
+		// 		cnWordArr = getLineCnWord({
+		// 			lineText,
+		// 			reg: scriptRegexp,
+		// 			resoloveReg: quotationRegexp,
+		// 			initWordArr: cnWordArr
+		// 		});
+		// 	}
+		// }
 		if (cnWordArr.length > 0) {
 			lines.push(...cnWordArr);
 		}

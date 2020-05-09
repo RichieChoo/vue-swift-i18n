@@ -136,7 +136,7 @@ ii. 不同val时，保存新增key,val和原有的key,val
 ## 新增功能
 1. 国际化json文件名可配置
 1. 悬浮展示i18n value，跳转json文件
-1. 增加一键生成`richierc.json`配置文件,优先级高于vscode配置(适用于自定义项目)
+1. 增加一键生成`richierc.json`配置文件,优先级高于vscode配置((当vscode打开项目包含多个不同的国际化项目且每个国际化比如需要配置不同modulePrefix))
 1. 增加puidType配置，默认使用`short`类型（12位),提供`long`类型（24位），生成唯一key
 
 

@@ -22,6 +22,8 @@ const scriptRegexp = /((?<!=)["|'][\u4e00-\u9fa5]["|'])|((?<!=)["|'][\u4e00-\u9f
 const propertyRegexp = /(\s\S+=["|'][\u4e00-\u9fa5]\S+["|'])|(\s\w+=["|'][\u4e00-\u9fa5]["|'])/g;
 
 // 单行  匹配 template ><下的汉字
+const angleBracketSpaceRegexp2 = /((?<=\s)[\u4e00-\u9fa5][^\s\<\>]*|(?<=[>\s])[\u4e00-\u9fa5][^\s\<\>]*(?=[\s<]))/g;
+const angleBracketSpaceRegexp = /(?<=[>\s])[\u4e00-\u9fa5][^\s\<]*(?=[\s<])/g;
 // const templateTextInAngleBracketsRegexp = /(\>[\u4e00-\u9fa5]\S+\<)|(\>[\u4e00-\u9fa5]\<)/g;
 const templateTextInAngleBracketsRegexp = /(?<=[>\s])[\u4e00-\u9fa5]\S+(?=[\s<])|(?<=[>\s])[\u4e00-\u9fa5](?=[\s<])/g;
 
@@ -34,21 +36,22 @@ const warnRegexp = /[{}<>:]/g;
 // 匹配 $t替换的字符串
 const dollarTRegexp = /(?<=(\$t|i18n\.t)\(["'])[^'"]+/gm;
 module.exports = {
-  templateBeginRegexp,
-  templateEndRegexp,
-  scriptBeginRegexp,
-  scripteEndRegexp,
+	templateBeginRegexp,
+	templateEndRegexp,
+	scriptBeginRegexp,
+	scripteEndRegexp,
 
-  scriptRegexp,
-  propertyRegexp,
-  templateTextInLineRegexp,
-  templateTextInAngleBracketsRegexp,
-  warnRegexp,
-  angleBracketsRegexp,
-  quotationRegexp,
-  spaceRegexp,
-  firstSpaceRegexp,
-  commentRegexp,
+	scriptRegexp,
+	propertyRegexp,
+	templateTextInLineRegexp,
+	templateTextInAngleBracketsRegexp,
+	angleBracketSpaceRegexp,
+	warnRegexp,
+	angleBracketsRegexp,
+	quotationRegexp,
+	spaceRegexp,
+	firstSpaceRegexp,
+	commentRegexp,
 
-  dollarTRegexp
+	dollarTRegexp
 };
