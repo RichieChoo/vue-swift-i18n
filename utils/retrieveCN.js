@@ -1,20 +1,7 @@
-const flatten = require("flat");
-const unflatten = require("unflatten");
-const fs = require("fs");
-const path = require("path");
-const mkdir = require("mkdirp");
 const Puid = require("puid");
 const {
-	openFileByPath,
-	getPrefix,
 	getRange,
-	getLocales,
-	getValueFormPrefix,
-	getEditor,
-	showMessage,
-	getCustomSetting
 } = require(".");
-const { langArr, operation } = require("./constant");
 const {
 	scriptRegexp,
 	propertyRegexp,
@@ -29,15 +16,6 @@ const {
 	warnRegexp
 } = require("./regex");
 
-const {
-	msg,
-	Position,
-	Selection,
-	Range,
-	workspace,
-	window,
-	OverviewRulerLane
-} = require("./vs");
 
 const getLineCnWord = ({ lineText, reg, resoloveReg, initWordArr = [] }) => {
 	let word = lineText.match(reg) || initWordArr;
@@ -100,6 +78,7 @@ module.exports = (currentEditor, puidType) => {
 			if (inVueTemplate) {
 				const text = lineText;
 				const inAngleBracketSpacet = lineText.match(angleBracketSpaceRegexp);
+				
 				const inText = lineText.match(templateTextInLineRegexp);
 				const warning = lineText.match(warnRegexp);
 				if (inAngleBracketSpacet && !warning) {

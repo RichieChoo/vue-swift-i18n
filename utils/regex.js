@@ -15,20 +15,20 @@ const scripteEndRegexp = /\<\/script/g;
 //只匹配单行注释，多行注释不考虑
 const commentRegexp = /\/\//g;
 
-//匹配js中的汉字,配合template range 判断 是否是template中的js汉字  √
-const scriptRegexp = /((?<!=)["|'][\u4e00-\u9fa5]["|'])|((?<!=)["|'][\u4e00-\u9fa5]\S+["|'])/g;
+//匹配js中的汉字,配合template range 判断 是否是template中的js汉字  √ (?<!=)["'][\u4e00-\u9fa5]\S*["|']
+const scriptRegexp = /(?<!=)["'][\u4e00-\u9fa5]\S*["']/g;
 
 //匹配属性中的汉字 √
-const propertyRegexp = /(\s\S+=["|'][\u4e00-\u9fa5]\S+["|'])|(\s\w+=["|'][\u4e00-\u9fa5]["|'])/g;
+const propertyRegexp = /\s\S+=["'][\u4e00-\u9fa5]\S*["']/g;
 
 // 单行  匹配 template ><下的汉字
-const angleBracketSpaceRegexp2 = /((?<=\s)[\u4e00-\u9fa5][^\s\<\>]*|(?<=[>\s])[\u4e00-\u9fa5][^\s\<\>]*(?=[\s<]))/g;
-const angleBracketSpaceRegexp = /(?<=[>\s])[\u4e00-\u9fa5][^\s\<]*(?=[\s<])/g;
+const angleBracketSpaceRegexp = /((?<=\s)[\u4e00-\u9fa5][^\s\<\>]*|(?<=[>\s])[\u4e00-\u9fa5][^\s\<\>]*(?=[\s<]))/g;
+// const angleBracketSpaceRegexp2 = /(?<=[>\s])[\u4e00-\u9fa5][^\s\<]*(?=[\s<])/g;
 // const templateTextInAngleBracketsRegexp = /(\>[\u4e00-\u9fa5]\S+\<)|(\>[\u4e00-\u9fa5]\<)/g;
-const templateTextInAngleBracketsRegexp = /(?<=[>\s])[\u4e00-\u9fa5]\S+(?=[\s<])|(?<=[>\s])[\u4e00-\u9fa5](?=[\s<])/g;
+// const templateTextInAngleBracketsRegexp = /(?<=[>\s])[\u4e00-\u9fa5]\S+(?=[\s<])|(?<=[>\s])[\u4e00-\u9fa5](?=[\s<])/g;
 
 // 单行  匹配 ，配合template range ,warnRegexp判断 是否是template中的空字符开头的 汉字
-const templateTextInLineRegexp = /((?<=\s+)[\u4e00-\u9fa5]\S+)|((?<=\s+)[\u4e00-\u9fa5])/g;
+// const templateTextInLineRegexp = /((?<=\s+)[\u4e00-\u9fa5]\S+)|((?<=\s+)[\u4e00-\u9fa5])/g;
 
 //匹配到特殊字符串说明前面正则匹配有问题，给出提示，去掉匹配
 const warnRegexp = /[{}<>:]/g;
