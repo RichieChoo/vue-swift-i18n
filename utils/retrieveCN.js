@@ -3,9 +3,7 @@ const { getRange } = require(".");
 const {
 	scriptRegexp,
 	propertyRegexp,
-	templateTextInAngleBracketsRegexp,
 	angleBracketSpaceRegexp,
-	templateTextInLineRegexp,
 	angleBracketsRegexp,
 	quotationRegexp,
 	spaceRegexp,

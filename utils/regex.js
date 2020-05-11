@@ -24,27 +24,19 @@ const propertyRegexp = /\s\S+=["'][\u4e00-\u9fa5]\S*["']/g;
 // 单行  匹配 template ><下，空行的汉字（retrieve） ,
 const angleBracketSpaceRegexp = /((?<=\s)[\u4e00-\u9fa5][^\s\<\>]*|(?<=[>\s])[\u4e00-\u9fa5][^\s\<\>|\n]*(?=[\s<]))/g;
 
-//
-const templateTextInAngleBracketsRegexp = /(?<=[>])[\u4e00-\u9fa5]\S+(?=[\s<])|(?<=[>])[\u4e00-\u9fa5](?=[\s<])/g;
-
-// 单行  匹配 ，配合template range ,warnRegexp判断 是否是template中的空字符开头的 汉字
-const templateTextInLineRegexp = /(?<=\s+)[\u4e00-\u9fa5]\S*/g;
-
 //匹配到特殊字符串说明前面正则匹配有问题，给出提示，去掉匹配
 const warnRegexp = /[{}<>:]/g;
 
 // 匹配 $t替换的字符串
 const dollarTRegexp = /(?<=(\$t|i18n\.t)\(["'])[^'"]+/gm;
+
 module.exports = {
 	templateBeginRegexp,
 	templateEndRegexp,
 	scriptBeginRegexp,
 	scripteEndRegexp,
-
 	scriptRegexp,
 	propertyRegexp,
-	templateTextInLineRegexp,
-	templateTextInAngleBracketsRegexp,
 	angleBracketSpaceRegexp,
 	warnRegexp,
 	angleBracketsRegexp,
@@ -52,6 +44,5 @@ module.exports = {
 	spaceRegexp,
 	firstSpaceRegexp,
 	commentRegexp,
-
 	dollarTRegexp
 };
