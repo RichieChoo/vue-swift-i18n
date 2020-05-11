@@ -1,7 +1,5 @@
 const Puid = require("puid");
-const {
-	getRange,
-} = require(".");
+const { getRange } = require(".");
 const {
 	scriptRegexp,
 	propertyRegexp,
@@ -15,7 +13,6 @@ const {
 	commentRegexp,
 	warnRegexp
 } = require("./regex");
-
 
 const getLineCnWord = ({ lineText, reg, resoloveReg, initWordArr = [] }) => {
 	let word = lineText.match(reg) || initWordArr;
@@ -34,7 +31,6 @@ const getLineCnWord = ({ lineText, reg, resoloveReg, initWordArr = [] }) => {
 			.filter(v => !!v)
 			.concat(initWordArr);
 	}
-	console.log(word);
 	return word;
 };
 
@@ -76,62 +72,47 @@ module.exports = (currentEditor, puidType) => {
 			const inVueTemplate = i <= template.end && i >= template.begin;
 			const inVueScript = i <= script.end && i >= script.begin;
 			if (inVueTemplate) {
-				const text = lineText;
+				/*
+				vue template 三种位置
+				1. 标签,空行之间
+				2.标签属性
+				3.{{""}}之间
+				*/
 				const inAngleBracketSpacet = lineText.match(angleBracketSpaceRegexp);
-				
-				const inText = lineText.match(templateTextInLineRegexp);
-				const warning = lineText.match(warnRegexp);
-				if (inAngleBracketSpacet && !warning) {
+				const inProperty = lineText.match(propertyRegexp);
+				const inTemplateScript = lineText.match(scriptRegexp);
+				if (inAngleBracketSpacet) {
+					cnWordArr = getLineCnWord({
+						lineText,
+						reg: angleBracketSpaceRegexp,
+						resoloveReg: spaceRegexp,
+						initWordArr: cnWordArr
+					});
+				} else if (inProperty) {
+					cnWordArr = getLineCnWord({
+						lineText,
+						reg: propertyRegexp,
+						resoloveReg: quotationRegexp,
+						initWordArr: cnWordArr
+					});
+				} else if (inTemplateScript) {
+					cnWordArr = getLineCnWord({
+						lineText,
+						reg: scriptRegexp,
+						resoloveReg: quotationRegexp,
+						initWordArr: cnWordArr
+					});
 				}
 			}
 			if (inVueScript) {
+				cnWordArr = getLineCnWord({
+					lineText,
+					reg: scriptRegexp,
+					resoloveReg: quotationRegexp,
+					initWordArr: cnWordArr
+				});
 			}
 		}
-		// //过滤单行注释，多行注释不考虑
-		// if (!lineText.match(commentRegexp)) {
-		// 	//匹配 template ><下的汉字
-		// 	if (lineText.match(templateTextInAngleBracketsRegexp)) {
-		// 		cnWordArr = getLineCnWord({
-		// 			lineText,
-		// 			reg: templateTextInAngleBracketsRegexp,
-		// 			resoloveReg: spaceRegexp
-		// 		});
-		// 	}
-
-		// 	//配合template range 判断 是否是template中的, warnRegexp判断是一整行 空字符开头结尾的 汉字
-		// 	if (
-		// 		lineText.match(templateTextInLineRegexp) &&
-		// 		!lineText.match(warnRegexp) &&
-		// 		isTemplate
-		// 	) {
-		// 		cnWordArr = getLineCnWord({
-		// 			lineText,
-		// 			reg: templateTextInLineRegexp,
-		// 			resoloveReg: firstSpaceRegexp,
-		// 			initWordArr: cnWordArr
-		// 		});
-		// 	}
-
-		// 	//匹配属性中的汉字
-		// 	if (lineText.match(propertyRegexp)) {
-		// 		cnWordArr = getLineCnWord({
-		// 			lineText,
-		// 			reg: propertyRegexp,
-		// 			resoloveReg: quotationRegexp,
-		// 			initWordArr: cnWordArr
-		// 		});
-		// 	}
-
-		// 	//匹配script中的汉字
-		// 	if (lineText.match(scriptRegexp)) {
-		// 		cnWordArr = getLineCnWord({
-		// 			lineText,
-		// 			reg: scriptRegexp,
-		// 			resoloveReg: quotationRegexp,
-		// 			initWordArr: cnWordArr
-		// 		});
-		// 	}
-		// }
 		if (cnWordArr.length > 0) {
 			lines.push(...cnWordArr);
 		}

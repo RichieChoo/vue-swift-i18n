@@ -1,5 +1,8 @@
 const constants = {
-	defaultStyle: { color: "#ffffff", backgroundColor: "#115A1C" },
+	defaultStyle: {
+		// color: "#ffffff",
+		// backgroundColor: "#115A1C"
+	},
 	errorStyle: { color: "#ffffff", backgroundColor: "red" },
 	langArr: ["javascript", "vue"],
 	operation: {
