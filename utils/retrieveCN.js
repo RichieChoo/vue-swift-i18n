@@ -4,10 +4,8 @@ const {
 	scriptRegexp,
 	propertyRegexp,
 	angleBracketSpaceRegexp,
-	angleBracketsRegexp,
 	quotationRegexp,
 	spaceRegexp,
-	firstSpaceRegexp,
 	commentRegexp,
 	warnRegexp
 } = require("./regex");

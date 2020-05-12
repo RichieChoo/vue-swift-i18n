@@ -1,7 +1,5 @@
 const {
 	registerCommand,
-
-	msg,
 	window,
 	Range,
 	Position,

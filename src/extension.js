@@ -1,12 +1,12 @@
-const { registerCommand, msg } = require("../utils/vs");
-const { plugin } = require("../utils/constant");
-const swiftI18n = require("./swiftI18n");
-const showI18n = require("./showI18n");
-const flatJson = require("./flatJson");
-const updateI18n = require("./updateI18n");
-const hoverI18n = require("./hoverI18n");
-const openI18nFile = require("./openI18nFile");
-const generateRichieRC = require("./generateRichieRC");
+const { msg } = require('../utils/vs');
+const { plugin } = require('../utils/constant');
+const swiftI18n = require('./swiftI18n');
+const showI18n = require('./showI18n');
+const flatJson = require('./flatJson');
+const updateI18n = require('./updateI18n');
+const hoverI18n = require('./hoverI18n');
+const openI18nFile = require('./openI18nFile');
+const generateRichieRC = require('./generateRichieRC');
 
 function activate(context) {
 	// register

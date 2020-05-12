@@ -1,4 +1,4 @@
-const { registerCommand, msg } = require('../utils/vs');
+const { registerCommand } = require('../utils/vs');
 const { openFileByPath } = require('../utils');
 const { operation } = require('../utils/constant');
 const swiftJson = require('../lib/swiftJson');

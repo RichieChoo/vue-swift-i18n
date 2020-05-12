@@ -1,14 +1,12 @@
 const fs = require("fs");
 const validator = require("validator");
 const {
-	registerCommand,
 	executeCommand,
 	msg,
 	open,
 	file,
 	Range,
 	Position,
-	ViewColumn,
 	workspace,
 	window
 } = require("./vs");
@@ -23,7 +21,6 @@ const {
 	operation,
 	customConfigFileName,
 	pkgFileName,
-	defaultConfig
 } = require("./constant");
 const path = require("path");
 const settings = workspace.getConfiguration("vueSwiftI18n");
