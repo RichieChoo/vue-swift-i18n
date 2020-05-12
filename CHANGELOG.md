@@ -1,4 +1,9 @@
 # Change Log
+
+## 0.3.0
+- optimization regexp for retrieving CN match
+- fix same i18n key bug 
+
 ## 0.2.11
 - update gif
 
