@@ -1,9 +1,12 @@
 const constants = {
 	defaultStyle: {
-		// color: "#ffffff",
-		// backgroundColor: "#115A1C"
+		fontStyle: "italic"
+		// textDecoration: "underline solid green"
 	},
-	errorStyle: { color: "#ffffff", backgroundColor: "red" },
+	errorStyle: {
+		fontStyle: "italic"
+		// textDecoration: "underline solid red"
+	},
 	langArr: ["javascript", "vue"],
 	operation: {
 		flatJson: { cmd: "vueSwiftI18n.flatJson", title: "Flat Json" },
