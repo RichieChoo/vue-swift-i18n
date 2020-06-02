@@ -1,5 +1,5 @@
-const { msg } = require('../utils/vs');
-const { plugin } = require('../utils/constant');
+const { msg } = require('./utils/vs');
+const { plugin } = require('./utils/constant');
 const swiftI18n = require('./swiftI18n');
 const showI18n = require('./showI18n');
 const flatJson = require('./flatJson');

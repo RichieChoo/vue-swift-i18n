@@ -13,4 +13,5 @@ run/
 .idea/
 .idea/*.*
 package-lock.json
+dist/
 
