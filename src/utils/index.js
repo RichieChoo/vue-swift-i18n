@@ -1,5 +1,9 @@
 const fs = require("fs");
+const path = require("path");
 const validator = require("validator");
+const connect = require("./connect");
+const safeEval = require("safe-eval");
+const ast = require("./ast");
 const {
 	executeCommand,
 	msg,
@@ -20,11 +24,9 @@ const {
 	langArr,
 	operation,
 	customConfigFileName,
-	pkgFileName,
+	pkgFileName
 } = require("./constant");
-const path = require("path");
 const settings = workspace.getConfiguration("vueSwiftI18n");
-const connect = require("./connect");
 const isObject = obj =>
 	Object.prototype.toString.call(obj) === "[object Object]";
 
@@ -166,22 +168,22 @@ const getRange = editor => {
 		const tBegin = getCellRange({
 			editor,
 			regex: templateBeginRegexp,
-			line: i,
+			line: i
 		});
 		const tEnd = getCellRange({
 			editor,
 			regex: templateEndRegexp,
-			line: i,
+			line: i
 		});
 		const sBegin = getCellRange({
 			editor,
 			regex: scriptBeginRegexp,
-			line: i,
+			line: i
 		});
 		const sEnd = getCellRange({
 			editor,
 			regex: scripteEndRegexp,
-			line: i,
+			line: i
 		});
 		if (tBegin) {
 			range.template.begin = tBegin.start.line;
@@ -271,17 +273,17 @@ const changeObjeValueKey = (obj, prefix) => {
 	return result;
 };
 
-const getValueFormPrefix = (_data, prefix) => {
+const getValueFromDotString = (_data, dotString) => {
 	let result = {};
 	//str存在特殊字符时，需要替换为[]
-	const str = prefix
+	const str = dotString
 		.split(".")
-		.map((v, p) => `["${v}"]`)
+		.map(v => `["${v}"]`)
 		.join("");
 	try {
-		eval(`result = _data${str}`);
+		safeEval(`result = _data${str}`);
 	} catch (error) {
-		result = {};
+		result = null;
 	}
 	return result;
 };
@@ -296,6 +298,7 @@ module.exports = {
 	showMessage,
 	connect,
 	getPrefix,
-	getValueFormPrefix,
-	getCustomSetting
+	getValueFromDotString,
+	getCustomSetting,
+	...ast
 };

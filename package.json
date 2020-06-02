@@ -24,7 +24,7 @@
 	"activationEvents": [
 		"*"
 	],
-	"main": "./src/extension.js",
+	"main": "./dist/extension.cjs.js",
 	"contributes": {
 		"languages": [
 			{
@@ -284,9 +284,14 @@
 		]
 	},
 	"scripts": {
-		"test": "node ./test/runTest.js"
+		"test": "node ./test/runTest.js",
+		"dev": "rollup -w -c rollup.config.js",
+		"rollup": "rollup -c rollup.config.js"
 	},
 	"devDependencies": {
+		"@babel/core": "^7.10.2",
+		"@rollup/plugin-commonjs": "^12.0.0",
+		"@rollup/plugin-node-resolve": "^8.0.0",
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^5.2.6",
 		"@types/node": "^10.14.14",
@@ -294,13 +299,22 @@
 		"eslint": "^5.13.0",
 		"glob": "^7.1.4",
 		"mocha": "^6.2.0",
+		"rollup": "^2.12.0",
+		"rollup-plugin-babel": "^4.4.0",
+		"rollup-plugin-delete": "^1.2.0",
+		"rollup-plugin-node-builtins": "^2.1.2",
+		"rollup-plugin-node-globals": "^1.4.0",
+		"rollup-plugin-node-resolve": "^5.2.0",
+		"rollup-plugin-terser": "^6.1.0",
 		"typescript": "^3.3.1",
 		"vscode-test": "^1.1.0"
 	},
 	"dependencies": {
 		"flat": "^4.1.0",
+		"json-to-ast": "^2.1.0",
 		"mkdirp": "^0.5.1",
 		"puid": "^1.0.7",
+		"safe-eval": "^0.4.1",
 		"sort-json": "^2.0.0",
 		"sort-package-json": "^1.40.0",
 		"unflatten": "^1.0.4",

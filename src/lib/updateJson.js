@@ -2,7 +2,7 @@ const {
 	openFileByPath,
 	getPrefix,
 	getLocales,
-	getValueFormPrefix,
+	getValueFromDotString,
 	getEditor,
 	showMessage,
 	getCustomSetting
@@ -58,7 +58,7 @@ const writeJson = (currentEditor, localesPath, puidType) => {
 		} else {
 			_data = !data.toString() ? {} : JSON.parse(data.toString());
 		}
-		let temp = getValueFormPrefix(_data, prefix);
+		let temp = getValueFromDotString(_data, prefix);
 		if (Object.keys(linesObj).length !== 0) {
 			//已存在 => 智能替换（1.相同val时，新的key,val替换原来的key,val。2.不同val时，保存新增key,val和原有的key,val,）
 			Object.keys(linesObj).forEach(v => {

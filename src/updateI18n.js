@@ -1,7 +1,7 @@
-const { registerCommand } = require('../utils/vs');
-const { openFileByPath } = require('../utils');
-const { operation } = require('../utils/constant');
-const updateJson = require('../lib/updateJson');
+const { registerCommand } = require('./utils/vs');
+const { openFileByPath } = require('./utils');
+const { operation } = require('./utils/constant');
+const updateJson = require('./lib/updateJson');
 module.exports = context => {
     context.subscriptions.push(
         registerCommand(operation.updateI18n.cmd, uri => {

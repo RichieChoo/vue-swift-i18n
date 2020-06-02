@@ -1,9 +1,4 @@
-const {
-	msg,
-	Position,
-	Range,
-	executeCommand
-} = require("../utils/vs");
+const { msg, Position, Range, executeCommand } = require("../utils/vs");
 const {
 	getRange,
 	getLocales,
@@ -11,7 +6,7 @@ const {
 	getEditor,
 	changeObjeValueKey,
 	getCustomSetting,
-	getValueFormPrefix,
+	getValueFromDotString,
 	showMessage
 } = require("../utils");
 const {
@@ -20,7 +15,7 @@ const {
 	angleBracketSpaceRegexp,
 	quotationRegexp,
 	spaceRegexp,
-	commentRegexp,
+	commentRegexp
 } = require("../utils/regex");
 const { operation } = require("../utils/constant");
 const flatten = require("flat");
@@ -96,11 +91,11 @@ module.exports = ({ editor, context }) => {
 		if (!err) {
 			const _data = JSON.parse(data.toString());
 			const localeObj = changeObjeValueKey(
-				getValueFormPrefix(_data, prefix),
+				getValueFromDotString(_data, prefix),
 				prefix
 			);
 			// flatten(JSON.parse(data.toString()))[prefix] || {}
-			if (Object.keys(localeObj).length === 0) {
+			if (!localeObj || Object.keys(localeObj).length === 0) {
 				msg.error(localesPath + ` not contains property '${prefix}'`);
 				return;
 			}

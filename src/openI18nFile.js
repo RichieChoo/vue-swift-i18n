@@ -3,10 +3,10 @@ const {
 	window,
 	Range,
 	Position,
-} = require('../utils/vs');
-const { operation } = require('../utils/constant');
-const { openFileByPath } = require('../utils');
-const scrollTo = require('../lib/scroll');
+} = require('./utils/vs');
+const { operation } = require('./utils/constant');
+const { openFileByPath } = require('./utils');
+const scrollTo = require('./lib/scroll');
 module.exports = context => {
 	context.subscriptions.push(
 		registerCommand(operation.openI18nFile.cmd, (args = {}) => {

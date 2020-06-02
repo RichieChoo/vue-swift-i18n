@@ -1,7 +1,7 @@
-const { registerCommand } = require('../utils/vs');
-const { openFileByPath } = require('../utils');
-const { operation } = require('../utils/constant');
-const swiftJson = require('../lib/swiftJson');
+const { registerCommand } = require('./utils/vs');
+const { openFileByPath } = require('./utils');
+const { operation } = require('./utils/constant');
+const swiftJson = require('./lib/swiftJson');
 
 module.exports = context => {
     context.subscriptions.push(

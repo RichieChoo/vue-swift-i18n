@@ -1,6 +1,6 @@
-const { registerCommand, msg } = require("../utils/vs");
-const { plugin, operation } = require("../utils/constant");
-const flat = require("../lib/flat");
+const { registerCommand, msg } = require("./utils/vs");
+const { plugin, operation } = require("./utils/constant");
+const flat = require("./lib/flat");
 module.exports = (context, unFlat = false) => {
 	context.subscriptions.push(
 		registerCommand(

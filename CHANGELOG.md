@@ -1,8 +1,13 @@
 # Change Log
 
+## 0.3.1
+- add rollup to bundle extension
+- use safe-eval
+- use json AST instead of RegExp for hover tooltip
+
 ## 0.3.0
 - optimization regexp for retrieving CN match
-- fix same i18n key bug 
+- fix same i18n key bug
 
 ## 0.2.11
 - update gif
