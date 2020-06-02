@@ -11,8 +11,8 @@ export default {
 	output: {
 		file: pkg.main,
 		format: "cjs"
-    },
-    external: [ 'vscode' ],
+	},
+	external: [{ vscode: "commonjs vscode" }],
 	plugins: [
 		del({ targets: "dist/*" }),
 		resolve(),

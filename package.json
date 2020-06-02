@@ -12,7 +12,7 @@
 		"i18n",
 		"developer-tool"
 	],
-	"version": "0.3.3",
+	"version": "0.3.4",
 	"engines": {
 		"vscode": "^1.37.1"
 	},
@@ -24,7 +24,7 @@
 	"activationEvents": [
 		"*"
 	],
-	"main": "./dist/extension.cjs.js",
+	"main": "./src/extension.js",
 	"contributes": {
 		"languages": [
 			{
@@ -286,8 +286,7 @@
 	"scripts": {
 		"test": "node ./test/runTest.js",
 		"dev": "rollup -w -c rollup.config.js",
-		"rollup": "rollup -c rollup.config.js",
-		"vscode:prepublish": "npm run rollup"
+		"rollup": "rollup -c rollup.config.js"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.10.2",

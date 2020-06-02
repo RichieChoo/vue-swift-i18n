@@ -6,5 +6,5 @@ test/**
 **/*.map
 **/.eslintrc.json
 example/**
-src/**
+dist/**
 rollup.config.js
