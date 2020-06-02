@@ -7,5 +7,4 @@ test/**
 **/.eslintrc.json
 example/**
 src/**
-node_modules
 rollup.config.js
