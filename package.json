@@ -24,7 +24,7 @@
 	"activationEvents": [
 		"*"
 	],
-	"main": "./src/extension.js",
+	"main": "./dist/extension.ejs.js",
 	"contributes": {
 		"languages": [
 			{
@@ -285,13 +285,12 @@
 	},
 	"scripts": {
 		"test": "node ./test/runTest.js",
-		"dev": "rollup -w -c rollup.config.js",
-		"rollup": "rollup -c rollup.config.js"
+		"vscode:prepublish": "webpack --mode production",
+		"dev": "webpack --mode development",
+		"dev:w": "webpack --mode development --watch"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.10.2",
-		"@rollup/plugin-commonjs": "^12.0.0",
-		"@rollup/plugin-node-resolve": "^8.0.0",
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^5.2.6",
 		"@types/node": "^10.14.14",
@@ -299,15 +298,11 @@
 		"eslint": "^5.13.0",
 		"glob": "^7.1.4",
 		"mocha": "^6.2.0",
-		"rollup": "^2.12.0",
-		"rollup-plugin-babel": "^4.4.0",
-		"rollup-plugin-delete": "^1.2.0",
-		"rollup-plugin-node-builtins": "^2.1.2",
-		"rollup-plugin-node-globals": "^1.4.0",
-		"rollup-plugin-node-resolve": "^5.2.0",
-		"rollup-plugin-terser": "^6.1.0",
+		"terser-webpack-plugin": "^3.0.2",
 		"typescript": "^3.3.1",
-		"vscode-test": "^1.1.0"
+		"vscode-test": "^1.1.0",
+		"webpack": "^4.43.0",
+		"webpack-cli": "^3.3.11"
 	},
 	"dependencies": {
 		"flat": "^4.1.0",

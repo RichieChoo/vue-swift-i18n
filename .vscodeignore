@@ -6,5 +6,6 @@ test/**
 **/*.map
 **/.eslintrc.json
 example/**
-dist/**
-rollup.config.js
+webpack.config.js
+src/**
+node_modules
