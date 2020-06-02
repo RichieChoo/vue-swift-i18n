@@ -1,9 +1,12 @@
 # Change Log
+## 0.3.2
+- remove useless files and update README.md
 
 ## 0.3.1
 - add rollup to bundle extension
 - use safe-eval
-- use json AST instead of RegExp for hover tooltip
+- optimize hover tooltip jump by using json AST instead of RegExp
+- Change the show i18n detail styles
 
 ## 0.3.0
 - optimization regexp for retrieving CN match

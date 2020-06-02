@@ -133,12 +133,19 @@ ii. 不同val时，保存新增key,val和原有的key,val
 1. vscode正则 `[\u4e00-\u9fa5]` 查找汉字
 2. vscode插件expand-region来扩展选择,方便选中复制
 
-## 新增功能
-1. 国际化json文件名可配置
-1. 悬浮展示i18n value，跳转json文件
-1. 增加一键生成`richierc.json`配置文件,优先级高于vscode配置((当vscode打开项目包含多个不同的国际化项目且每个国际化比如需要配置不同modulePrefix))
-1. 增加puidType配置，默认使用`short`类型（12位),提供`long`类型（24位），生成唯一key
+## TODO
+- [x] 国际化json文件名可配置
+- [x] 悬浮展示i18n value，跳转json文件
+- [x] 通过项目配置文件获取配置 settings,其中项目配置文件优先级最高(richierc.json)
+- [x] 增加puidType配置，默认使用`short`类型（12位),提供`long`类型（24位），生成唯一key
+- [ ] 使用 JSON AST 代替 RegExp 优化跳转体验
+- [ ] 增加 webview 展示替换更新等提醒界面
+- [ ] 使用 JS AST 替换正则替换,优化中英文匹配
+- [ ] 支持 JS I18n 文件写入与读取
 
+## 赞赏
+如果插件给您带来边里,欢迎star或插件赞赏哦
+![star或者好评我给你返现，加我好友吧！](https://cdn.nlark.com/yuque/0/2020/png/111625/1591099372734-9be6b399-dc8e-4b2b-9313-b2f6b4c0169c.png "star或者好评我给你返现，加我好友吧！")
 
 
 

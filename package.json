@@ -12,7 +12,7 @@
 		"i18n",
 		"developer-tool"
 	],
-	"version": "0.3.0",
+	"version": "0.3.2",
 	"engines": {
 		"vscode": "^1.37.1"
 	},
@@ -286,7 +286,8 @@
 	"scripts": {
 		"test": "node ./test/runTest.js",
 		"dev": "rollup -w -c rollup.config.js",
-		"rollup": "rollup -c rollup.config.js"
+		"rollup": "rollup -c rollup.config.js",
+		"vscode:prepublish": "npm run rollup"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.10.2",
@@ -327,5 +328,6 @@
 		"type": "git",
 		"url": "https://github.com/RichieChoo/vue-swift-i18n"
 	},
+	"files": ["dist"],
 	"homepage": "https://github.com/RichieChoo/vue-swift-i18n/blob/master/README.md"
 }
