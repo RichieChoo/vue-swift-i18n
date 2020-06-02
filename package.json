@@ -24,7 +24,7 @@
 	"activationEvents": [
 		"*"
 	],
-	"main": "./dist/extension.ejs.js",
+	"main": "dist/extension.cjs.js",
 	"contributes": {
 		"languages": [
 			{
@@ -84,7 +84,7 @@
 			"type": "object",
 			"title": "Vue-Swift-I18n",
 			"properties": {
-				"vueSwiftI18n.defaultLocalesPath": {
+				"vueSwiftI18n.s": {
 					"type": "string",
 					"default": "src/locales",
 					"description": "Specify the 'locales' folder path for vue-swift-i18n. \n (expect 'string', default 'src/locales')"
@@ -286,8 +286,7 @@
 	"scripts": {
 		"test": "node ./test/runTest.js",
 		"vscode:prepublish": "webpack --mode production",
-		"dev": "webpack --mode development",
-		"dev:w": "webpack --mode development --watch"
+		"dev": "webpack --mode development --watch"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.10.2",

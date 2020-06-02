@@ -7,6 +7,7 @@ const config = {
 		path: path.resolve(__dirname, "dist"),
 		filename: "extension.cjs.js",
 		libraryTarget: "commonjs2",
+		devtoolModuleFilenameTemplate: '../[resource-path]'
 	},
 	devtool: "source-map",
 	externals: {
