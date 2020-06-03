@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const TerserPlugin = require("terser-webpack-plugin");
 const config = {
 	target: "node",
 	entry: "./src/extension.js",
@@ -15,6 +16,25 @@ const config = {
 	},
 	resolve: {
 		extensions: [".js"]
+	},
+	optimization: {
+		minimize: true,
+		minimizer: [
+			new TerserPlugin({
+				parallel: true,
+				sourceMap: false,
+				terserOptions: {
+					output: {
+						comments: false
+					},
+					compress: {
+						drop_console: true,
+						warnings: false
+					}
+				},
+				extractComments: false
+			})
+		]
 	},
 	plugins: [new webpack.ProgressPlugin()]
 };

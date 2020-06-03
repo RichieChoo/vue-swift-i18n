@@ -1,4 +1,8 @@
 # Change Log
+## 0.3.5
+- fix safe-eval bug
+- add webpack bundle extension,optimize extension loading speed
+
 ## 0.3.2
 - remove useless files and update README.md
 

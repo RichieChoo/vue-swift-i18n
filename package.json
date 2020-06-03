@@ -12,7 +12,7 @@
 		"i18n",
 		"developer-tool"
 	],
-	"version": "0.3.4",
+	"version": "0.3.5",
 	"engines": {
 		"vscode": "^1.37.1"
 	},
@@ -286,7 +286,8 @@
 	"scripts": {
 		"test": "node ./test/runTest.js",
 		"vscode:prepublish": "webpack --mode production",
-		"dev": "webpack --mode development --watch"
+		"dev": "webpack --mode development",
+		"dev:w": "webpack --mode development --watch"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.10.2",
