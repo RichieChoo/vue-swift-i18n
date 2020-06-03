@@ -7,14 +7,15 @@ const config = {
 		path: path.resolve(__dirname, "dist"),
 		filename: "extension.cjs.js",
 		libraryTarget: "commonjs2",
-		devtoolModuleFilenameTemplate: '../[resource-path]'
+		devtoolModuleFilenameTemplate: "../[resource-path]"
 	},
 	devtool: "source-map",
 	externals: {
-		vscode: "commonjs vscode",
+		vscode: "commonjs vscode"
 	},
 	resolve: {
-		extensions: [".js"],
+		extensions: [".js"]
 	},
+	plugins: [new webpack.ProgressPlugin()]
 };
 module.exports = config;
