@@ -280,8 +280,12 @@ const getValueFromDotString = (_data, dotString) => {
 		.split(".")
 		.map(v => `["${v}"]`)
 		.join("");
+	const context = {
+		str,
+		_data
+	};
 	try {
-		safeEval(`result = _data${str}`);
+		result = safeEval(`_data${str}`, context);
 	} catch (error) {
 		result = null;
 	}
