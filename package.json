@@ -84,7 +84,7 @@
 			"type": "object",
 			"title": "Vue-Swift-I18n",
 			"properties": {
-				"vueSwiftI18n.s": {
+				"vueSwiftI18n.defaultLocalesPath": {
 					"type": "string",
 					"default": "src/locales",
 					"description": "Specify the 'locales' folder path for vue-swift-i18n. \n (expect 'string', default 'src/locales')"
