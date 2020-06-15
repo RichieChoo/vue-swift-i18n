@@ -27,7 +27,7 @@
    （商店搜索**vue-swift-i18n**，或者ctrl+p,输入**ext install RichieChoo.vue-swift-i18n**
 2. 使用，见下图：
 
-![vue-swift-i18n](./swift.gif "vue-swift-i18n")
+![vue-swift-i18n](https://cdn.nlark.com/yuque/0/2020/gif/111625/1592184981019-4f136ddf-b31f-4102-9a60-8daa65aded6d.gif "vue-swift-i18n")
 
 ## 功能
 
@@ -38,7 +38,7 @@
 1. 在vue/js中提供，提供t,tt,ttt代码提示,详情见[[传送门]](#8c0Fn)
 
 ## 设计
-![design.png](./design.png "design")
+![design.png](https://cdn.nlark.com/yuque/0/2020/png/111625/1582165204110-151c4717-556e-443e-8975-cb29cbcbe83f.png "design")
 
 ## 详述
 约定：**汉字**--`汉字开头的连续非空字符串`
