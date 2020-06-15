@@ -1,4 +1,6 @@
 # Change Log
+## 0.3.7
+- update swfit.gif
 
 ## 0.3.6
 - fix defaultLocalesPath in package.json
