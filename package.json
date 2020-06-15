@@ -12,7 +12,7 @@
 		"i18n",
 		"developer-tool"
 	],
-	"version": "0.3.8",
+	"version": "0.3.9",
 	"engines": {
 		"vscode": "^1.37.1"
 	},

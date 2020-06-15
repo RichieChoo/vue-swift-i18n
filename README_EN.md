@@ -15,7 +15,7 @@
 ## Description
 A Visual Studio Code extension with rich support for the i18n in Vue,including features such as flating json file or flat json files in a folder,i18n snippets and more !
 
-![vue-swift-i18n](https://cdn.nlark.com/yuque/0/2020/gif/111625/1588754860502-5efa916d-2d17-4f8b-b047-7e9055c3042e.gif "vue-swift-i18n")
+![vue-swift-i18n](https://cdn.nlark.com/yuque/0/2020/gif/111625/1592184981019-4f136ddf-b31f-4102-9a60-8daa65aded6d.gif "vue-swift-i18n")
 
 ## Quick Start
 1. Install the vue-swift-i18n extension for Visual Studio Code.
