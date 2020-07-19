@@ -285,6 +285,8 @@
 	},
 	"scripts": {
 		"test": "node ./test/runTest.js",
+		"docs:dev": "vuepress dev docs",
+		"docs:build": "vuepress build docs",
 		"vscode:prepublish": "webpack --mode production",
 		"dev": "webpack --mode development",
 		"dev:w": "webpack --mode development --watch"
