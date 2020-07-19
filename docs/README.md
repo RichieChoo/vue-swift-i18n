@@ -1,49 +1,36 @@
 ---
 home: true
-heroImage: /hero.png
-actionText: Get Started →
+heroImage: /icon.png
+actionText: 快速上手 →
 actionLink: /guide/
-footer: MIT Licensed | Copyright © 2018-present Evan You
+features:
+- title: 快速生成i18n文件
+  details: 通过正则检测中文，快速产出json文件到对应国际化目录
+- title: 极速替换
+  details: 通过检测中文在vue文件位置，使用相应的vue及vue-i18n语法快速替换中文
+- title: 便捷展示
+  details: 极速展示vue文件对应国际化前的含义（现仅支持中文）
+footer: MIT Licensed | Copyright © 2019-present Richie Choo
 ---
 
-<div style="text-align: center">
-  <Bit/>
-</div>
-
-<div class="features">
-  <div class="feature">
-    <h2>Simplicity First</h2>
-    <p>Minimal setup with markdown-centered project structure helps you focus on writing.</p>
-  </div>
-  <div class="feature">
-    <h2>Vue-Powered</h2>
-    <p>Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.</p>
-  </div>
-  <div class="feature">
-    <h2>Performant</h2>
-    <p>VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.</p>
-  </div>
-</div>
-
-### As Easy as 1, 2, 3
+像数 1, 2, 3, 4, 5 一样容易 :wink:
 
 ``` bash
-# Scaffold VuePress site
-yarn create vuepress [directoryName]
-# OR npx create-vuepress [directoryName]
+# 安装
+ext install RichieChoo.vue-swift-i18n
 
-# Navigate to your new VuePress directory
-cd [directoryName]
+# 使用idea打开vue项目的一个.vue文件
 
-# Start local dev server
-yarn dev
-# OR npm run dev
+# 生成/更新i18n json 文件
+Ctrl + Alt + U #Ctrl+Cmd+U
 
-# Build static files
-yarn build
-# OR npm run build
+# 替换vue中需要国际化的汉字
+Ctrl + Alt + I #Ctrl+Cmd+I
+
+# 查看已经替换的i18n对应值
+Ctrl + Alt + O #Ctrl+Cmd+O
+
 ```
-
-::: warning COMPATIBILITY NOTE
-VuePress requires Node.js >= 8.6.
+::: warning 注意
+请确保你的 Vscode 版本 >= 1.37。
 :::
