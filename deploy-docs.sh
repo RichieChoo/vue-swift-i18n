@@ -19,8 +19,8 @@ git clean -fd
 # 获取最新代码
 git pull origin master
 
-# 生成静态文件
-npm run docs:build
+# 安装更新依赖,生成静态文件
+npm install && npm update && npm run docs:build
 
 # 重启nginx服务器
 nginx -s reload
