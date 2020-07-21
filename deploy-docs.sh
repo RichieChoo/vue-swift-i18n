@@ -1,11 +1,17 @@
 #!/usr/bin/env sh
+
+
 deployName="Vue Swift I18n Docs"
 readonly deployName
 
-echo "Deploying '${deployName}'...\n"
 
 # 确保脚本抛出遇到的错误
 set -e
+
+
+
+echo "Deploying '${deployName}'..."
+echo ""
 
 # 清除对项目的改动
 git clean -fd
