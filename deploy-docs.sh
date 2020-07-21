@@ -2,7 +2,7 @@
 deployName="Vue Swift I18n Docs"
 readonly deployName
 
-echo "Deploying '${deployName}'...\n"
+echo `Deploying '${deployName}'...\n`
 
 # 确保脚本抛出遇到的错误
 set -e
