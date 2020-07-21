@@ -18,3 +18,6 @@ npm run docs:build
 
 # 重启nginx服务器
 nginx -s reload
+
+# 查看nginx 进程状态
+systemctl status nginx
