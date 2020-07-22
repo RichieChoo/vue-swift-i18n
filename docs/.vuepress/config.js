@@ -10,10 +10,17 @@ module.exports = {
 		smoothScroll: true,
 		nav,
 		sidebar: {
-			"/guide/": getAutoSideBar([{ title: "指南", path: "../guide" }]),
+			"/guide/": getAutoSideBar([
+				{ title: "指南", path: "../guide", children: ["quick-starter"] },
+				{
+					title: "深入",
+					path: "../guide",
+					children: ["update-i18n", "swift-i18n", "show-i18n"]
+				}
+			]),
 			"/config/": getAutoSideBar([{ title: "配置", path: "../config" }]),
 			"/inspiration/": getAutoSideBar([
-				{ title: "楔子", path: "../inspiration" },
+				{ title: "楔子", path: "../inspiration" }
 			])
 		}
 	}
