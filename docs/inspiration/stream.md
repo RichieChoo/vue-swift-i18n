@@ -14,9 +14,9 @@
 
 ## 替换
 判断汉字位置，根据不同的位置使用不同的语法：
-- `template`标签之间，使用`{{}}`包裹`$t(sth.key)`
-- `template`标签`property`,使用`$t(sth.key)`替换并在属性前手动添加`:`
-- `script`标签之间的,使用`this.$t(sth.key)`替换
+- `template` 标签之间，使用 **`{{}}`** 包裹 **"\$t(sth.key)"**
+- `template` 标签 **`property`**，使用 **"\$t(sth.key)"** 替换并在属性前手动添加`:`
+- `script` 标签之间的，使用 **"this.\$t(sth.key)"** 替换
 
 
 ## 重复工作

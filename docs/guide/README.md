@@ -8,11 +8,11 @@
 
 ## Features
 
-* [快速更新JSON](../guide/update-i18n.md)
-* [智能替换](../guide/swift-i18n.md)
-* [全面展示](../guide/show-i18n.md)
-* [扁平/反扁平JSON](../guide/flat.md)
-* [代码提示](../guide/snippets)
+* [快速更新JSON](../guide/1-update-i18n.md)
+* [智能替换](../guide/2-swift-i18n.md)
+* [全面展示](../guide/3-show-i18n.md)
+* [扁平/反扁平JSON](../guide/4-other.md)
+* [代码提示](../guide/4-other.md)
 
 ## 什么时候最需要...?
 
