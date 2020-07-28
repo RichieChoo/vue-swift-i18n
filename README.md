@@ -98,8 +98,7 @@ ii. 不同val时，保存新增key,val和原有的key,val
 
 2. json文件的属性名及value
 - 默认：**[当前文件的父文件夹名].[当前文件名(无后缀)]**
-- 提供数字层级配置项：**`Parent Dir Level`**,如**3**则代表属性名头部添加取**3**层父文件夹名
-- 提供字符串配置项：`**Module Prefix Fo Update JSON**`，如 “sdm-ui”，会把“sdm-ui"添加到父文件夹名之前
+到父文件夹名之前
 - 其他配置项：
   - **`Not Alert Before Update I18n`**，默认提示，若为true则会直接更新json不弹窗提醒
   - **`Do Not Disturb`**,默认false,若为true则会关闭任何命令提醒
