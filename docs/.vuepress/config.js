@@ -11,7 +11,7 @@ module.exports = {
 		nav,
 		sidebar: {
 			"/guide/": getAutoSideBar([
-				{ title: "指南", path: "../guide", children: ["quick-starter"] },
+				{ title: "指南", path: "../guide", children: ["into"] },
 				{
 					title: "深入",
 					path: "../guide",
