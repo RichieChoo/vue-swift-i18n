@@ -14,7 +14,7 @@ echo "Deploying '${deployName}'..."
 echo ""
 
 # 清除对项目的改动
-    git clean -fdx && git reset --hard HEAD
+git clean -fdx && git reset --hard HEAD
 
 # 获取最新代码
 git pull origin master
