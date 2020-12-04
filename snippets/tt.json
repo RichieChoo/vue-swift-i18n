@@ -2,16 +2,16 @@
     "$t": {
         "prefix": "t",
         "body": ["\\$t('${CLIPBOARD}')"],
-        "description": "output $t(CLIPBOARD)"
+        "description": "$t(CLIPBOARD)"
     },
     "{{$t}}": {
         "prefix": "tt",
         "body": ["{{\\$t('${CLIPBOARD}')}}"],
-        "description": "output {{$t(CLIPBOARD)}}"
+        "description": "{{$t(CLIPBOARD)}}"
     },
     "this.$t": {
         "prefix": "ttt",
         "body": ["this.\\$t('${CLIPBOARD}')"],
-        "description": "output this.$t(CLIPBOARD)"
+        "description": "this.$t(CLIPBOARD)"
     }
 }

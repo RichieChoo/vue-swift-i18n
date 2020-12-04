@@ -22,13 +22,13 @@ ext install RichieChoo.vue-swift-i18n
 # 使用idea打开vue项目的一个.vue文件
 
 # 生成/更新i18n json 文件
-Ctrl + Alt + U #Ctrl+Cmd+U
+Ctrl + Alt + U # Ctrl + Cmd + U
 
 # 替换vue中需要国际化的汉字
-Ctrl + Alt + I #Ctrl+Cmd+I
+Ctrl + Alt + I # Ctrl + Cmd + I
 
 # 查看已经替换的i18n对应值
-Ctrl + Alt + O #Ctrl+Cmd+O
+Ctrl + Alt + O # Ctrl + Cmd + O
 
 ```
 ::: warning 注意

@@ -12,7 +12,7 @@
 		"i18n",
 		"developer-tool"
 	],
-	"version": "0.3.9",
+	"version": "0.4.0",
 	"engines": {
 		"vscode": "^1.37.1"
 	},
@@ -26,26 +26,7 @@
 	],
 	"main": "dist/extension.cjs.js",
 	"contributes": {
-		"languages": [
-			{
-				"id": "vue",
-				"aliases": [
-					"Vue",
-					"vue"
-				],
-				"extensions": [
-					".vue"
-				],
-				"configuration": "./syntaxes/vue.configuration.json"
-			}
-		],
-		"grammars": [
-			{
-				"language": "vue",
-				"scopeName": "text.html.vue",
-				"path": "./syntaxes/vue.tmLanguage"
-			}
-		],
+
 		"commands": [
 			{
 				"command": "vueSwiftI18n.openI18nFile",

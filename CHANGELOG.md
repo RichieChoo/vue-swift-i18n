@@ -1,4 +1,9 @@
 # Change Log
+
+## 0.4.0
+- fix format bug conflict with Vetur ([#3](https://github.com/RichieChoo/vue-swift-i18n/issues/3))
+- add HomePage
+
 ## 0.3.7
 - update swfit.gif
 
