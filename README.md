@@ -10,7 +10,7 @@
 
 
 ## ✨ 快速开始
-![vue-swift-i18n](https://cdn.nlark.com/yuque/0/2020/gif/111625/1607065252172-af95e6f2-e802-43cb-8a1f-2a8a3f3d3e71.gif)
+![vue-swift-i18n](./docs/.vuepress/public/swift.gif)
 
 ## 契子
 
