@@ -10,7 +10,7 @@
 
 
 ## ✨ 快速开始
-![vue-swift-i18n](./swift.gif)
+![vue-swift-i18n](swift.gif)
 
 ## 契子
 
