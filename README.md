@@ -41,7 +41,6 @@
 - [x] 增加 puidType 配置，默认使用`short`类型（12 位),提供`long`类型（24 位），生成唯一 key
 - [x] 使用 JSON AST 代替 RegExp 优化跳转体验
 - [ ] 增加 webview 展示替换更新等提醒界面
-- [ ] 增加 JS AST 的配置,优化中英文匹配
 - [ ] 支持 JS I18n 文件写入与读取
 
 ## 赞赏
