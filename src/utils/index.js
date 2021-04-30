@@ -23,6 +23,7 @@ const {
 const {
 	langArr,
 	operation,
+	defaultNotUseFileNameAsKeyValue,
 	customConfigFileName,
 	pkgFileName
 } = require("./constant");
@@ -123,24 +124,47 @@ const getPrefix = currentEditor => {
 		currentEditor.document.languageId === "vue"
 			? path.basename(currentEditor.document.uri.fsPath, ".vue")
 			: path.basename(currentEditor.document.uri.fsPath, ".js");
-	const { modulePrefix, jsonNameLevel = 0 } = getCustomSetting(
+	const { modulePrefix, notUseFileNameAsKey = false, jsonNameLevel = 0 } = getCustomSetting(
 		currentEditor.document.uri.fsPath,
 		{
 			modulePrefix: "modulePrefixFoUpdateJson",
+			notUseFileNameAsKey: "notUseFileNameAsKey",
 			jsonNameLevel: "parentDirLevel"
 		}
 	);
-	let prefix = connect(
-		path
-			.dirname(currentEditor.document.uri.fsPath)
-			.split(path.sep)
-			.slice(-jsonNameLevel)
-			.filter(v => !!v)
-			.join("."),
-		fileName
-	);
-	if (modulePrefix) {
+	let prefix;
+	if(jsonNameLevel > 0 && notUseFileNameAsKey) {
+		prefix = path
+		.dirname(currentEditor.document.uri.fsPath)
+		.split(path.sep)
+		.slice(-jsonNameLevel)
+		.filter(v => !!v)
+		.join(".");
+	} else if(jsonNameLevel > 0) {
+		prefix = connect(
+			path
+				.dirname(currentEditor.document.uri.fsPath)
+				.split(path.sep)
+				.slice(-jsonNameLevel)
+				.filter(v => !!v)
+				.join("."),
+			fileName
+		);
+	} else {
+		if(notUseFileNameAsKey) {
+			prefix = "";
+		} else {
+			prefix = fileName
+		}
+	}
+	
+	if (modulePrefix && prefix) {
 		prefix = connect(modulePrefix, prefix);
+	} else if(modulePrefix) {
+		prefix = modulePrefix
+	}
+	else if(!prefix) {
+		prefix = defaultNotUseFileNameAsKeyValue
 	}
 	return prefix;
 };

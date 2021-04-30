@@ -12,7 +12,7 @@
 		"i18n",
 		"developer-tool"
 	],
-	"version": "0.4.1",
+	"version": "0.4.2",
 	"engines": {
 		"vscode": "^1.37.1"
 	},
@@ -99,6 +99,11 @@
 					"type": "boolean",
 					"default": false,
 					"description": "Whether alert tip before executing command 'Update I18n Locales Json'. \n (expect 'boolean', default false )"
+				},
+				"vueSwiftI18n.notUseFileNameAsKey": {
+					"type": "boolean",
+					"default": false,
+					"description": "Don't use file name as key. \n (expect 'boolean', default false )"
 				},
 				"vueSwiftI18n.parentDirLevel": {
 					"type": "number",
