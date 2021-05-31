@@ -40,8 +40,10 @@ const constants = {
 		langFile: "zh-cn.json",
 		modulePrefixFoUpdateJson: "",
 		notAlertBeforeUpdateI18n: false,
+		notUseFileNameAsKey: false,
 		parentDirLevel: 1
 	},
+	defaultNotUseFileNameAsKeyValue: "components",
 	pkgFileName: "package.json",
 	customConfigFileName: "richierc.json"
 };
