@@ -1,5 +1,6 @@
 # Change Log
-
+## 0.4.2
+- add notUseFileNameAsKey and fileNameSubstitute for user when he need't use parentDirName for key's prefix
 ## 0.4.0
 - fix format bug conflict with Vetur ([#3](https://github.com/RichieChoo/vue-swift-i18n/issues/3))
 - add HomePage
