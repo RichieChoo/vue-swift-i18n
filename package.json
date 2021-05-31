@@ -26,7 +26,6 @@
 	],
 	"main": "dist/extension.cjs.js",
 	"contributes": {
-
 		"commands": [
 			{
 				"command": "vueSwiftI18n.openI18nFile",
@@ -89,6 +88,11 @@
 					"type": "string",
 					"default": "short",
 					"description": "Long or short type puid in locales json'. \n (expect 'string', default zh-cn.json )"
+				},
+				"vueSwiftI18n.fileNameSubstitute": {
+					"type": "string",
+					"default": "components",
+					"description": "The substitute for fileName, when  'notUseFileNameAsKey' is true, it will work . \n (expect 'string', default components )"
 				},
 				"vueSwiftI18n.modulePrefixFoUpdateJson": {
 					"type": "string",

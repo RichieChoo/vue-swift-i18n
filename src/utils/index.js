@@ -12,20 +12,19 @@ const {
 	Range,
 	Position,
 	workspace,
-	window
+	window,
 } = require("./vs");
 const {
 	templateBeginRegexp,
 	templateEndRegexp,
 	scriptBeginRegexp,
-	scripteEndRegexp
+	scripteEndRegexp,
 } = require("./regex");
 const {
 	langArr,
 	operation,
-	defaultNotUseFileNameAsKeyValue,
 	customConfigFileName,
-	pkgFileName
+	pkgFileName,
 } = require("./constant");
 const settings = workspace.getConfiguration("vueSwiftI18n");
 const isObject = obj =>
@@ -42,12 +41,12 @@ const showMessage = ({
 	file,
 	editor,
 	callback,
-	needOpen = true
+	needOpen = true,
 }) => {
 	const actions = [
 		"Got it",
 		callback && callback.name,
-		needOpen && "View it"
+		needOpen && "View it",
 	].filter(v => !!v);
 
 	const vsMsg = type === "error" ? msg.error : msg.info;
@@ -63,7 +62,7 @@ const showMessage = ({
 			openFileByPath(file, {
 				selection: new Range(new Position(0, 0), new Position(0, 0)),
 				preview: false,
-				viewColumn
+				viewColumn,
 			});
 		}
 		if (callback && val === callback.name) {
@@ -92,7 +91,7 @@ const getCustomSetting = (fsPath, key, forceIgnoreCustomSetting = false) => {
 			showMessage({
 				type: "error",
 				file: customPath,
-				message: `'${customPath}' is not a right json, custom setting will not work`
+				message: `'${customPath}' is not a right json, custom setting will not work`,
 			});
 		}
 		if (typeof key === "string") {
@@ -124,23 +123,25 @@ const getPrefix = currentEditor => {
 		currentEditor.document.languageId === "vue"
 			? path.basename(currentEditor.document.uri.fsPath, ".vue")
 			: path.basename(currentEditor.document.uri.fsPath, ".js");
-	const { modulePrefix, notUseFileNameAsKey = false, jsonNameLevel = 0 } = getCustomSetting(
-		currentEditor.document.uri.fsPath,
-		{
-			modulePrefix: "modulePrefixFoUpdateJson",
-			notUseFileNameAsKey: "notUseFileNameAsKey",
-			jsonNameLevel: "parentDirLevel"
-		}
-	);
+	const {
+		modulePrefix,
+		notUseFileNameAsKey = false,
+		fileNameSubstitute = "components",
+		jsonNameLevel = 0,
+	} = getCustomSetting(currentEditor.document.uri.fsPath, {
+		modulePrefix: "modulePrefixFoUpdateJson",
+		notUseFileNameAsKey: "notUseFileNameAsKey",
+		jsonNameLevel: "parentDirLevel",
+	});
 	let prefix;
-	if(jsonNameLevel > 0 && notUseFileNameAsKey) {
+	if (jsonNameLevel > 0 && notUseFileNameAsKey) {
 		prefix = path
-		.dirname(currentEditor.document.uri.fsPath)
-		.split(path.sep)
-		.slice(-jsonNameLevel)
-		.filter(v => !!v)
-		.join(".");
-	} else if(jsonNameLevel > 0) {
+			.dirname(currentEditor.document.uri.fsPath)
+			.split(path.sep)
+			.slice(-jsonNameLevel)
+			.filter(v => !!v)
+			.join(".");
+	} else if (jsonNameLevel > 0) {
 		prefix = connect(
 			path
 				.dirname(currentEditor.document.uri.fsPath)
@@ -148,30 +149,29 @@ const getPrefix = currentEditor => {
 				.slice(-jsonNameLevel)
 				.filter(v => !!v)
 				.join("."),
-			fileName
+			fileName,
 		);
 	} else {
-		if(notUseFileNameAsKey) {
+		if (notUseFileNameAsKey) {
 			prefix = "";
 		} else {
-			prefix = fileName
+			prefix = fileName;
 		}
 	}
-	
+
 	if (modulePrefix && prefix) {
 		prefix = connect(modulePrefix, prefix);
-	} else if(modulePrefix) {
-		prefix = modulePrefix
-	}
-	else if(!prefix) {
-		prefix = defaultNotUseFileNameAsKeyValue
+	} else if (modulePrefix) {
+		prefix = modulePrefix;
+	} else if (!prefix) {
+		prefix = fileNameSubstitute;
 	}
 	return prefix;
 };
 
 const defaultOption = {
 	selection: new Range(new Position(0, 0), new Position(0, 0)),
-	preview: false
+	preview: false,
 };
 const openFileByPath = (fPath, option) => {
 	return open(file(fPath), option || defaultOption);
@@ -184,7 +184,7 @@ const getCellRange = ({ editor, regex, line }) =>
 const getRange = editor => {
 	const range = {
 		template: {},
-		script: {}
+		script: {},
 	};
 	const lineCount = editor.document.lineCount;
 	for (let i = 0; i < lineCount; i++) {
@@ -192,22 +192,22 @@ const getRange = editor => {
 		const tBegin = getCellRange({
 			editor,
 			regex: templateBeginRegexp,
-			line: i
+			line: i,
 		});
 		const tEnd = getCellRange({
 			editor,
 			regex: templateEndRegexp,
-			line: i
+			line: i,
 		});
 		const sBegin = getCellRange({
 			editor,
 			regex: scriptBeginRegexp,
-			line: i
+			line: i,
 		});
 		const sEnd = getCellRange({
 			editor,
 			regex: scripteEndRegexp,
-			line: i
+			line: i,
 		});
 		if (tBegin) {
 			range.template.begin = tBegin.start.line;
@@ -242,14 +242,14 @@ const varifyFile = ({ fsPath, showError, showInfo }) => {
 				needOpen: false,
 				callback: {
 					name: operation.updateI18n.title,
-					func: () => executeCommand(operation.updateI18n.cmd)
-				}
+					func: () => executeCommand(operation.updateI18n.cmd),
+				},
 			});
 	} else {
 		showInfo &&
 			showMessage({
 				message: `Get Locales Path:${fsPath}`,
-				file: fsPath
+				file: fsPath,
 			});
 		exist = true;
 	}
@@ -261,7 +261,7 @@ const getLocales = ({
 	isGetRootPath = false,
 	defaultLocalesPath,
 	showInfo = false,
-	showError = true
+	showError = true,
 }) => {
 	const dirName = path.dirname(fsPath);
 	if (fs.existsSync(path.join(dirName, pkgFileName))) {
@@ -269,7 +269,7 @@ const getLocales = ({
 		const lang = getCustomSetting(path.join(dirName, pkgFileName), "langFile"); //default "zh-cn.json"
 		const localesPath = getCustomSetting(
 			path.join(dirName, pkgFileName),
-			"defaultLocalesPath"
+			"defaultLocalesPath",
 		);
 		let jsonPath = path.join(dirName, localesPath || "", lang);
 		if (!!defaultLocalesPath) {
@@ -282,7 +282,7 @@ const getLocales = ({
 			isGetRootPath,
 			defaultLocalesPath,
 			showInfo,
-			showError
+			showError,
 		});
 	}
 };
@@ -306,7 +306,7 @@ const getValueFromDotString = (_data, dotString) => {
 		.join("");
 	const context = {
 		str,
-		_data
+		_data,
 	};
 	try {
 		result = safeEval(`_data${str}`, context);
@@ -328,5 +328,5 @@ module.exports = {
 	getPrefix,
 	getValueFromDotString,
 	getCustomSetting,
-	...ast
+	...ast,
 };
