@@ -1,4 +1,7 @@
 # Change Log
+
+## 0.4.3
+- update HomePage to https://vsi.richieyu.top
 ## 0.4.2
 - add notUseFileNameAsKey and fileNameSubstitute for user when he need't use parentDirName for key's prefix
 
