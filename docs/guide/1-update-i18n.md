@@ -72,10 +72,11 @@
 ::: tip 为什么不用语义化的英文？
 请先看下面两张图。
 :::
-![图1](/1.png)
+![图1](/unshow.png)
 
 <p style="text-align:center">图1<p>
 <br>
-![图2](/2.png)
+
+![图2](/show.png)
 <p style="text-align:center">图2<p>
-其中图1是语义化的key，图2是插件提供的批量查看key/value。有了这个功能，语义化真的那么重要么？
+其中图1是语义化的key，图2是插件提供的批量查看key/value。相比这个功能，语义化也不那么易读呀~

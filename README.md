@@ -6,7 +6,7 @@
 [![](https://vsmarketplacebadge.apphb.com/rating-short/RichieChoo.vue-swift-i18n.svg)](https://marketplace.visualstudio.com/items?itemName=RichieChoo.vue-swift-i18n)
 [![](https://vsmarketplacebadge.apphb.com/trending-monthly/RichieChoo.vue-swift-i18n.svg)](https://marketplace.visualstudio.com/items?itemName=RichieChoo.vue-swift-i18n)
 
-## 🏠 [Homepage](https://vueswifti18n.richieyu.club)
+## 🏠 [Homepage](https://vsi.richieyu.top)
 
 
 ## ✨ 快速开始
